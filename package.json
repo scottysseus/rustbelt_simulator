@@ -14,7 +14,7 @@
     "author": "scottysseus",
     "repository": {
         "type": "git",
-        "url": "git@github.com:scottysseus/rustbelt_simulator.git"
+        "url": "git@github.com:scottysseus/rustfield-revival.git"
     },
     "license": "ISC",
     "devDependencies": {
