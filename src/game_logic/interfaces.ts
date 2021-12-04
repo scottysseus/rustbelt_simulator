@@ -1,11 +1,12 @@
-export interface Project {
-  projectName: string
-  description: string
-  tileName: string
-  cost: number
-  revenue: number
-  effort: number
-  happiness: number
+/**
+ * Represents the project a player assigns workers to in order to improve a tile.
+ */
+export interface TileImprovementProject {
+  readonly name: string
+  readonly description: string
+  readonly targetCatalogEntryId: TileCatalogEntryId
+  readonly cost: number
+  readonly effort: number
 }
 
 /**
@@ -13,47 +14,85 @@ export interface Project {
  * When an actual tile is added to game board, it holds a pointer to an entry in this catalog to lookup things like assets.
  */
 export interface TileCatalogEntry {
-  rawName: string
-  projects: Array<Project>
-  sprite?: string
+  // Short form name suitable for displaying in most places 
+  readonly name: string
+  // Long form description or flavor text, shown in a "detail" view
+  readonly description: string
+  // An array of 0 to 3 projects for a tile
+  // 0 projects indicates a "final" tile that can't be improved any more
+  readonly projects: Array<TileImprovementProject>
+  // An array of "tags" that categorize this tile.
+  readonly tags: Array<string>
+  readonly revenue: number
+  readonly happiness: number
 }
 
-export type TileCatalog = Record<string, TileCatalogEntry>;
+export type TileCatalogEntryId = string;
+export type TileCatalog = Record<TileCatalogEntryId, TileCatalogEntry>;
 
 
-
-export interface Tile {
-  // Pointer into a database of tile decriptions that are IMMUTABLE
-  // determines what 
-  tileId: string
-  state: string
-}
-
-export interface RawTile extends Tile {
-  state: 'raw'
-}
-
-export interface InProgressTile extends Tile {
-  state: 'in-progress'
-  projectId: string
+export interface ActiveProject {
+  readonly project: TileImprovementProject
+  // Invariant: progress < project.effort
   progress: number
   assignedWorkers: number
 }
 
 
-export interface Contract {
-  check(state: GameState): boolean
-  reward(state: GameState): void,
-  completed: boolean
+/**
+ * Represents the state of current tile on the game map
+ */
+export interface Tile {
+  // Pointer into a database of tile decsriptions that are IMMUTABLE
+  catalogEntry: TileCatalogEntry
+  activeProject?: ActiveProject
 }
 
+export interface TileUnderConstruction extends Tile {
+  // Pointer into a database of tile decsriptions that are IMMUTABLE
+  catalogEntryId: TileCatalogEntryId
+  // Defined if this tile is currently under construction
+  activeProject: ActiveProject
+}
 
-export interface CompletedContract extends Contract {
-  completed: true;
+export function isTileUnderConstruction(tile: Tile): tile is TileUnderConstruction {
+  return !!((tile as TileUnderConstruction).activeProject);
+}
+
+/**
+ * Represents an "additional objective" or "side quest" that players can complete
+ * to gain rewards.
+ * 
+ */
+export interface Contract {
+  // aka title
+  readonly name: string
+  // Long form description / flavor text
+  readonly description: string
+  /**
+   * Look at the current game state and determine if this contract has been fulfilled
+   * 
+   * changes `isCompeleted()` if has been completed
+   * 
+   * DO NOT modify the game state
+   * @param state 
+   */
+  check(state: GameState): boolean
+
+  /**
+   * Modify the current game state to apply the rewards of this contract
+   * @param state 
+   */
+  reward(state: GameState): void
+
+  /**
+   * Indicates if this contract has been resolved
+   */
+  readonly completed: boolean
 }
 
 export interface MapState {
-  tiles: Array<RawTile | InProgressTile>,
+  tiles: Array<Tile>,
   size: {
     x: number,
     y: number
@@ -84,13 +123,21 @@ export interface GameState {
       goal: number
     },
     contracts: {
-      completed: Array<CompletedContract>,
+      completed: Array<Contract>,
       open: Array<Contract>
     }
   },
   // A flat-buffer of 
-  map: MapState
+  map: MapState,
+  tileCatalog: TileCatalog
 }
 
-
-export type GameMapDefinition = Array<Array<string>>;
+export interface GameMapDefinition {
+  // A flat array of 
+  tiles: Array<TileCatalogEntryId>
+  // The dimensions
+  size: {
+    x: number
+    y: number
+  }
+}
