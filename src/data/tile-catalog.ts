@@ -1,79 +1,37 @@
 import { TileCatalog } from '../game_logic';
 
 // This file implements a "database" of tiles, each with unique appearance, choices, etc
-export const db: TileCatalog = {
+export const catalog: TileCatalog = {
   "empty": {
-    rawName: "Empty Lot",
-    projects: [
-      {
-        projectName: "Clear Debris",
-        description: "Just get the junk out of the way",
-        tileName: "Empty Lot",
-        cost: 100,
-        revenue: 0,
-        effort: 10,
-        happiness: 2
-      }
-    ]
+    name: "Empty Lot",
+    description: "",
+    tags: [],
+    happiness: 0,
+    revenue: 0,
+    projects: []
   },
-  "grocery": {
-    rawName: "Grocery Store",
+  "firehouse-0": {
+    name: "Ruined Fire Station",
+    description: "The earthquake really messed this one up.",
+    tags: ['raw'],
+    happiness: 0,
+    revenue: 0,
     projects: [
       {
-        projectName: "Repair",
-        description: "Oh, the watermelons!",
-        tileName: "Grocery Store",
-        cost: 100,
-        revenue: 0,
-        effort: 10,
-        happiness: 2
-      }
-    ]
-  },
-  "liquor": {
-    rawName: "Liquor Store",
-    projects: [
-      {
-        projectName: "Repair",
-        description: "Bob's ur uncle!",
-        tileName: "Liquor Store",
-        cost: 100,
-        revenue: 0,
-        effort: 10,
-        happiness: 2
-      }
-    ]
-  },
-  "muffins": {
-    rawName: "Grandma's Muffin Shop",
-    projects: [
-      {
-        projectName: "Repair",
-        description: "MMM Just like my grandma used to bake.",
-        tileName: "Grandma's Muffin Shop",
+        name: "Repair",
+        description: "Fix it up!",
+        targetCatalogEntryId: "firehouse-1",
         cost: 300,
-        revenue: 10,
-        effort: 20,
-        happiness: 5
-      },
-      {
-        projectName: "Replace",
-        description: "NEW! Pumpink Spice Orange Juice",
-        tileName: "Blunkin Donuts",
-        cost: 200,
-        revenue: 20,
-        effort: 30,
-        happiness: 4
-      },
-      {
-        projectName: "Replace",
-        tileName: "Burrito Gong",
-        description: "It's a hot log of maybe hispanic food!",
-        cost: 200,
-        revenue: 20,
-        effort: 30,
-        happiness: 4
+        effort: 9
       }
     ]
+  },
+  "firehouse-1": {
+    name: 'Ladder 15 Fire Station',
+    description: "Just like the old days.",
+    tags: ['repaired', 'improved', 'public-service'],
+    revenue: -5,
+    happiness: 10,
+    projects: []
   }
 };

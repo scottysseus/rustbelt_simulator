@@ -1,11 +1,11 @@
 export * from './interfaces';
-import { GameMapDefinition, GameState, InProgressTile } from "./interfaces";
+import { GameMapDefinition, GameState, isTileUnderConstruction, Tile, TileCatalog, TileCatalogEntryId, TileUnderConstruction } from "./interfaces";
 import { advanceTurnCounter, applyRevenue, applyWorkers, checkWinLoss, resetWorkers, resolveContracts } from "./turn";
 
 const STARTING_MONEY = 1000000;
 const STARTING_WORKERS = 3;
 
-export function createGameState(mapDefinition: GameMapDefinition) {
+export function createGameState(mapDefinition: GameMapDefinition, tileCatalog: TileCatalog): GameState {
   const state = {
     game: {
       turnCounter: 0
@@ -26,30 +26,43 @@ export function createGameState(mapDefinition: GameMapDefinition) {
         goal: 100
       },
       contracts: {
+        open: [],
         completed: []
       }
     },
-    map: {}
+    map: {
+      tiles: initializeTiles(mapDefinition, tileCatalog),
+      size: mapDefinition.size
+    },
+    tileCatalog
   };
-
-  state.map = {
-
-  }
 
   return state;
 }
 
-export function playerInitiateProject(state: GameState, tileIndex: number, projectId: string) {
-  state.map.tiles[tileIndex].state = 'in-progress';
-  const tile = state.map.tiles[tileIndex] as InProgressTile;
-  tile.projectId = projectId;
-  tile.progress = 0;
-  tile.assignedWorkers = 0;
+function initializeTiles(mapDefinition: GameMapDefinition, tileCatalog: TileCatalog): Array<Tile> {
+  return mapDefinition.tiles.map((catalogEntryId: TileCatalogEntryId): Tile => ({
+    catalogEntry: tileCatalog[catalogEntryId]
+  }));
 }
 
-export function playerAssignWorkers(state: GameState, tileIndex: number, workercount: number) {
-  const tile = state.map.tiles[tileIndex] as InProgressTile;
-  tile.assignedWorkers = workercount;
+export function playerInitiateProject(state: GameState, tileIndex: number, projectIndex: number) {
+  const tile = state.map.tiles[tileIndex] as TileUnderConstruction;
+  tile.activeProject = {
+    project: tile.catalogEntry.projects[projectIndex],
+    progress: 0,
+    assignedWorkers: 0
+  };
+}
+
+export function playerAssignWorkers(state: GameState, tileIndex: number, workerCount: number) {
+  const tile = state.map.tiles[tileIndex];
+  if (isTileUnderConstruction(tile)) {
+    const priorWorkers = tile.activeProject.assignedWorkers;
+    const delta = workerCount - priorWorkers;
+    tile.activeProject.assignedWorkers += delta;
+    state.player.resources.workers.free -= delta;
+  }
 }
 
 

@@ -1,4 +1,4 @@
-import { CompletedContract, GameState, Tile } from "./interfaces";
+import { GameState, Tile, isTileUnderConstruction } from "./interfaces";
 
 export function applyRevenue(state: GameState) {
   state.player.resources.money.balance = state.player.resources.money.balance + state.player.resources.money.revenue;
@@ -9,12 +9,26 @@ export function applyRevenue(state: GameState) {
 export function applyWorkers(state: GameState) {
   // Keep it simple
   for (const tile of state.map.tiles) {
-    applyWorker(state, tile);
+    applyWorkersAtTile(state, tile);
   }
 }
 
-export function applyWorker(state: GameState, tile: Tile) {
+export function applyWorkersAtTile(state: GameState, tile: Tile) {
+  if (isTileUnderConstruction(tile)) {
+    const delta = tile.activeProject.assignedWorkers;
+    tile.activeProject.progress += delta;
+    tile.activeProject.assignedWorkers = 0;
 
+
+    // Check if project is done
+    if (tile.activeProject.progress == tile.activeProject.project.effort) {
+      // Change the catalog entry
+      tile.catalogEntry = state.tileCatalog[tile.activeProject.project.targetCatalogEntryId];
+      let t = tile as Tile;
+      delete t.activeProject;
+    }
+
+  }
 }
 
 export function resetWorkers(state: GameState) {
@@ -23,7 +37,7 @@ export function resetWorkers(state: GameState) {
 
 export function resolveContracts(state: GameState) {
   for (const contract of state.player.contracts.open) {
-    contract.completed = contract.check(state);
+    contract.check(state);
     if (contract.completed) {
       contract.reward(state);
     }
