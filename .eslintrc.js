@@ -1,18 +1,23 @@
 module.exports = {
-  env: {
-    browser: true,
-    es2021: true
-  },
+  root: true,
+  parser: '@typescript-eslint/parser',
+  plugins: [
+    '@typescript-eslint'
+  ],
   extends: [
     'standard',
     'standard-jsx',
     'standard-react'
   ],
-  parserOptions: {
-    ecmaVersion: 12,
-    sourceType: 'module',
-    project: './tsconfig.json'
-  },
   rules: {
+    // next 2 lines: React 17's new JSX transform doesn't require `React`
+    'react/jsx-uses-react': 'off',
+    'react/react-in-jsx-scope': 'off',
+    // HACK: must disable the base rule as it can report incorrect errors
+    'no-use-before-define': 'off',
+    '@typescript-eslint/no-use-before-define': ['error', {
+      // HACK: functions will be hoisted
+      functions: false
+    }]
   }
 }

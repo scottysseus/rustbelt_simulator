@@ -14,7 +14,7 @@ export interface TileImprovementProject {
  * When an actual tile is added to game board, it holds a pointer to an entry in this catalog to lookup things like assets.
  */
 export interface TileCatalogEntry {
-  // Short form name suitable for displaying in most places 
+  // Short form name suitable for displaying in most places
   readonly name: string
   // Long form description or flavor text, shown in a "detail" view
   readonly description: string
@@ -30,14 +30,12 @@ export interface TileCatalogEntry {
 export type TileCatalogEntryId = string;
 export type TileCatalog = Record<TileCatalogEntryId, TileCatalogEntry>;
 
-
 export interface ActiveProject {
   readonly project: TileImprovementProject
   // Invariant: progress < project.effort
   progress: number
   assignedWorkers: number
 }
-
 
 /**
  * Represents the state of current tile on the game map
@@ -55,14 +53,14 @@ export interface TileUnderConstruction extends Tile {
   activeProject: ActiveProject
 }
 
-export function isTileUnderConstruction(tile: Tile): tile is TileUnderConstruction {
-  return !!((tile as TileUnderConstruction).activeProject);
+export function isTileUnderConstruction (tile: Tile): tile is TileUnderConstruction {
+  return !!((tile as TileUnderConstruction).activeProject)
 }
 
 /**
  * Represents an "additional objective" or "side quest" that players can complete
  * to gain rewards.
- * 
+ *
  */
 export interface Contract {
   // aka title
@@ -71,17 +69,17 @@ export interface Contract {
   readonly description: string
   /**
    * Look at the current game state and determine if this contract has been fulfilled
-   * 
+   *
    * changes `isCompeleted()` if has been completed
-   * 
+   *
    * DO NOT modify the game state
-   * @param state 
+   * @param state
    */
   check(state: GameState): boolean
 
   /**
    * Modify the current game state to apply the rewards of this contract
-   * @param state 
+   * @param state
    */
   reward(state: GameState): void
 
@@ -98,7 +96,6 @@ export interface MapState {
     y: number
   }
 }
-
 
 /**
  * The state of the game, design to be transformed only through specific functions, but observed by any elements.
@@ -127,13 +124,13 @@ export interface GameState {
       open: Array<Contract>
     }
   },
-  // A flat-buffer of 
+  // A flat-buffer of
   map: MapState,
   tileCatalog: TileCatalog
 }
 
 export interface GameMapDefinition {
-  // A flat array of 
+  // A flat array of
   tiles: Array<TileCatalogEntryId>
   // The dimensions
   size: {
