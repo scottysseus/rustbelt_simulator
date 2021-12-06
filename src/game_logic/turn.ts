@@ -42,9 +42,9 @@ export function resolveContracts (state: GameState) {
 
   const newOpen = []
   let contract
-  while (contract = state.player.contracts.open.pop()) {
+  while ((contract = state.player.contracts.open.pop()) !== undefined) {
     if (contract.completed) {
-      state.player.contracts.completed.push(contract as CompletedContract)
+      state.player.contracts.completed.push(contract)
     } else {
       newOpen.push(contract)
     }
