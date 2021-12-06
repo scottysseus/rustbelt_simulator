@@ -1,11 +1,11 @@
-export * from './interfaces';
-import { GameMapDefinition, GameState, isTileUnderConstruction, Tile, TileCatalog, TileCatalogEntryId, TileUnderConstruction } from "./interfaces";
-import { advanceTurnCounter, applyRevenue, applyWorkers, checkWinLoss, resetWorkers, resolveContracts } from "./turn";
+import { GameMapDefinition, GameState, isTileUnderConstruction, Tile, TileCatalog, TileCatalogEntryId, TileUnderConstruction } from './interfaces'
+import { advanceTurnCounter, applyRevenue, applyWorkers, checkWinLoss, resetWorkers, resolveContracts } from './turn'
+export * from './interfaces'
 
-const STARTING_MONEY = 1000000;
-const STARTING_WORKERS = 3;
+const STARTING_MONEY = 1000000
+const STARTING_WORKERS = 3
 
-export function createGameState(mapDefinition: GameMapDefinition, tileCatalog: TileCatalog): GameState {
+export function createGameState (mapDefinition: GameMapDefinition, tileCatalog: TileCatalog): GameState {
   const state = {
     game: {
       turnCounter: 0
@@ -35,42 +35,41 @@ export function createGameState(mapDefinition: GameMapDefinition, tileCatalog: T
       size: mapDefinition.size
     },
     tileCatalog
-  };
+  }
 
-  return state;
+  return state
 }
 
-function initializeTiles(mapDefinition: GameMapDefinition, tileCatalog: TileCatalog): Array<Tile> {
+function initializeTiles (mapDefinition: GameMapDefinition, tileCatalog: TileCatalog): Array<Tile> {
   return mapDefinition.tiles.map((catalogEntryId: TileCatalogEntryId): Tile => ({
     catalogEntry: tileCatalog[catalogEntryId]
-  }));
+  }))
 }
 
-export function playerInitiateProject(state: GameState, tileIndex: number, projectIndex: number) {
-  const tile = state.map.tiles[tileIndex] as TileUnderConstruction;
+export function playerInitiateProject (state: GameState, tileIndex: number, projectIndex: number) {
+  const tile = state.map.tiles[tileIndex] as TileUnderConstruction
   tile.activeProject = {
     project: tile.catalogEntry.projects[projectIndex],
     progress: 0,
     assignedWorkers: 0
-  };
-}
-
-export function playerAssignWorkers(state: GameState, tileIndex: number, workerCount: number) {
-  const tile = state.map.tiles[tileIndex];
-  if (isTileUnderConstruction(tile)) {
-    const priorWorkers = tile.activeProject.assignedWorkers;
-    const delta = workerCount - priorWorkers;
-    tile.activeProject.assignedWorkers += delta;
-    state.player.resources.workers.free -= delta;
   }
 }
 
+export function playerAssignWorkers (state: GameState, tileIndex: number, workerCount: number) {
+  const tile = state.map.tiles[tileIndex]
+  if (isTileUnderConstruction(tile)) {
+    const priorWorkers = tile.activeProject.assignedWorkers
+    const delta = workerCount - priorWorkers
+    tile.activeProject.assignedWorkers += delta
+    state.player.resources.workers.free -= delta
+  }
+}
 
-export function advanceTurn(state: GameState) {
-  applyRevenue(state);
-  applyWorkers(state);
-  resetWorkers(state);
-  resolveContracts(state);
-  advanceTurnCounter(state);
-  return checkWinLoss(state);
+export function advanceTurn (state: GameState) {
+  applyRevenue(state)
+  applyWorkers(state)
+  resetWorkers(state)
+  resolveContracts(state)
+  advanceTurnCounter(state)
+  return checkWinLoss(state)
 }
