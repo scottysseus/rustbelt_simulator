@@ -19,7 +19,7 @@ export function applyWorkersAtTile (state: GameState, tile: Tile) {
     tile.activeProject.assignedWorkers = 0
 
     // Check if project is done
-    if (tile.activeProject.progress == tile.activeProject.project.effort) {
+    if (tile.activeProject.progress === tile.activeProject.project.effort) {
       // Change the catalog entry
       tile.catalogEntry = state.tileCatalog[tile.activeProject.project.targetCatalogEntryId]
       const t = tile as Tile
