@@ -1,4 +1,3 @@
-import React from 'react'
 import { Chip, Typography } from '@mui/material'
 
 const summary = [
@@ -38,7 +37,6 @@ export function PlayerSummaryPane (props) {
   const rows = summary.map(row => summaryPaneRow(row))
   return (
     <div id={props.id} className='player-summary-pane pane'>
-      <Typography>Summary</Typography>
       <table>
         <tbody>
           {rows}

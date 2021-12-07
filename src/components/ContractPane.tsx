@@ -1,5 +1,3 @@
-import React from 'react'
-
 export const testContracts = [
   {
     name: 'Green tourism',
@@ -19,5 +17,5 @@ export const testContracts = [
 
 export function ContractPane (props) {
   const contractRows = testContracts.map(contract => <tr key={contract.name} onClick={props.onContractClicked}><td>{contract.name}</td></tr>)
-  return <table className='highlight'><tbody>{contractRows}</tbody></table>
+  return <table><tbody>{contractRows}</tbody></table>
 }
