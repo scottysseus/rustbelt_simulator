@@ -36,3 +36,63 @@ html, body {
     overflow: hidden; /* fix firefox not resizing canvas */
     border: 1px solid black;
 }
+
+#container {
+    position: fixed;
+    display: grid;
+    grid-template-rows: [header] 20% [body1] 30% [body2] 30% [footer] 20%;
+    grid-template-columns: [left] 20% [center1] 30% [center2] 30% [right] 20%;
+    min-height: 100%;
+    min-width: 100%;
+}
+
+.material-icons {
+    vertical-align: text-bottom;
+}
+
+.pane {
+    border: 1px solid rgba(0,0,0,0.12);
+}
+
+.player-summary-pane {
+    text-align: center;
+}
+
+.player-summary-pane-row {
+    border-bottom: none;
+}
+
+.player-summary-pane-row > td {
+    padding: 5px;
+}
+
+#player-summary {
+    grid-column-start: left;
+    grid-row-start: header;
+    height: 100%;
+    width: 100%;
+}
+
+#turn-summary {
+    grid-column: center1 / span 2;
+    grid-row-start: header;
+    background-color: red;
+    height: 100%;
+    width: 100%;
+}
+
+#contracts {
+    grid-column: left / span 2;
+    grid-row-start: footer;
+    background-color: royalblue;
+    height: 100%;
+    width: 100%;
+}
+
+#details {
+    grid-column: center2 / span 2;
+    grid-row-start: footer;
+    background-color: orange;
+    height: 100%;
+    width: 100%;
+}
