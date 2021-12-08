@@ -1,13 +1,21 @@
 /**
  * Represents the project a player assigns workers to in order to improve a tile.
  */
-export interface TileImprovementProject {
+export interface ProjectCatalogEntry {
   readonly name: string
   readonly description: string
-  readonly targetCatalogEntryId: TileCatalogEntryId
+  readonly targetTileDefinition: string
   readonly cost: number
   readonly effort: number
 }
+
+export interface ProjectDefinition extends Omit<ProjectCatalogEntry, 'targetTileDefinition'> {
+  readonly targetTileDefinition: TileDefinition
+}
+
+export type ProjectCatalogId = string
+export type RawProjectCatalog = Record<ProjectCatalogId, ProjectCatalogEntry>
+export type ProjectCatalog = Record<ProjectCatalogId, ProjectDefinition>
 
 /**
  * A TileDBEntry stores the "starting point" and static information about tiles
@@ -20,18 +28,23 @@ export interface TileCatalogEntry {
   readonly description: string
   // An array of 0 to 3 projects for a tile
   // 0 projects indicates a "final" tile that can't be improved any more
-  readonly projects: Array<TileImprovementProject>
+  readonly projects: Array<ProjectCatalogId>
   // An array of "tags" that categorize this tile.
   readonly tags: Array<string>
   readonly revenue: number
   readonly happiness: number
 }
 
-export type TileCatalogEntryId = string;
-export type TileCatalog = Record<TileCatalogEntryId, TileCatalogEntry>;
+export interface TileDefinition extends Omit<TileCatalogEntry, 'projects'> {
+  readonly projects: Array<ProjectDefinition>
+}
+
+export type TileCatalogEntryId = string
+export type RawTileCatalog = Record<TileCatalogEntryId, TileCatalogEntry>
+export type TileCatalog = Record<TileCatalogEntryId, TileDefinition>
 
 export interface ActiveProject {
-  readonly project: TileImprovementProject
+  readonly project: ProjectDefinition
   // Invariant: progress < project.effort
   progress: number
   assignedWorkers: number
@@ -42,13 +55,12 @@ export interface ActiveProject {
  */
 export interface Tile {
   // Pointer into a database of tile decsriptions that are IMMUTABLE
-  catalogEntry: TileCatalogEntry
+  definition: TileDefinition
+
   activeProject?: ActiveProject
 }
 
 export interface TileUnderConstruction extends Tile {
-  // Pointer into a database of tile decsriptions that are IMMUTABLE
-  catalogEntryId: TileCatalogEntryId
   // Defined if this tile is currently under construction
   activeProject: ActiveProject
 }
