@@ -1,11 +1,15 @@
 import { advanceTurn, createGameState, playerAssignWorkers, playerInitiateProject, TileUnderConstruction } from './game_logic/index'
 import { map } from './data/map'
-import { catalog } from './data/tile-catalog'
+import { catalog as tileCatalog } from './data/tile-catalog'
+import { catalog as projectCatalog } from './data/project-catalog'
+import { hydrate } from './data/hydrate'
 
 export function playGameLogic () {
-// To begin the game, we need an initial state
-// However, that state will be initialized from a description of the game map and a tile catalog
-  const state = createGameState(map, catalog)
+  const catalogs = hydrate(tileCatalog, projectCatalog)
+
+  // To begin the game, we need an initial state
+  // However, that state will be initialized from a description of the game map and a tile catalog
+  const state = createGameState(map, catalogs.tileCatalog, catalogs.projectCatalog)
 
   // We  will mimic a few player turns and inspect the state
 
@@ -18,7 +22,7 @@ export function playGameLogic () {
 
   // Inspect the tile to see what it is
   let tile = (state.map.tiles.at(selectedTileIndex) as TileUnderConstruction)
-  console.log(tile.catalogEntry)
+  console.log(tile.definition)
 
   // Commit that action: "Start repairing the fire station"
   playerInitiateProject(state, selectedTileIndex, selectedProjectIndex)
@@ -67,5 +71,5 @@ export function playGameLogic () {
   // Inspect the state of the game and see how work is progressing
   // MAJOR TODO: make it easier to inspect this state
   tile = (state.map.tiles.at(selectedTileIndex) as TileUnderConstruction)
-  console.log(tile.catalogEntry)
+  console.log(tile.definition)
 }

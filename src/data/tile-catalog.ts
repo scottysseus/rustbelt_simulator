@@ -1,7 +1,7 @@
-import { TileCatalog } from '../game_logic'
+import { RawTileCatalog } from '../game_logic/interfaces'
 
 // This file implements a "database" of tiles, each with unique appearance, choices, etc
-export const catalog: TileCatalog = {
+export const catalog: RawTileCatalog = {
   empty: {
     name: 'Empty Lot',
     description: '',
@@ -17,13 +17,8 @@ export const catalog: TileCatalog = {
     happiness: 0,
     revenue: 0,
     projects: [
-      {
-        name: 'Repair',
-        description: 'Fix it up!',
-        targetCatalogEntryId: 'firehouse-1',
-        cost: 300,
-        effort: 9
-      }
+      'repair-firehouse',
+      'demolish'
     ]
   },
   'firehouse-1': {
@@ -32,6 +27,8 @@ export const catalog: TileCatalog = {
     tags: ['repaired', 'improved', 'public-service'],
     revenue: -5,
     happiness: 10,
-    projects: []
+    projects: [
+      'demolish'
+    ]
   }
 }

@@ -21,9 +21,13 @@ export function applyWorkersAtTile (state: GameState, tile: Tile) {
     // Check if project is done
     if (tile.activeProject.progress === tile.activeProject.project.effort) {
       // Change the catalog entry
-      tile.catalogEntry = state.tileCatalog[tile.activeProject.project.targetCatalogEntryId]
+      tile.definition = tile.activeProject.project.targetTileDefinition
       const t = tile as Tile
       delete t.activeProject
+
+      // Give player rewards for the tile
+      state.player.victory.happiness += tile.definition.happiness
+      state.player.resources.money.revenue += tile.definition.revenue
     }
   }
 }
