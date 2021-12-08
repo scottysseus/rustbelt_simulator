@@ -2,7 +2,8 @@ module.exports = {
   root: true,
   parser: '@typescript-eslint/parser',
   plugins: [
-    '@typescript-eslint'
+    '@typescript-eslint',
+    'react-hooks'
   ],
   extends: [
     'standard',
@@ -20,6 +21,8 @@ module.exports = {
       functions: false
     }],
     // HACK: typescript has its own undef rule
-    'no-undef': 'off'
+    'no-undef': 'off',
+    'react-hooks/rules-of-hooks': 'error', // Checks rules of Hooks
+    'react-hooks/exhaustive-deps': 'warn' // Checks effect dependencies
   }
 }
