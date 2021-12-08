@@ -18,6 +18,8 @@ module.exports = {
     '@typescript-eslint/no-use-before-define': ['error', {
       // HACK: functions will be hoisted
       functions: false
-    }]
+    }],
+    // HACK: typescript has its own undef rule
+    'no-undef': 'off'
   }
 }
