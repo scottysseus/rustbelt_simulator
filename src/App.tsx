@@ -1,9 +1,15 @@
+import { GameViewPort } from './components/view/GameViewPort'
+
 function App () {
   return (
-    <div>
-      <h2>Welcome to React App</h2>
-      <h3>Date : {new Date().toDateString()}</h3>
-    </div>
+    <>
+      <h2 className='title'>Rustfield Revival</h2>
+      <div className='viewport-section'>
+        <div className='viewport-center'>
+          <GameViewPort />
+        </div>
+      </div>
+    </>
   )
 }
 
