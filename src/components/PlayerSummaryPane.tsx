@@ -1,4 +1,4 @@
-import { Chip, Paper, Typography } from '@mui/material'
+import { Chip, Table, TableBody, TableCell, TableRow, Typography } from '@mui/material'
 
 const summary = [
   {
@@ -25,23 +25,21 @@ const summary = [
 
 function summaryPaneRow (props) {
   return (
-    <tr className='player-summary-pane-row'>
-      <td><i className='material-icons'>{props.icon}</i></td>
-      <td><Typography>{props.value}</Typography></td>
-      <td>{props.chip && <Chip label={props.chip.caption} color={props.chip.color} />}</td>
-    </tr>
+    <TableRow key={props.icon} className='player-summary-pane-row'>
+      <TableCell><i className='material-icons'>{props.icon}</i></TableCell>
+      <TableCell><Typography>{props.value}</Typography></TableCell>
+      <TableCell>{props.chip && <Chip label={props.chip.caption} color={props.chip.color} />}</TableCell>
+    </TableRow>
   )
 }
 
 export function PlayerSummaryPane (props) {
   const rows = summary.map(row => summaryPaneRow(row))
   return (
-    <Paper id={props.id} className='player-summary-pane'>
-      <table>
-        <tbody>
-          {rows}
-        </tbody>
-      </table>
-    </Paper>
+    <Table id={props.id} className='player-summary-pane pane'>
+      <TableBody>
+        {rows}
+      </TableBody>
+    </Table>
   )
 }

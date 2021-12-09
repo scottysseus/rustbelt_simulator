@@ -1,4 +1,4 @@
-import { Card, List, ListItem, Paper, Typography } from '@mui/material'
+import { Card, Stack, Typography } from '@mui/material'
 import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentDissatisfied'
 
 export const testContracts = [
@@ -26,15 +26,13 @@ export const testContracts = [
 
 function contractItem (props) {
   return (
-    <ListItem key={props.name}>
-      <Card className='contract-card'>
-        <div className='contract-card-heading'>
-          <Typography sx={{ fontSize: 'h6.fontSize' }}>{props.name}</Typography>
-          <Typography variant='caption'>{props.reward}</Typography>
-        </div>
-        <Typography>{props.condition}</Typography>
-      </Card>
-    </ListItem>
+    <Card key={props.name} className='contract-card contract-list-item'>
+      <div className='contract-card-heading'>
+        <Typography sx={{ fontSize: 'h6.fontSize' }}>{props.name}</Typography>
+        <Typography variant='caption'>{props.reward}</Typography>
+      </div>
+      <Typography>{props.condition}</Typography>
+    </Card>
   )
 }
 
@@ -42,11 +40,8 @@ export function ContractPane (props) {
   const contracts = testContracts.map(contract => contractItem(contract))
 
   return (
-    <Paper className='contract-pane' id={props.id}>
-      <Typography variant='h6'>Contracts</Typography>
-      <List>
-        {contracts}
-      </List>
-    </Paper>
+    <Stack className='contract-pane pane contract-list' spacing={2}>
+      {contracts}
+    </Stack>
   )
 }
