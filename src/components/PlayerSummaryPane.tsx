@@ -1,4 +1,4 @@
-import { Chip, Typography } from '@mui/material'
+import { Chip, Paper, Typography } from '@mui/material'
 
 const summary = [
   {
@@ -36,12 +36,12 @@ function summaryPaneRow (props) {
 export function PlayerSummaryPane (props) {
   const rows = summary.map(row => summaryPaneRow(row))
   return (
-    <div id={props.id} className='player-summary-pane pane'>
+    <Paper id={props.id} className='player-summary-pane'>
       <table>
         <tbody>
           {rows}
         </tbody>
       </table>
-    </div>
+    </Paper>
   )
 }

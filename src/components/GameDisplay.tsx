@@ -1,12 +1,9 @@
-import { PlayerSummaryPane } from './PlayerSummaryPane'
+import { HUD } from './HUD'
 
 export function GameDisplay (props) {
   return (
-    <div id='container'>
-      <PlayerSummaryPane id='player-summary' />
-      {/* <div id='turn-summary'>turn summary</div> */}
-      <div id='contracts'>contracts</div>
-      <div id='details'>details</div>
+    <div className='container'>
+      <HUD />
     </div>
   )
 }
