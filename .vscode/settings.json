@@ -19,5 +19,25 @@
     },
     "[typescriptreact]": {
         "editor.formatOnSave": false
+    },
+    "[json]": {
+        "files.insertFinalNewline": true,
+        "files.trimTrailingWhitespace": true
+    },
+    "[jsonc]": {
+        "files.insertFinalNewline": true,
+        "files.trimTrailingWhitespace": true
+    },
+    "[html]": {
+        "files.insertFinalNewline": true,
+        "files.trimTrailingWhitespace": true
+    },
+    "[css]": {
+        "files.insertFinalNewline": true,
+        "files.trimTrailingWhitespace": true
+    },
+    "[ignore]": {
+        "files.insertFinalNewline": true,
+        "files.trimTrailingWhitespace": true
     }
 }
