@@ -1,3 +1,38 @@
-h2{
-    color: teal
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    --title-height: 30px;
+}
+
+#app {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.title {
+    flex: 0 1 auto;
+    margin: 0;
+    flex-basis: var(--title-height);
+    text-align: center;
+    font-size: calc(var(--title-height) - 5px);
+    color: teal;
+}
+
+.viewport-section {
+    display: flex;
+    height: calc(100vmin - (2 * var(--title-height)));
+    padding: 6px;
+    aspect-ratio: 1;
+}
+
+.viewport-center {
+    aspect-ratio: 1;
+    overflow: hidden; /* fix firefox not resizing canvas */
+    border: 1px solid black;
 }
