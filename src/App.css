@@ -47,6 +47,7 @@ html, body {
     position: fixed;
     min-height: 100%;
     min-width: auto;
+    z-index: 10;
 }
 
 /* the extra specifity is needed here to override @mui's styling */

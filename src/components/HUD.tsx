@@ -5,13 +5,10 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 
 export function HUD (props) {
   return (
-    <div className='hud' onClick={() => console.log('accordion1 clicked')}>
-      <Accordion defaultExpanded className='hud-pane-expander' onClick={() => console.log('accordion1 clicked')}>
+    <div className='hud'>
+      <Accordion defaultExpanded className='hud-pane-expander'>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
-          aria-controls='panel1a-content'
-          id='panel1a-header'
-          onClick={() => console.log('accordion1 summary clicked')}
         >
           <Typography variant='h6'>Summary</Typography>
         </AccordionSummary>
