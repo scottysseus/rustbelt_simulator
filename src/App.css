@@ -36,3 +36,61 @@ html, body {
     overflow: hidden; /* fix firefox not resizing canvas */
     border: 1px solid black;
 }
+
+.container {
+    position: fixed;
+    min-height: 100%;
+    min-width: 100%;
+}
+
+.hud {
+    position: fixed;
+    min-height: 100%;
+    min-width: auto;
+    z-index: 10;
+}
+
+/* the extra specifity is needed here to override @mui's styling */
+.hud-pane-expander.hud-pane-expander.hud-pane-expander.hud-pane-expander {
+    margin: 24px 24px 0 24px;
+}
+
+.MuiSvgIcon-root {
+    vertical-align: middle;
+}
+
+.player-summary-pane-row {
+    border-bottom: none;
+}
+
+.player-summary-pane-row:hover {
+    background-color: rgb(0, 0, 0, 0.04);
+}
+
+.player-summary-pane-row > td {
+    padding: 5px 0;
+    text-align: left;
+    border-bottom: none;
+}
+.contract-list {
+    margin-right: 16px;
+}
+
+.contract-list > .contract-list-item {
+    padding: 8px;
+}
+
+.contract-card {
+    width: 100%;
+    text-align: left;
+    padding: 8px;
+    display: block;
+}
+
+.contract-card:hover {
+    background-color: rgb(0, 0, 0, 0.04);
+}
+
+.contract-card-heading {
+    margin-bottom: 8px;
+}
