@@ -4,13 +4,8 @@ import { MapControls, Stats } from '@react-three/drei'
 import { Map } from '../Map'
 
 function PlainPlane () {
-  // const ref = useRef<THREE.Mesh>(null!)
-  // useFrame((state, delta) => {
-  //   ref.current.rotation.x += 0.01
-  // })
   return (
     <mesh
-      // ref={ref}
       rotation={new THREE.Euler(-Math.PI / 2)}
     >
       <planeGeometry args={[1000, 1000, 20, 20]} />
