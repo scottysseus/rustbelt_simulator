@@ -33,6 +33,7 @@ export interface TileCatalogEntry {
   readonly tags: Array<string>
   readonly revenue: number
   readonly happiness: number
+  readonly modelPath: string
 }
 
 export interface TileDefinition extends Omit<TileCatalogEntry, 'projects'> {
@@ -109,6 +110,27 @@ export interface MapState {
   }
 }
 
+export interface PlayerState {
+  resources: {
+    money: {
+      balance: number,
+      revenue: number
+    },
+    workers: {
+      max: number,
+      free: number
+    }
+  },
+  victory: {
+    happiness: number,
+    goal: number
+  },
+  contracts: {
+    completed: Array<Contract>,
+    open: Array<Contract>
+  }
+}
+
 /**
  * The state of the game, design to be transformed only through specific functions, but observed by any elements.
  */
@@ -116,26 +138,7 @@ export interface GameState {
   game: {
     turnCounter: number
   },
-  player: {
-    resources: {
-      money: {
-        balance: number,
-        revenue: number
-      },
-      workers: {
-        max: number,
-        free: number
-      }
-    },
-    victory: {
-      happiness: number,
-      goal: number
-    },
-    contracts: {
-      completed: Array<Contract>,
-      open: Array<Contract>
-    }
-  },
+  player: PlayerState,
   // A flat-buffer of
   map: MapState,
   tileCatalog: TileCatalog

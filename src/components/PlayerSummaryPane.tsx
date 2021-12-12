@@ -1,27 +1,5 @@
 import { Chip, Table, TableBody, TableCell, TableRow, Typography } from '@mui/material'
-
-const summary = [
-  {
-    icon: 'attach_money',
-    value: '23405',
-    chip: {
-      caption: '+300',
-      color: 'primary'
-    }
-  },
-  {
-    icon: 'sentiment_satisfied_alt',
-    value: '34'
-  },
-  {
-    icon: 'person',
-    value: 9,
-    chip: {
-      caption: '3 idle',
-      color: 'warning'
-    }
-  }
-]
+import { PlayerState } from '../game_logic'
 
 function summaryPaneRow (props) {
   return (
@@ -33,7 +11,37 @@ function summaryPaneRow (props) {
   )
 }
 
-export function PlayerSummaryPane (props) {
+function formatRevenue (value: number) {
+  if (value >= 0) {
+    return `+ $${Math.abs(value)}`
+  } else {
+    return `- $${Math.abs(value)}`
+  }
+}
+
+export function PlayerSummaryPane (props: {id: string, playerState: PlayerState}) {
+  const summary = [
+    {
+      icon: 'attach_money',
+      value: props.playerState.resources.money.balance,
+      chip: {
+        caption: formatRevenue(props.playerState.resources.money.revenue),
+        color: 'primary'
+      }
+    },
+    {
+      icon: 'sentiment_satisfied_alt',
+      value: props.playerState.victory.happiness
+    },
+    {
+      icon: 'person',
+      value: props.playerState.resources.workers.max,
+      chip: {
+        caption: `${props.playerState.resources.workers.free} idle`,
+        color: 'warning'
+      }
+    }
+  ]
   const rows = summary.map(row => summaryPaneRow(row))
   return (
     <Table id={props.id} className='player-summary-pane pane'>

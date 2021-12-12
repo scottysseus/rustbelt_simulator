@@ -14,7 +14,7 @@ export function createGameState (mapDefinition: GameMapDefinition, tileCatalog: 
       resources: {
         money: {
           balance: STARTING_MONEY,
-          revenue: 0
+          revenue: -10
         },
         workers: {
           max: STARTING_WORKERS,

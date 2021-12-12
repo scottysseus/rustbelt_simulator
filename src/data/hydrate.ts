@@ -20,7 +20,7 @@ export function hydrate (rawTiles: RawTileCatalog, rawProjects: RawProjectCatalo
   }
 
   for (const tileId in rawTiles) {
-    tileCatalog[tileId] = Object.assign(rawTiles[tileId], {
+    tileCatalog[tileId] = Object.assign({}, rawTiles[tileId], {
       projects: rawTiles[tileId].projects.map((id) => projectCatalog[id])
     })
   }
