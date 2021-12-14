@@ -6,6 +6,7 @@ import { Map } from './Map'
 function PlainPlane () {
   return (
     <mesh
+      position={[0, -0.01, 0]}
       rotation={new THREE.Euler(-Math.PI / 2)}
     >
       <planeGeometry args={[1000, 1000, 20, 20]} />
