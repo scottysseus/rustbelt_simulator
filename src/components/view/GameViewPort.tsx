@@ -1,16 +1,12 @@
 import * as THREE from 'three'
-import { Canvas } from '@react-three/fiber'
+import { Canvas, useThree } from '@react-three/fiber'
 import { MapControls, Stats } from '@react-three/drei'
-import { Map } from '../Map'
+import { Map } from './Map'
 
 function PlainPlane () {
-  // const ref = useRef<THREE.Mesh>(null!)
-  // useFrame((state, delta) => {
-  //   ref.current.rotation.x += 0.01
-  // })
   return (
     <mesh
-      // ref={ref}
+      position={[0, -0.01, 0]}
       rotation={new THREE.Euler(-Math.PI / 2)}
     >
       <planeGeometry args={[1000, 1000, 20, 20]} />
@@ -19,24 +15,32 @@ function PlainPlane () {
   )
 }
 
-export function GameViewPort () {
+function GameView () {
   //    -    +
   // X  Left Right
   // Y  Down Up
   // Z  Far  Near
-  const camera = new THREE.PerspectiveCamera()
-  camera.translateX(-10)
-  camera.translateY(10)
-  camera.translateZ(10)
+  const camera = useThree((state) => state.camera) as THREE.PerspectiveCamera
+  camera.fov = 45
+  camera.position.set(-10, 10, 10)
   camera.lookAt(0, 0, 0)
+  camera.updateProjectionMatrix()
   return (
-    <Canvas camera={camera}>
+    <>
       <MapControls />
       <PlainPlane />
       <ambientLight intensity={0.3} />
       <directionalLight intensity={2} position={[-3, 10, 5]} />
       <Map numColumns={10} numRows={10} gridInterval={1} />
-      <Stats />
+      <Stats className='stats' showPanel={1} />
+    </>
+  )
+}
+
+export function GameViewPort () {
+  return (
+    <Canvas>
+      <GameView />
     </Canvas>
   )
 }

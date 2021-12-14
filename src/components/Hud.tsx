@@ -3,7 +3,7 @@ import { ContractPane } from './ContractPane'
 import { PlayerSummaryPane } from './PlayerSummaryPane'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 
-export function HUD (props) {
+export function Hud () {
   return (
     <div className='hud'>
       <Accordion defaultExpanded className='hud-pane-expander'>
