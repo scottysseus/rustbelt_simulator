@@ -1,11 +1,10 @@
-import { HUD } from './HUD'
+import { Hud } from './Hud'
 import { GameViewPort } from './view/GameViewPort'
 
-export function GameDisplay (props) {
+export function GameDisplay () {
   return (
     <div className='container'>
-      {/* eslint-disable-next-line react/jsx-pascal-case */}
-      <HUD onClick={(e) => { console.log('HUD clicked') }} />
+      <Hud />
       <div className='viewport-section'>
         <div className='viewport-center'>
           <GameViewPort />
