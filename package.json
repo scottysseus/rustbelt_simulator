@@ -6,7 +6,8 @@
     "scripts": {
         "start": "webpack serve --config webpack.config.dev.js",
         "build": "webpack --env production --mode production --config webpack.config.prod.js",
-        "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
+        "lint": "eslint . --ext .js,.jsx,.ts,.tsx && npm run check-types",
+        "check-types": "tsc --noEmit"
     },
     "keywords": [
         "game"
