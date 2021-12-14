@@ -1,7 +1,7 @@
 import * as THREE from 'three'
 import { Canvas } from '@react-three/fiber'
 import { MapControls, Stats } from '@react-three/drei'
-import { Map } from '../Map'
+import { Map } from './Map'
 
 function PlainPlane () {
   return (
