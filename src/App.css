@@ -15,6 +15,11 @@ html, body {
     height: 100%;
 }
 
+.stats {
+    left: unset !important;
+    right: 0;
+}
+
 .hud {
     position: absolute;
     top: 0;

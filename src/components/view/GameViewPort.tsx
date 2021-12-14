@@ -31,7 +31,7 @@ function GameView () {
       <ambientLight intensity={0.3} />
       <directionalLight intensity={2} position={[-3, 10, 5]} />
       <Map numColumns={10} numRows={10} gridInterval={1} />
-      <Stats />
+      <Stats className='stats' showPanel={1} />
     </>
   )
 }
