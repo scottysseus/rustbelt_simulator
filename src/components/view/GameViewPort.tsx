@@ -1,5 +1,5 @@
 import * as THREE from 'three'
-import { Canvas, useThree } from '@react-three/fiber'
+import { Canvas } from '@react-three/fiber'
 import { MapControls, Stats } from '@react-three/drei'
 import { Map } from './Map'
 
@@ -20,14 +20,10 @@ function GameView () {
   // X  Left Right
   // Y  Down Up
   // Z  Far  Near
-  const camera = useThree((state) => state.camera) as THREE.PerspectiveCamera
-  camera.fov = 45
-  camera.position.set(-10, 10, 10)
-  camera.lookAt(0, 0, 0)
-  camera.updateProjectionMatrix()
+
   return (
     <>
-      <MapControls />
+      <MapControls target={[10, 0, 10]} />
       <PlainPlane />
       <ambientLight intensity={0.3} />
       <directionalLight intensity={2} position={[-3, 10, 5]} />
@@ -39,7 +35,7 @@ function GameView () {
 
 export function GameViewPort () {
   return (
-    <Canvas>
+    <Canvas camera={{ position: [10, 10, 30], fov: 45 }}>
       <GameView />
     </Canvas>
   )
