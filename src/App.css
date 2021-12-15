@@ -13,6 +13,23 @@ html, body {
 
 .container {
     height: 100%;
+
+}
+
+.menu-main {
+    background-color: #b7410e;
+    min-width: 100%;
+    min-height: 100%;
+    position: fixed;
+    font-family: 'Rock Salt', cursive;
+    text-align: center;
+}
+
+.menu-main-contents {
+    margin-top: 20%;
+    margin-left: auto;
+    margin-right: auto;
+    width: 25%;
 }
 
 .stats {

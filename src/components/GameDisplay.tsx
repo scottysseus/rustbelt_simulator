@@ -21,7 +21,7 @@ export function GameDisplay (props) {
   const [state, dispatch] = useReducer(reducer, startingState)
 
   return (
-    <div className='container'>
+    <div style={props.style} ref={ref} className='container'>
       <GameViewPort state={state} dispatch={dispatch} />
       <Hud state={state} dispatch={dispatch} />
     </div>
