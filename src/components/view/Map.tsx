@@ -1,6 +1,6 @@
 import { Suspense } from 'react'
-import { MapState } from '../game_logic'
-import { uiDispatcher, UiState } from './GameDisplay'
+import { MapState } from '../../game_logic'
+import { uiDispatcher, UiState } from '../GameDisplay'
 import { MapLocation } from './MapLocation'
 import { Html, useProgress } from '@react-three/drei'
 
