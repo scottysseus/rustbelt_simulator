@@ -2,7 +2,7 @@
 import { useLoader } from '@react-three/fiber'
 import { useState } from 'react'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
-import { Tile } from '../game_logic'
+import { Tile } from '../../game_logic/interfaces'
 
 /**
  * This component is meant represent one map location whose actual mesh child will change based on game state
