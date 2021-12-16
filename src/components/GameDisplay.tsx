@@ -50,7 +50,6 @@ export function GameDisplay () {
   return (
     <div className='container'>
       <GameViewPort gameState={gameState} uiState={uiState} dispatchUi={dispatchUI} />
-      {/* eslint-disable-next-line react/jsx-pascal-case */}
       <Hud gameState={gameState} uiState={uiState} dispatch={dispatch} />
     </div>
   )
