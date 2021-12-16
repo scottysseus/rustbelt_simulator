@@ -8,27 +8,40 @@ export const catalog: RawTileCatalog = {
     tags: [],
     happiness: 0,
     revenue: 0,
-    projects: []
+    projects: [],
+    modelPath: 'models/tile.glb'
   },
-  'firehouse-0': {
-    name: 'Ruined Fire Station',
-    description: 'The earthquake really messed this one up.',
-    tags: ['raw'],
+  grocery: {
+    name: 'Grocery',
+    description: '',
+    tags: [],
     happiness: 0,
     revenue: 0,
     projects: [
-      'repair-firehouse',
       'demolish'
-    ]
+    ],
+    modelPath: 'models/groceries.glb'
   },
-  'firehouse-1': {
-    name: 'Ladder 15 Fire Station',
-    description: 'Just like the old days.',
-    tags: ['repaired', 'improved', 'public-service'],
-    revenue: -5,
-    happiness: 10,
+  library: {
+    name: 'Library',
+    description: 'Books!',
+    tags: [],
+    happiness: 0,
+    revenue: 0,
     projects: [
       'demolish'
-    ]
+    ],
+    modelPath: 'models/library.glb'
+  },
+  gas: {
+    name: 'Gas',
+    description: 'Books!',
+    tags: [],
+    happiness: 0,
+    revenue: 0,
+    projects: [
+      'demolish'
+    ],
+    modelPath: 'models/gas.glb'
   }
 }
