@@ -2,14 +2,19 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import { Accordion, AccordionDetails, AccordionSummary, Fab, Typography } from '@mui/material'
 import { GameState, Tile } from '../game_logic'
 import { ContractPane } from './ContractPane'
-import { UiState, GameDispatch } from './GameDisplay'
+import { UIState, gameDispatcher, uiDispatcher } from './reducers'
 import { TileSummary } from './hud/TileSummary'
 import { PlayerSummaryPane } from './PlayerSummaryPane'
 import NextPlanIcon from '@mui/icons-material/NextPlan'
 
-export function Hud (props: {gameState: GameState, uiState: UiState, dispatch: GameDispatch}) {
+export function Hud (props: {
+  gameState: GameState,
+  uiState: UIState,
+  dispatchGame: gameDispatcher,
+  dispatchUI: uiDispatcher
+}) {
   const nextTurn = () => {
-    props.dispatch({ type: 'advanceTurn' })
+    props.dispatchGame({ type: 'advanceTurn' })
   }
 
   let selectedTile: Tile | undefined
@@ -40,7 +45,7 @@ export function Hud (props: {gameState: GameState, uiState: UiState, dispatch: G
         </Accordion>
       </div>
       <div className='bottom-hud'>
-        <TileSummary tile={selectedTile} dispatch={props.dispatch} />
+        <TileSummary tile={selectedTile} dispatchGame={props.dispatchGame} dispatchUI={props.dispatchUI} />
       </div>
       <div className='bottom-hud-right'>
         <Fab variant='extended' size='large' color='secondary' aria-label='add' onClick={nextTurn}>

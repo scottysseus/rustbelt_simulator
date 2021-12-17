@@ -1,6 +1,6 @@
 import { Suspense } from 'react'
 import { MapState } from '../../game_logic'
-import { uiDispatcher, UiState } from '../GameDisplay'
+import { uiDispatcher, UIState } from '../reducers'
 import { MapLocation } from './MapLocation'
 import { Html, useProgress } from '@react-three/drei'
 
@@ -17,14 +17,14 @@ function Loader () {
  * @param props
  * @returns
  */
-export function Map (props: {mapState: MapState, gridInterval: number, uiState: UiState, dispatchUi: uiDispatcher}) {
+export function Map (props: {mapState: MapState, gridInterval: number, uiState: UIState, dispatchUi: uiDispatcher}) {
   const mapLocations = []
 
   for (let i = 0; i < props.mapState.size.x; i++) {
     for (let j = 0; j < props.mapState.size.y; j++) {
       const index = ijToIndex(i, j, props.mapState.size.x)
       mapLocations.push(
-        <Suspense fallback={<Loader />}>
+        <Suspense key={`${i},${j}`} fallback={<Loader />}>
           <MapLocation
             key={`${i}${j}`}
             row={i}
