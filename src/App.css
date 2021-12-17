@@ -1,3 +1,8 @@
+/*
+The theme colors revolve around 'rust' (#b7410e).
+It uses various tints and grays of it (see https://www.colorhexa.com/b7410e).
+*/
+
 *, *::before, *::after {
     box-sizing: border-box;
 }
@@ -17,14 +22,13 @@ html, body {
 }
 
 .menu-main {
-    /* background-color: #b7410e; */
-    background-color: #735c52;
+    background-color: #130701;
     min-width: 100%;
     min-height: 100%;
     position: fixed;
     font-family: 'Rock Salt', cursive;
     font-size: 56px;
-    color: #f06f37;
+    color: #b7410e;
     text-align: center;
     padding-top: 10%;
     display: flex;
@@ -33,13 +37,13 @@ html, body {
 }
 
 .menu-main-buttons > button {
-    background-color: #f06f37;
+    background-color: #b7410e;
     min-width: max-content;
     width: 256px;
 }
 
 .menu-main-buttons > button:hover {
-    background-color: #f4966e;
+    background-color: #ed5513;
 }
 
 .menu-main-buttons {
