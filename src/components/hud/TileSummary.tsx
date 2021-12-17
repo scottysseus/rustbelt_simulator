@@ -1,4 +1,4 @@
-import { Card, CardContent, CardHeader, IconButton, Typography } from '@mui/material'
+import { Card, CardContent, CardHeader, IconButton } from '@mui/material'
 import { ProjectsDisplay } from './ProjectsDisplay'
 import { Tile } from '../../game_logic'
 import { gameDispatcher, uiDispatcher } from '../reducers'
@@ -28,7 +28,7 @@ export function TileSummary (props: {
         }
       />
       <CardContent>
-        <ProjectsDisplay tile={props.tile} dispatch={props.dispatchGame} />
+        <ProjectsDisplay tile={props.tile} dispatchGame={props.dispatchGame} />
       </CardContent>
     </Card>
   )
