@@ -1,4 +1,4 @@
-import { useReducer } from 'react'
+import React, { useReducer } from 'react'
 import { hydrate } from '../data/hydrate'
 import { map } from '../data/map'
 import { catalog as projectCatalog } from '../data/project-catalog'
@@ -8,7 +8,7 @@ import { Hud } from './Hud'
 import { reducer, State } from './reducers'
 import { GameViewPort } from './view/GameViewPort'
 
-export function GameDisplay (props) {
+export const GameDisplay = React.forwardRef((props, ref) => {
   const catalogs = hydrate(tileCatalog, projectCatalog)
 
   // To begin the game, we need an initial state
@@ -26,4 +26,4 @@ export function GameDisplay (props) {
       <Hud state={state} dispatch={dispatch} />
     </div>
   )
-}
+})
