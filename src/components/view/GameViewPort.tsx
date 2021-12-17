@@ -37,7 +37,15 @@ export function GameView (props: {gameState: GameState, uiState: UiState, dispat
 
 export function GameViewPort (props) {
   return (
-    <Canvas camera={{ position: [10, 10, 30], fov: 45 }}>
+    <Canvas
+      camera={{ position: [10, 10, 30], fov: 45 }}
+      raycaster={{
+        filter: (items, state) => {
+          if (items.length > 0) { return [items[0]] }
+          return []
+        }
+      }}
+    >
       <GameView {...props} />
     </Canvas>
   )
