@@ -2,14 +2,14 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import { Accordion, AccordionDetails, AccordionSummary, Fab, Typography } from '@mui/material'
 import { GameState, Tile } from '../game_logic'
 import { ContractPane } from './ContractPane'
-import { UIState, gameDispatcher, uiDispatcher } from './reducers'
+import { UiState, gameDispatcher, uiDispatcher } from './reducers'
 import { TileSummary } from './hud/TileSummary'
 import { PlayerSummaryPane } from './PlayerSummaryPane'
 import NextPlanIcon from '@mui/icons-material/NextPlan'
 
 export function Hud (props: {
   gameState: GameState,
-  uiState: UIState,
+  uiState: UiState,
   dispatchGame: gameDispatcher,
   dispatchUI: uiDispatcher
 }) {

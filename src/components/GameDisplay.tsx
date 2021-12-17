@@ -5,7 +5,7 @@ import { catalog as projectCatalog } from '../data/project-catalog'
 import { catalog as tileCatalog } from '../data/tile-catalog'
 import { createGameState } from '../game_logic'
 import { Hud } from './Hud'
-import { gameReducer, uiReducer, UIState } from './reducers'
+import { gameReducer, uiReducer, UiState } from './reducers'
 import { GameViewPort } from './view/GameViewPort'
 
 export function GameDisplay (props) {
@@ -14,7 +14,7 @@ export function GameDisplay (props) {
   // To begin the game, we need an initial state
   // However, that state will be initialized from a description of the game map and a tile catalog
   const startingState = createGameState(map, catalogs.tileCatalog, catalogs.projectCatalog)
-  const startingUiState: UIState = {
+  const startingUiState: UiState = {
   }
 
   const [gameState, dispatch] = useReducer(gameReducer, startingState)

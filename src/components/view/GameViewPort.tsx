@@ -3,7 +3,7 @@ import { Canvas } from '@react-three/fiber'
 import { MapControls, Stats } from '@react-three/drei'
 import { Map } from './Map'
 import { GameState } from '../../game_logic'
-import { uiDispatcher, UIState } from '../reducers'
+import { uiDispatcher, UiState } from '../reducers'
 function PlainPlane () {
   return (
     <mesh
@@ -16,7 +16,7 @@ function PlainPlane () {
   )
 }
 
-export function GameView (props: {gameState: GameState, uiState: UIState, dispatchUi: uiDispatcher}) {
+export function GameView (props: {gameState: GameState, uiState: UiState, dispatchUi: uiDispatcher}) {
   //    -    +
   // X  Left Right
   // Y  Down Up
