@@ -18,6 +18,7 @@ export interface GameAction {
 export function gameReducer (state: GameState, action: GameAction): GameState {
   console.log(action)
   switch (action.type) {
+    // TODO make advanceTurn a pure function?
     case 'advanceTurn':
       advanceTurn(state)
   }
