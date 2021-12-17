@@ -11,7 +11,7 @@ export interface UiAction {
 }
 
 export interface GameAction {
-  type: 'advanceTurn'
+  type: 'advanceTurn' | 'selectProject'
   projectIndex?: number
 }
 

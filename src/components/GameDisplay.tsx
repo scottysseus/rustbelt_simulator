@@ -18,12 +18,12 @@ export function GameDisplay (props) {
   }
 
   const [gameState, dispatch] = useReducer(gameReducer, startingState)
-  const [uiState, dispatchUI] = useReducer(uiReducer, startingUiState)
+  const [uiState, dispatchUi] = useReducer(uiReducer, startingUiState)
 
   return (
     <div className='container'>
-      <GameViewPort gameState={gameState} uiState={uiState} dispatchUi={dispatchUI} />
-      <Hud gameState={gameState} uiState={uiState} dispatchGame={dispatch} dispatchUI={dispatchUI} />
+      <GameViewPort gameState={gameState} uiState={uiState} dispatchUi={dispatchUi} />
+      <Hud gameState={gameState} uiState={uiState} dispatchGame={dispatch} dispatchUi={dispatchUi} />
     </div>
   )
 }

@@ -11,7 +11,7 @@ export function Hud (props: {
   gameState: GameState,
   uiState: UiState,
   dispatchGame: gameDispatcher,
-  dispatchUI: uiDispatcher
+  dispatchUi: uiDispatcher
 }) {
   const nextTurn = () => {
     props.dispatchGame({ type: 'advanceTurn' })
@@ -45,7 +45,7 @@ export function Hud (props: {
         </Accordion>
       </div>
       <div className='bottom-hud'>
-        <TileSummary tile={selectedTile} dispatchGame={props.dispatchGame} dispatchUI={props.dispatchUI} />
+        <TileSummary tile={selectedTile} dispatchGame={props.dispatchGame} dispatchUi={props.dispatchUi} />
       </div>
       <div className='bottom-hud-right'>
         <Fab variant='extended' size='large' color='secondary' aria-label='add' onClick={nextTurn}>
