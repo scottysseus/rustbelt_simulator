@@ -1,34 +1,40 @@
 
 import { useLoader } from '@react-three/fiber'
-import { useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import * as THREE from 'three'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import { Tile } from '../../game_logic/interfaces'
 
+const COLOR_HOVERED = new THREE.Color(0x663399)
+const COLOR_SELECTED = new THREE.Color(0x660000)
+
 /**
- * This component is meant represent one map location whose actual mesh child will change based on game state
+ * Represents an occupied tile on the map.
  * @param props
  * @returns
  */
 export function MapLocation (props: {row: number, column: number, gridInterval: number, tile: Tile, selected: boolean, onSelected: () => void}) {
-  const ref = useRef<THREE.Group>(null)
-
   const x = props.gridInterval * props.column
   const z = props.gridInterval * (props.row + 1)
 
   const gltf = useLoader(GLTFLoader, props.tile.definition.modelPath)
 
-  const onPointerOver = (event: THREE.Event) => {
-    console.log(event)
-    if (ref.current != null) {
-      setColorRecursive(ref.current, new THREE.Color(0x663399))
+  const ref = useRef<THREE.Group>(null)
+  const [color, setColor] = useState<THREE.Color | null>(null)
+
+  useEffect(() => {
+    if (props.selected) {
+      setColor(COLOR_SELECTED)
+    } else {
+      setColor(null)
     }
-  }
-  const onPointerOut = (event: THREE.Event) => {
-    if (ref.current != null) {
-      setColorRecursive(ref.current, null)
+  }, [props.selected])
+
+  useEffect(() => {
+    if (ref.current) {
+      setColorRecursive(ref.current, color)
     }
-  }
+  }, [ref, color])
 
   const onClick = (event: THREE.Event) => {
     console.log('Clicked on Map Location', props.tile.definition.name, props.row, props.column)
@@ -41,12 +47,25 @@ export function MapLocation (props: {row: number, column: number, gridInterval: 
       object={gltf.scene}
       position={[x, 0, z]}
       onClick={onClick}
-      onPointerOver={onPointerOver}
-      onPointerOut={onPointerOut}
+      onPointerOver={() => {
+        if (!props.selected) { setColor(COLOR_HOVERED) }
+      }}
+      onPointerOut={() => {
+        if (!props.selected) { setColor(null) }
+      }}
     />
   )
 }
 
+/**
+ * Changes the color of a primitive. A color of null resets to the original color.
+ *
+ * Technical answer: Updates the color of the material of all Mesh descendants belonging to an Object3D node.
+ * Object3D is the base class for both Group (the actual type of our primitive) and Mesh.
+ * @param object3d
+ * @param color
+ * @returns
+ */
 function setColorRecursive (object3d: THREE.Object3D, color: THREE.Color | null) {
   if (object3d instanceof THREE.Mesh) {
     const mesh = object3d as THREE.Mesh
