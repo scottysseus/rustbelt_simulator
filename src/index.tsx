@@ -1,5 +1,9 @@
+import { StrictMode } from 'react'
 import ReactDom from 'react-dom'
-import App from './App'
 import './App.css'
+import { GameDisplay } from './components/GameDisplay'
 
-ReactDom.render(<App />, document.getElementById('app'))
+ReactDom.render(
+  <StrictMode>
+    <GameDisplay />
+  </StrictMode>, document.getElementById('app'))

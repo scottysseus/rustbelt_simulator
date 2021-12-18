@@ -1,4 +1,4 @@
-import { advanceTurn, createGameState, playerAssignWorkers, playerInitiateProject, TileUnderConstruction } from './game_logic/index'
+import { advanceTurn, createGameState, playerAssignWorkers, playerInitiateProject, TileUnderConstruction } from './game_logic'
 import { map } from './data/map'
 import { catalog as tileCatalog } from './data/tile-catalog'
 import { catalog as projectCatalog } from './data/project-catalog'
