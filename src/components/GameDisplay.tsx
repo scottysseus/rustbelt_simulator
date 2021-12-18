@@ -15,7 +15,7 @@ export function GameDisplay () {
   // However, that state will be initialized from a description of the game map and a tile catalog
   const startingState: State = {
     game: createGameState(map, catalogs.tileCatalog, catalogs.projectCatalog),
-    ui: {}
+    ui: { selectedTile: null }
   }
 
   const [state, dispatch] = useReducer(reducer, startingState)

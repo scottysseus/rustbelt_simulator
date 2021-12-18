@@ -1,7 +1,7 @@
 import { advanceTurn, GameState } from '../game_logic'
 
 export interface UIState {
-  selectedTile?: number
+  selectedTile: number | null
 }
 
 type Action = {
@@ -25,19 +25,13 @@ export function reducer (state: State, action: Action): State {
     // TODO make advanceTurn a pure function?
     case 'advanceTurn':
       advanceTurn(state.game)
-      return Object.assign({}, state, { game: state.game })
-    case 'selectTile': {
-      const newState = Object.assign({}, state)
-      newState.ui.selectedTile = action.tileIndex
-      return newState
-    }
-    case 'deselectTile': {
-      const newState = Object.assign({}, state)
-      delete newState.ui.selectedTile
-      return newState
-    }
+      return { ...state }
+    case 'selectTile':
+      return { ...state, ui: { ...state.ui, selectedTile: action.tileIndex } }
+    case 'deselectTile':
+      return { ...state, ui: { ...state.ui, selectedTile: null } }
     default:
-      return Object.assign({}, state)
+      return { ...state }
   }
 }
 

@@ -16,7 +16,7 @@ export function Hud (props: {
   }
 
   let selectedTile: Tile | undefined
-  if (props.state.ui.selectedTile !== undefined) {
+  if (props.state.ui.selectedTile !== null) {
     selectedTile = props.state.game.map.tiles[props.state.ui.selectedTile]
   }
 
