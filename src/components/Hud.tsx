@@ -1,20 +1,23 @@
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import { Accordion, AccordionDetails, AccordionSummary, Fab, Typography } from '@mui/material'
-import { GameState, Tile } from '../game_logic'
+import { Tile } from '../game_logic'
 import { ContractPane } from './ContractPane'
-import { UiState, GameDispatch } from './GameDisplay'
+import { State, dispatcher } from './reducers'
 import { TileSummary } from './hud/TileSummary'
 import { PlayerSummaryPane } from './PlayerSummaryPane'
 import NextPlanIcon from '@mui/icons-material/NextPlan'
 
-export function Hud (props: {gameState: GameState, uiState: UiState, dispatch: GameDispatch}) {
+export function Hud (props: {
+  state: State,
+  dispatch: dispatcher
+}) {
   const nextTurn = () => {
     props.dispatch({ type: 'advanceTurn' })
   }
 
   let selectedTile: Tile | undefined
-  if (props.uiState.selectedTile !== undefined) {
-    selectedTile = props.gameState.map.tiles[props.uiState.selectedTile]
+  if (props.state.ui.selectedTile !== undefined) {
+    selectedTile = props.state.game.map.tiles[props.state.ui.selectedTile]
   }
 
   return (
@@ -27,7 +30,7 @@ export function Hud (props: {gameState: GameState, uiState: UiState, dispatch: G
             <Typography variant='h6'>Summary</Typography>
           </AccordionSummary>
           <AccordionDetails>
-            <PlayerSummaryPane id='playerSummaryPane' playerState={props.gameState.player} />
+            <PlayerSummaryPane id='playerSummaryPane' playerState={props.state.game.player} />
           </AccordionDetails>
         </Accordion>
         <Accordion defaultExpanded className='hud-pane-expander'>

@@ -1,9 +1,9 @@
 import { Tile } from '../../game_logic'
-import { GameDispatch } from '../GameDisplay'
+import { dispatcher } from '../reducers'
 import { ActiveProjectDisplay } from './ActiveProjectDisplay'
 import { SelectProjectDisplay } from './SelectProjectDisplay'
 
-export function ProjectsDisplay (props: {tile?: Tile, dispatch: GameDispatch }) {
+export function ProjectsDisplay (props: {tile?: Tile, dispatch: dispatcher }) {
   if (!props.tile) {
     return (<></>)
   }

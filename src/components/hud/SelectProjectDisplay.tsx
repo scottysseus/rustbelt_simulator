@@ -1,8 +1,8 @@
 import { Button, Table, TableBody, TableCell, TableHead, TableRow, Typography } from '@mui/material'
 import { Tile } from '../../game_logic'
-import { GameDispatch } from '../GameDisplay'
+import { dispatcher } from '../reducers'
 
-export function SelectProjectDisplay (props: {tile: Tile, dispatch: GameDispatch}) {
+export function SelectProjectDisplay (props: {tile: Tile, dispatch: dispatcher}) {
   const projects = props.tile.definition.projects
   console.log('projects', projects, props.tile)
   const projectList = projects.map((project, index) => {
