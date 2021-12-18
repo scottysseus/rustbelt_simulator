@@ -1,4 +1,4 @@
-import { RawTileCatalog } from '../game_logic/interfaces'
+import { RawTileCatalog } from '../game_logic'
 
 // This file implements a "database" of tiles, each with unique appearance, choices, etc
 export const catalog: RawTileCatalog = {

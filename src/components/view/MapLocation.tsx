@@ -3,7 +3,7 @@ import { useLoader } from '@react-three/fiber'
 import { useEffect, useRef, useState } from 'react'
 import * as THREE from 'three'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
-import { Tile } from '../../game_logic/interfaces'
+import { Tile } from '../../game_logic'
 
 const COLOR_HOVERED = new THREE.Color(0x663399)
 const COLOR_SELECTED = new THREE.Color(0x660000)
