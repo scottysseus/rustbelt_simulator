@@ -2,8 +2,7 @@ import * as THREE from 'three'
 import { Canvas } from '@react-three/fiber'
 import { MapControls, Stats } from '@react-three/drei'
 import { Map } from './Map'
-import { GameState } from '../../game_logic'
-import { uiDispatcher, UIState } from '../reducers'
+import { dispatcher, State } from '../reducers'
 function PlainPlane () {
   return (
     <mesh
@@ -16,7 +15,7 @@ function PlainPlane () {
   )
 }
 
-export function GameView (props: {gameState: GameState, uiState: UIState, dispatchUI: uiDispatcher}) {
+export function GameView (props: {state: State, dispatch: dispatcher}) {
   //    -    +
   // X  Left Right
   // Y  Down Up
@@ -28,14 +27,14 @@ export function GameView (props: {gameState: GameState, uiState: UIState, dispat
       <PlainPlane />
       <ambientLight intensity={0.3} />
       <directionalLight intensity={2} position={[-3, 10, 5]} />
-      <Map gridInterval={1} mapState={props.gameState.map} uiState={props.uiState} dispatchUI={props.dispatchUI} />
+      <Map gridInterval={1} mapState={props.state.game.map} uiState={props.state.ui} dispatch={props.dispatch} />
       <Stats className='stats' showPanel={1} />
       <axesHelper args={[10]} />
     </>
   )
 }
 
-export function GameViewPort (props) {
+export function GameViewPort (props: {state: State, dispatch: dispatcher}) {
   return (
     <Canvas
       camera={{ position: [10, 10, 30], fov: 45 }}

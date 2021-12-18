@@ -1,20 +1,19 @@
 import { Card, CardContent, CardHeader, IconButton } from '@mui/material'
 import { ProjectsDisplay } from './ProjectsDisplay'
 import { Tile } from '../../game_logic'
-import { gameDispatcher, uiDispatcher } from '../reducers'
+import { dispatcher } from '../reducers'
 import CloseIcon from '@mui/icons-material/Close'
 
 export function TileSummary (props: {
   tile?: Tile,
-  dispatchGame: gameDispatcher,
-  dispatchUI: uiDispatcher
+  dispatch: dispatcher
 }) {
   if (!props.tile) {
     return (<div />)
   }
 
   const onCloseClick = () => {
-    props.dispatchUI({
+    props.dispatch({
       type: 'deselectTile'
     })
   }
@@ -28,7 +27,7 @@ export function TileSummary (props: {
         }
       />
       <CardContent>
-        <ProjectsDisplay tile={props.tile} dispatchGame={props.dispatchGame} />
+        <ProjectsDisplay tile={props.tile} dispatch={props.dispatch} />
       </CardContent>
     </Card>
   )

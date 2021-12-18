@@ -1,25 +1,23 @@
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import { Accordion, AccordionDetails, AccordionSummary, Fab, Typography } from '@mui/material'
-import { GameState, Tile } from '../game_logic'
+import { Tile } from '../game_logic'
 import { ContractPane } from './ContractPane'
-import { UIState, gameDispatcher, uiDispatcher } from './reducers'
+import { State, dispatcher } from './reducers'
 import { TileSummary } from './hud/TileSummary'
 import { PlayerSummaryPane } from './PlayerSummaryPane'
 import NextPlanIcon from '@mui/icons-material/NextPlan'
 
 export function Hud (props: {
-  gameState: GameState,
-  uiState: UIState,
-  dispatchGame: gameDispatcher,
-  dispatchUI: uiDispatcher
+  state: State,
+  dispatch: dispatcher
 }) {
   const nextTurn = () => {
-    props.dispatchGame({ type: 'advanceTurn' })
+    props.dispatch({ type: 'advanceTurn' })
   }
 
   let selectedTile: Tile | undefined
-  if (props.uiState.selectedTile !== undefined) {
-    selectedTile = props.gameState.map.tiles[props.uiState.selectedTile]
+  if (props.state.ui.selectedTile !== undefined) {
+    selectedTile = props.state.game.map.tiles[props.state.ui.selectedTile]
   }
 
   return (
@@ -32,7 +30,7 @@ export function Hud (props: {
             <Typography variant='h6'>Summary</Typography>
           </AccordionSummary>
           <AccordionDetails>
-            <PlayerSummaryPane id='playerSummaryPane' playerState={props.gameState.player} />
+            <PlayerSummaryPane id='playerSummaryPane' playerState={props.state.game.player} />
           </AccordionDetails>
         </Accordion>
         <Accordion defaultExpanded className='hud-pane-expander'>
@@ -45,7 +43,7 @@ export function Hud (props: {
         </Accordion>
       </div>
       <div className='bottom-hud'>
-        <TileSummary tile={selectedTile} dispatchGame={props.dispatchGame} dispatchUI={props.dispatchUI} />
+        <TileSummary tile={selectedTile} dispatch={props.dispatch} />
       </div>
       <div className='bottom-hud-right'>
         <Fab variant='extended' size='large' color='secondary' aria-label='add' onClick={nextTurn}>

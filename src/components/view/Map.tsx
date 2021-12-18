@@ -1,6 +1,6 @@
 import { Suspense } from 'react'
 import { MapState } from '../../game_logic'
-import { uiDispatcher, UIState } from '../reducers'
+import { dispatcher, UIState } from '../reducers'
 import { MapLocation } from './MapLocation'
 import { Html, useProgress } from '@react-three/drei'
 
@@ -17,7 +17,7 @@ function Loader () {
  * @param props
  * @returns
  */
-export function Map (props: {mapState: MapState, gridInterval: number, uiState: UIState, dispatchUI: uiDispatcher}) {
+export function Map (props: {mapState: MapState, gridInterval: number, uiState: UIState, dispatch: dispatcher}) {
   const mapLocations = []
 
   for (let i = 0; i < props.mapState.size.x; i++) {
@@ -33,7 +33,7 @@ export function Map (props: {mapState: MapState, gridInterval: number, uiState: 
             gridInterval={props.gridInterval}
             selected={props.uiState.selectedTile === index}
             onSelected={() => {
-              props.dispatchUI({ type: 'selectTile', tileIndex: index })
+              props.dispatch({ type: 'selectTile', tileIndex: index })
             }}
           />
         </Suspense>

@@ -5,38 +5,37 @@ export interface UIState {
   selectedTile?: number
 }
 
-export interface UIAction {
-  type: 'selectTile' | 'deselectTile'
+export interface Action {
+  type: 'selectTile' | 'deselectTile' | 'advanceTurn' | 'selectProject'
   tileIndex?: number
-}
-
-export interface GameAction {
-  type: 'advanceTurn' | 'selectProject'
   projectIndex?: number
 }
 
-export function gameReducer (state: GameState, action: GameAction): GameState {
+export interface State {
+  ui: UIState
+  game: GameState
+}
+
+export function reducer (state: State, action: Action): State {
   console.log(action)
   switch (action.type) {
     // TODO make advanceTurn a pure function?
     case 'advanceTurn':
-      advanceTurn(state)
-  }
-  return Object.assign({}, state)
-}
-
-export function uiReducer (state: UIState, action: UIAction): UIState {
-  switch (action.type) {
-    case 'selectTile':
-      return Object.assign({}, state, { selectedTile: action.tileIndex })
+      advanceTurn(state.game)
+      return Object.assign({}, state, { game: state.game })
+    case 'selectTile': {
+      const newState = Object.assign({}, state)
+      newState.ui.selectedTile = action.tileIndex
+      return newState
+    }
     case 'deselectTile': {
       const newState = Object.assign({}, state)
-      delete newState.selectedTile
+      delete newState.ui.selectedTile
       return newState
     }
     default:
       return Object.assign({}, state)
   }
 }
-export type uiDispatcher = (action: UIAction) => void
-export type gameDispatcher = (action: GameAction) => void
+
+export type dispatcher = (action: Action) => void
