@@ -7,14 +7,14 @@ import CloseIcon from '@mui/icons-material/Close'
 export function TileSummary (props: {
   tile?: Tile,
   dispatchGame: gameDispatcher,
-  dispatchUi: uiDispatcher
+  dispatchUI: uiDispatcher
 }) {
   if (!props.tile) {
     return (<div />)
   }
 
   const onCloseClick = () => {
-    props.dispatchUi({
+    props.dispatchUI({
       type: 'deselectTile'
     })
   }

@@ -1,11 +1,11 @@
 import { advanceTurn } from '../game_logic'
 import { GameState } from '../game_logic/interfaces'
 
-export interface UiState {
+export interface UIState {
   selectedTile?: number
 }
 
-export interface UiAction {
+export interface UIAction {
   type: 'selectTile' | 'deselectTile'
   tileIndex?: number
 }
@@ -25,7 +25,7 @@ export function gameReducer (state: GameState, action: GameAction): GameState {
   return Object.assign({}, state)
 }
 
-export function uiReducer (state: UiState, action: UiAction): UiState {
+export function uiReducer (state: UIState, action: UIAction): UIState {
   switch (action.type) {
     case 'selectTile':
       return Object.assign({}, state, { selectedTile: action.tileIndex })
@@ -38,5 +38,5 @@ export function uiReducer (state: UiState, action: UiAction): UiState {
       return Object.assign({}, state)
   }
 }
-export type uiDispatcher = (action: UiAction) => void
+export type uiDispatcher = (action: UIAction) => void
 export type gameDispatcher = (action: GameAction) => void
