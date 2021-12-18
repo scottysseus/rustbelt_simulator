@@ -1,4 +1,4 @@
-import { useReducer } from 'react'
+import { useMemo, useReducer } from 'react'
 import { hydrate } from '../data/hydrate'
 import { map } from '../data/map'
 import { catalog as projectCatalog } from '../data/project-catalog'
@@ -9,14 +9,16 @@ import { reducer, State } from './reducers'
 import { GameViewPort } from './view/GameViewPort'
 
 export function GameDisplay () {
-  const catalogs = hydrate(tileCatalog, projectCatalog)
+  const startingState = useMemo<State>(() => {
+    const catalogs = hydrate(tileCatalog, projectCatalog)
 
-  // To begin the game, we need an initial state
-  // However, that state will be initialized from a description of the game map and a tile catalog
-  const startingState: State = {
-    game: createGameState(map, catalogs.tileCatalog, catalogs.projectCatalog),
-    ui: { selectedTile: null }
-  }
+    // To begin the game, we need an initial state
+    // However, that state will be initialized from a description of the game map and a tile catalog
+    return {
+      game: createGameState(map, catalogs.tileCatalog, catalogs.projectCatalog),
+      ui: { selectedTile: null }
+    }
+  }, [])
 
   const [state, dispatch] = useReducer(reducer, startingState)
 
