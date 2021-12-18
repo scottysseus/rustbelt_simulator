@@ -20,7 +20,7 @@ export interface State {
 }
 
 export function reducer (state: State, action: Action): State {
-  console.log(action)
+  console.log(state)
   switch (action.type) {
     // TODO make advanceTurn a pure function?
     case 'advanceTurn':

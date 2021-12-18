@@ -1,3 +1,5 @@
+import { catalog as projectCatalog } from '../data/project-catalog'
+import { catalog as tileCatalog } from '../data/tile-catalog'
 import { GameState, Tile, isTileUnderConstruction, Contract } from './interfaces'
 
 export function applyRevenue (state: GameState) {
@@ -18,16 +20,18 @@ export function applyWorkersAtTile (state: GameState, tile: Tile) {
     tile.activeProject.progress += delta
     tile.activeProject.assignedWorkers = 0
 
+    const projectDefinition = projectCatalog[tile.activeProject.project]
+    const tileDefinition = tileCatalog[tile.definition]
     // Check if project is done
-    if (tile.activeProject.progress === tile.activeProject.project.effort) {
+    if (tile.activeProject.progress === projectDefinition.effort) {
       // Change the catalog entry
-      tile.definition = tile.activeProject.project.targetTileDefinition
+      tile.definition = projectDefinition.targetTileDefinition
       const t = tile as Tile
       delete t.activeProject
 
       // Give player rewards for the tile
-      state.player.victory.happiness += tile.definition.happiness
-      state.player.resources.money.revenue += tile.definition.revenue
+      state.player.victory.happiness += tileDefinition.happiness
+      state.player.resources.money.revenue += tileDefinition.revenue
     }
   }
 }

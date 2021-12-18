@@ -3,6 +3,7 @@ import { useLoader } from '@react-three/fiber'
 import { useEffect, useRef, useState } from 'react'
 import * as THREE from 'three'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
+import { catalog as tileCatalog } from '../../data/tile-catalog'
 import { Tile } from '../../game_logic'
 
 const COLOR_HOVERED = new THREE.Color(0x663399)
@@ -17,7 +18,8 @@ export function MapLocation (props: {row: number, column: number, gridInterval: 
   const x = props.gridInterval * props.column
   const z = props.gridInterval * (props.row + 1)
 
-  const gltf = useLoader(GLTFLoader, props.tile.definition.modelPath)
+  const tileDefinition = tileCatalog[props.tile.definition]
+  const gltf = useLoader(GLTFLoader, tileDefinition.modelPath)
 
   const ref = useRef<THREE.Group>(null)
   const [color, setColor] = useState<THREE.Color | null>(null)
@@ -37,7 +39,7 @@ export function MapLocation (props: {row: number, column: number, gridInterval: 
   }, [ref, color])
 
   const onClick = (event: THREE.Event) => {
-    console.log('Clicked on Map Location', props.tile.definition.name, props.row, props.column)
+    console.log('Clicked on Map Location', tileDefinition.name, props.row, props.column)
     props.onSelected()
   }
 

@@ -11,34 +11,29 @@ type ReadonlyRecord<K extends string, T> = Readonly<Record<K, T>>
 /**
  * Represents the project a player assigns workers to in order to improve a tile.
  */
-export interface ProjectCatalogEntry {
+export interface ProjectDefinition {
   readonly name: string
   readonly description: string
-  readonly targetTileDefinition: string
+  readonly targetTileDefinition: TileCatalogEntryId // TODO rename
   readonly cost: number
   readonly effort: number
 }
 
-export interface ProjectDefinition extends Omit<ProjectCatalogEntry, 'targetTileDefinition'> {
-  readonly targetTileDefinition: TileDefinition
-}
-
-export type ProjectCatalogId = string
-export type RawProjectCatalog = ReadonlyRecord<ProjectCatalogId, ProjectCatalogEntry>
-export type ProjectCatalog = ReadonlyRecord<ProjectCatalogId, ProjectDefinition>
+export type ProjectCatalogEntryId = 'demolish' | 'refine'
+export type ProjectCatalog = ReadonlyRecord<ProjectCatalogEntryId, ProjectDefinition>
 
 /**
  * A TileDBEntry stores the "starting point" and static information about tiles
  * When an actual tile is added to game board, it holds a pointer to an entry in this catalog to lookup things like assets.
  */
-export interface TileCatalogEntry {
+export interface TileDefinition {
   // Short form name suitable for displaying in most places
   readonly name: string
   // Long form description or flavor text, shown in a "detail" view
   readonly description: string
   // An array of 0 to 3 projects for a tile
   // 0 projects indicates a "final" tile that can't be improved any more
-  readonly projects: ReadonlyArray<ProjectCatalogId>
+  readonly projects: ReadonlyArray<ProjectCatalogEntryId>
   // An array of "tags" that categorize this tile.
   readonly tags: ReadonlyArray<string>
   readonly revenue: number
@@ -46,16 +41,11 @@ export interface TileCatalogEntry {
   readonly modelPath: string
 }
 
-export interface TileDefinition extends Omit<TileCatalogEntry, 'projects'> {
-  readonly projects: ReadonlyArray<ProjectDefinition>
-}
-
-export type TileCatalogEntryId = string
-export type RawTileCatalog = ReadonlyRecord<TileCatalogEntryId, TileCatalogEntry>
+export type TileCatalogEntryId = 'empty' | 'grocery' | 'library' | 'gas'
 export type TileCatalog = ReadonlyRecord<TileCatalogEntryId, TileDefinition>
 
 export interface ActiveProject {
-  readonly project: ProjectDefinition
+  readonly project: ProjectCatalogEntryId
   // Invariant: progress < project.effort
   readonly progress: number
   readonly assignedWorkers: number
@@ -66,7 +56,7 @@ export interface ActiveProject {
  */
 export interface Tile {
   // Pointer into a database of tile decsriptions that are IMMUTABLE
-  readonly definition: TileDefinition
+  readonly definition: TileCatalogEntryId
 
   readonly activeProject?: ActiveProject
 }

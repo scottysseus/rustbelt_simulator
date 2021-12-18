@@ -1,15 +1,10 @@
-import { advanceTurn, createGameState, playerAssignWorkers, playerInitiateProject, TileUnderConstruction } from './game_logic'
-import { map } from './data/map'
-import { catalog as tileCatalog } from './data/tile-catalog'
 import { catalog as projectCatalog } from './data/project-catalog'
-import { hydrate } from './data/hydrate'
+import { advanceTurn, createGameState, playerAssignWorkers, playerInitiateProject, TileUnderConstruction } from './game_logic'
 
 export function playGameLogic () {
-  const catalogs = hydrate(tileCatalog, projectCatalog)
-
   // To begin the game, we need an initial state
   // However, that state will be initialized from a description of the game map and a tile catalog
-  const state = createGameState(map, catalogs.tileCatalog, catalogs.projectCatalog)
+  const state = createGameState()
 
   // We  will mimic a few player turns and inspect the state
 
@@ -40,7 +35,7 @@ export function playGameLogic () {
   console.log(
     tile.activeProject.progress,
     '/',
-    tile.activeProject.project.effort
+    projectCatalog[tile.activeProject.project].effort
   )
 
   // Turn 2
@@ -57,7 +52,7 @@ export function playGameLogic () {
   console.log(
     tile.activeProject.progress,
     '/',
-    tile.activeProject.project.effort
+    projectCatalog[tile.activeProject.project].effort
   )
 
   // Turn 3

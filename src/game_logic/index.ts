@@ -1,11 +1,14 @@
 import { GameMapDefinition, GameState, isTileUnderConstruction, Tile, TileCatalog, TileCatalogEntryId, TileUnderConstruction, ProjectCatalog } from './interfaces'
 import { advanceTurnCounter, applyRevenue, applyWorkers, checkWinLoss, resetWorkers, resolveContracts } from './turn'
+import { map as mapDefinition } from '../data/map'
+import { catalog as tileCatalog } from '../data/tile-catalog'
+import { catalog as projectCatalog } from '../data/project-catalog'
 export * from './interfaces'
 
 const STARTING_MONEY = 1000000
 const STARTING_WORKERS = 3
 
-export function createGameState (mapDefinition: GameMapDefinition, tileCatalog: TileCatalog, projectCatalog: ProjectCatalog): GameState {
+export function createGameState (): GameState {
   const state = {
     game: {
       turnCounter: 0
@@ -31,7 +34,7 @@ export function createGameState (mapDefinition: GameMapDefinition, tileCatalog: 
       }
     },
     map: {
-      tiles: initializeTiles(mapDefinition, tileCatalog, projectCatalog),
+      tiles: initializeTiles(),
       size: mapDefinition.size
     },
     tileCatalog,
@@ -41,16 +44,17 @@ export function createGameState (mapDefinition: GameMapDefinition, tileCatalog: 
   return state
 }
 
-function initializeTiles (mapDefinition: GameMapDefinition, tileCatalog: TileCatalog, projectCatalog: ProjectCatalog): Array<Tile> {
+function initializeTiles (): Array<Tile> {
   return mapDefinition.tiles.map((catalogEntryId: TileCatalogEntryId): Tile => ({
-    definition: tileCatalog[catalogEntryId]
+    definition: catalogEntryId
   }))
 }
 
 export function playerInitiateProject (state: GameState, tileIndex: number, projectIndex: number) {
   const tile = state.map.tiles[tileIndex] as TileUnderConstruction
+  const tileDefinition = tileCatalog[tile.definition]
   tile.activeProject = {
-    project: tile.definition.projects[projectIndex],
+    project: tileDefinition.projects[projectIndex],
     progress: 0,
     assignedWorkers: 0
   }
