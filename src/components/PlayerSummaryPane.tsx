@@ -1,7 +1,18 @@
 import { Chip, Table, TableBody, TableCell, TableRow, Typography } from '@mui/material'
+import { ComponentPropsWithoutRef } from 'react'
 import { PlayerState } from '../game_logic'
 
-function summaryPaneRow (props) {
+type MuiColor = ComponentPropsWithoutRef<typeof Chip>['color']
+type SummaryPaneRowProps = {
+  icon: string
+  value: number
+  chip?: {
+    caption: string
+    color: MuiColor
+  }
+}
+
+function summaryPaneRow (props: SummaryPaneRowProps) {
   return (
     <TableRow key={props.icon} className='player-summary-pane-row'>
       <TableCell><i className='material-icons'>{props.icon}</i></TableCell>
@@ -20,7 +31,7 @@ function formatRevenue (value: number) {
 }
 
 export function PlayerSummaryPane (props: {id: string, playerState: PlayerState}) {
-  const summary = [
+  const summary: SummaryPaneRowProps[] = [
     {
       icon: 'attach_money',
       value: props.playerState.resources.money.balance,

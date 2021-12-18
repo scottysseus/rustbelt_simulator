@@ -8,7 +8,7 @@ import { Hud } from './Hud'
 import { reducer, State } from './reducers'
 import { GameViewPort } from './view/GameViewPort'
 
-export function GameDisplay (props) {
+export function GameDisplay () {
   const catalogs = hydrate(tileCatalog, projectCatalog)
 
   // To begin the game, we need an initial state
