@@ -1,7 +1,7 @@
 import { advanceTurn, GameState } from '../game_logic'
 
 export interface UIState {
-  selectedTile: number | null
+  readonly selectedTile: number | null
 }
 
 type Action = {
@@ -15,8 +15,8 @@ type Action = {
 }
 
 export interface State {
-  ui: UIState
-  game: GameState
+  readonly ui: UIState
+  readonly game: GameState
 }
 
 export function reducer (state: State, action: Action): State {
