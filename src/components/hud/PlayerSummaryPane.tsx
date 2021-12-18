@@ -1,6 +1,6 @@
 import { Chip, Table, TableBody, TableCell, TableRow, Typography } from '@mui/material'
 import { ComponentPropsWithoutRef } from 'react'
-import { PlayerState } from '../game_logic'
+import { PlayerState } from '../../game_logic'
 
 type MuiColor = ComponentPropsWithoutRef<typeof Chip>['color']
 type SummaryPaneRowProps = {

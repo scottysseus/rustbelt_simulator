@@ -1,9 +1,9 @@
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import { Accordion, AccordionDetails, AccordionSummary, Fab, Typography } from '@mui/material'
-import { Tile } from '../game_logic'
+import { Tile } from '../../game_logic'
 import { ContractPane } from './ContractPane'
-import { State, dispatcher } from './reducers'
-import { TileSummary } from './hud/TileSummary'
+import { State, dispatcher } from '../reducers'
+import { TileSummary } from './TileSummary'
 import { PlayerSummaryPane } from './PlayerSummaryPane'
 import NextPlanIcon from '@mui/icons-material/NextPlan'
 
