@@ -4,10 +4,14 @@ export interface UIState {
   selectedTile?: number
 }
 
-export interface Action {
-  type: 'selectTile' | 'deselectTile' | 'advanceTurn' | 'selectProject'
-  tileIndex?: number
-  projectIndex?: number
+type Action = {
+  type: 'advanceTurn' | 'deselectTile'
+} | {
+  type: 'selectTile'
+  tileIndex: number
+} | {
+  type: 'selectProject'
+  projectIndex: number
 }
 
 export interface State {
