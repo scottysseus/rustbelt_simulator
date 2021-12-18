@@ -80,25 +80,7 @@ export interface Contract {
   readonly name: string
   // Long form description / flavor text
   readonly description: string
-  /**
-   * Look at the current game state and determine if this contract has been fulfilled
-   *
-   * changes `isCompeleted()` if has been completed
-   *
-   * DO NOT modify the game state
-   * @param state
-   */
-  check(state: GameState): boolean
-
-  /**
-   * Modify the current game state to apply the rewards of this contract
-   * @param state
-   */
-  reward(state: GameState): void
-
-  /**
-   * Indicates if this contract has been resolved
-   */
+  // Indicates if this contract has been resolved
   readonly completed: boolean
 }
 

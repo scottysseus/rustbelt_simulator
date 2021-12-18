@@ -1,4 +1,4 @@
-import { GameState, Tile, isTileUnderConstruction } from './interfaces'
+import { GameState, Tile, isTileUnderConstruction, Contract } from './interfaces'
 
 export function applyRevenue (state: GameState) {
   state.player.resources.money.balance = state.player.resources.money.balance + state.player.resources.money.revenue
@@ -38,9 +38,9 @@ export function resetWorkers (state: GameState) {
 
 export function resolveContracts (state: GameState) {
   for (const contract of state.player.contracts.open) {
-    contract.check(state)
+    contractMaybeComplete(state, contract)
     if (contract.completed) {
-      contract.reward(state)
+      contractCollectRewards(state, contract)
     }
   }
 
@@ -54,6 +54,14 @@ export function resolveContracts (state: GameState) {
     }
   }
   state.player.contracts.open.unshift(...newOpen)
+}
+
+function contractMaybeComplete (state: GameState, contract: Contract) {
+  throw new Error('Not implemented')
+}
+
+function contractCollectRewards (state: GameState, contract: Contract) {
+  throw new Error('Not implemented')
 }
 
 export function advanceTurnCounter (state: GameState) {
