@@ -6,11 +6,11 @@ import CloseIcon from '@mui/icons-material/Close'
 import { tileCatalog } from '../../data/tile-catalog'
 
 export function TileSummary (props: {
-  tile?: Tile,
+  tile: Tile | null,
   dispatch: dispatcher
 }) {
-  if (!props.tile) {
-    return (<div />)
+  if (props.tile === null) {
+    return null
   }
 
   const onCloseClick = () => {

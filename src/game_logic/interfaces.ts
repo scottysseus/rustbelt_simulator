@@ -4,6 +4,7 @@
  * - Use ReadonlyArrays instead of Arrays
  * - Use ReadonlyRecords instead of Records
  * - Use readonly varieties of Maps, Sets, etc
+ * - No optionals, use nullables instead
  */
 
 type ReadonlyRecord<K extends string, T> = Readonly<Record<K, T>>
