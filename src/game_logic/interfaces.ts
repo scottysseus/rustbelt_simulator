@@ -14,13 +14,13 @@ type ReadonlyRecord<K extends string, T> = Readonly<Record<K, T>>
 export interface ProjectDefinition {
   readonly name: string
   readonly description: string
-  readonly targetTileDefinition: TileCatalogEntryId // TODO rename
+  readonly targetTileType: TileType
   readonly cost: number
   readonly effort: number
 }
 
-export type ProjectCatalogEntryId = 'demolish' | 'refine'
-export type ProjectCatalog = ReadonlyRecord<ProjectCatalogEntryId, ProjectDefinition>
+export type ProjectType = 'demolish' | 'refine'
+export type ProjectCatalog = ReadonlyRecord<ProjectType, ProjectDefinition>
 
 /**
  * A TileDBEntry stores the "starting point" and static information about tiles
@@ -33,7 +33,7 @@ export interface TileDefinition {
   readonly description: string
   // An array of 0 to 3 projects for a tile
   // 0 projects indicates a "final" tile that can't be improved any more
-  readonly projects: ReadonlyArray<ProjectCatalogEntryId>
+  readonly projects: ReadonlyArray<ProjectType>
   // An array of "tags" that categorize this tile.
   readonly tags: ReadonlyArray<string>
   readonly revenue: number
@@ -41,11 +41,11 @@ export interface TileDefinition {
   readonly modelPath: string
 }
 
-export type TileCatalogEntryId = 'empty' | 'grocery' | 'library' | 'gas'
-export type TileCatalog = ReadonlyRecord<TileCatalogEntryId, TileDefinition>
+export type TileType = 'empty' | 'grocery' | 'library' | 'gas'
+export type TileCatalog = ReadonlyRecord<TileType, TileDefinition>
 
 export interface ActiveProject {
-  readonly project: ProjectCatalogEntryId
+  readonly type: ProjectType
   // Invariant: progress < project.effort
   readonly progress: number
   readonly assignedWorkers: number
@@ -56,9 +56,9 @@ export interface ActiveProject {
  */
 export interface Tile {
   // Pointer into a database of tile decsriptions that are IMMUTABLE
-  readonly definition: TileCatalogEntryId
+  readonly type: TileType
 
-  readonly activeProject?: ActiveProject
+  readonly activeProject?: ActiveProject // TODO: remove?
 }
 
 export interface TileUnderConstruction extends Tile {
@@ -128,7 +128,7 @@ export interface GameState {
 
 export interface GameMapDefinition {
   // A flat array of
-  readonly tiles: ReadonlyArray<TileCatalogEntryId>
+  readonly tiles: ReadonlyArray<TileType>
   // The dimensions
   readonly size: {
     readonly x: number

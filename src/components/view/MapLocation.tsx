@@ -18,7 +18,7 @@ export function MapLocation (props: {row: number, column: number, gridInterval: 
   const x = props.gridInterval * props.column
   const z = props.gridInterval * (props.row + 1)
 
-  const tileDefinition = tileCatalog[props.tile.definition]
+  const tileDefinition = tileCatalog[props.tile.type]
   const gltf = useLoader(GLTFLoader, tileDefinition.modelPath)
 
   const ref = useRef<THREE.Group>(null)

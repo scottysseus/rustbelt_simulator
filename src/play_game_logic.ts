@@ -17,7 +17,7 @@ export function playGameLogic () {
 
   // Inspect the tile to see what it is
   let tile = (state.map.tiles.at(selectedTileIndex) as TileUnderConstruction)
-  console.log(tile.definition)
+  console.log(tile.type)
 
   // Commit that action: "Start repairing the fire station"
   playerInitiateProject(state, selectedTileIndex, selectedProjectIndex)
@@ -35,7 +35,7 @@ export function playGameLogic () {
   console.log(
     tile.activeProject.progress,
     '/',
-    projectCatalog[tile.activeProject.project].effort
+    projectCatalog[tile.activeProject.type].effort
   )
 
   // Turn 2
@@ -52,7 +52,7 @@ export function playGameLogic () {
   console.log(
     tile.activeProject.progress,
     '/',
-    projectCatalog[tile.activeProject.project].effort
+    projectCatalog[tile.activeProject.type].effort
   )
 
   // Turn 3
@@ -66,5 +66,5 @@ export function playGameLogic () {
   // Inspect the state of the game and see how work is progressing
   // MAJOR TODO: make it easier to inspect this state
   tile = (state.map.tiles.at(selectedTileIndex) as TileUnderConstruction)
-  console.log(tile.definition)
+  console.log(tile.type)
 }

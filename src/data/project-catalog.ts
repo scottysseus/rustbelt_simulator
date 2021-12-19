@@ -5,21 +5,21 @@ export const catalog: ProjectCatalog = { // TODO rename
   // 'repair-firehouse': {
   //   name: 'Repair',
   //   description: 'Fix it up!',
-  //   targetTileDefinition: 'firehouse-1',
+  //   targetTileType: 'firehouse-1',
   //   cost: 300,
   //   effort: 9
   // },
   demolish: {
     name: 'Demolish',
     description: 'Tear it down!',
-    targetTileDefinition: 'empty',
+    targetTileType: 'empty',
     cost: 500,
     effort: 20
   },
   refine: {
     name: 'Refine',
     description: 'Honestly, nothing.',
-    targetTileDefinition: 'empty',
+    targetTileType: 'empty',
     cost: 0,
     effort: 1
   }

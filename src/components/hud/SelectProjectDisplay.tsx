@@ -5,7 +5,7 @@ import { Tile } from '../../game_logic'
 import { dispatcher } from '../reducers'
 
 export function SelectProjectDisplay (props: {tile: Tile, dispatch: dispatcher}) {
-  const tileDefinition = tileCatalog[props.tile.definition]
+  const tileDefinition = tileCatalog[props.tile.type]
   const projects = tileDefinition.projects.map((id) => projectCatalog[id])
   console.log('projects', projects, props.tile)
   const projectList = projects.map((project, index) => {
@@ -14,7 +14,7 @@ export function SelectProjectDisplay (props: {tile: Tile, dispatch: dispatcher})
       // that I don't know what the tile index is
       props.dispatch({ type: 'selectProject', projectIndex: index })
     }
-    const targetTileDefinition = tileCatalog[project.targetTileDefinition]
+    const targetTileDefinition = tileCatalog[project.targetTileType]
     return (
       <TableRow key={project.name}>
         <TableCell><Typography>{project.name}</Typography></TableCell>

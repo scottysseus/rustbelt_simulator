@@ -19,7 +19,7 @@ export function TileSummary (props: {
     })
   }
 
-  const tileDefinition = tileCatalog[props.tile.definition]
+  const tileDefinition = tileCatalog[props.tile.type]
 
   return (
     <Card elevation={3}>

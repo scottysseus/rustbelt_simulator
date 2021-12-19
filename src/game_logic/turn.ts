@@ -20,12 +20,12 @@ export function applyWorkersAtTile (state: GameState, tile: Tile) {
     tile.activeProject.progress += delta
     tile.activeProject.assignedWorkers = 0
 
-    const projectDefinition = projectCatalog[tile.activeProject.project]
-    const tileDefinition = tileCatalog[tile.definition]
+    const projectDefinition = projectCatalog[tile.activeProject.type]
+    const tileDefinition = tileCatalog[tile.type]
     // Check if project is done
     if (tile.activeProject.progress === projectDefinition.effort) {
       // Change the catalog entry
-      tile.definition = projectDefinition.targetTileDefinition
+      tile.type = projectDefinition.targetTileType
       const t = tile as Tile
       delete t.activeProject
 
