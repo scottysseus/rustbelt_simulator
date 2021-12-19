@@ -20,18 +20,16 @@ export interface State {
 }
 
 export function reducer (state: State, action: Action): State {
-  console.log(state)
+  console.log('old state', state)
   switch (action.type) {
-    // TODO make advanceTurn a pure function?
     case 'advanceTurn':
-      advanceTurn(state.game)
-      return { ...state }
+      return { ...state, game: advanceTurn(state.game) }
     case 'selectTile':
       return { ...state, ui: { ...state.ui, selectedTile: action.tileIndex } }
     case 'deselectTile':
       return { ...state, ui: { ...state.ui, selectedTile: null } }
     default:
-      return { ...state }
+      return { ...state } // TODO prevent with typechecking
   }
 }
 

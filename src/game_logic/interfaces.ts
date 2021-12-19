@@ -58,7 +58,7 @@ export interface Tile {
   // Pointer into a database of tile decsriptions that are IMMUTABLE
   readonly type: TileType
 
-  readonly activeProject?: ActiveProject // TODO: remove?
+  readonly activeProject: ActiveProject | null
 }
 
 export interface TileUnderConstruction extends Tile {

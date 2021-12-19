@@ -1,10 +1,10 @@
 import { catalog as projectCatalog } from './data/project-catalog'
-import { advanceTurn, createGameState, playerAssignWorkers, playerInitiateProject, TileUnderConstruction } from './game_logic'
+import { advanceTurn, createGameState, isTileUnderConstruction, playerAssignWorkers, playerInitiateProject } from './game_logic'
 
 export function playGameLogic () {
   // To begin the game, we need an initial state
   // However, that state will be initialized from a description of the game map and a tile catalog
-  const state = createGameState()
+  let state = createGameState()
 
   // We  will mimic a few player turns and inspect the state
 
@@ -16,55 +16,59 @@ export function playGameLogic () {
   const selectedProjectIndex = 0
 
   // Inspect the tile to see what it is
-  let tile = (state.map.tiles.at(selectedTileIndex) as TileUnderConstruction)
+  let tile = state.map.tiles[selectedTileIndex]
   console.log(tile.type)
 
   // Commit that action: "Start repairing the fire station"
-  playerInitiateProject(state, selectedTileIndex, selectedProjectIndex)
+  state = playerInitiateProject(state, selectedTileIndex, selectedProjectIndex)
 
   // Player adds workers to the project
   const workerCount = 3
-  playerAssignWorkers(state, selectedTileIndex, workerCount)
+  state = playerAssignWorkers(state, selectedTileIndex, workerCount)
 
   // End turn 1
-  advanceTurn(state)
+  state = advanceTurn(state)
 
   // Inspect the state of the game and see how work is progressing
   // MAJOR TODO: make it easier to inspect this state
-  tile = (state.map.tiles.at(selectedTileIndex) as TileUnderConstruction)
-  console.log(
-    tile.activeProject.progress,
-    '/',
-    projectCatalog[tile.activeProject.type].effort
-  )
+  tile = state.map.tiles[selectedTileIndex]
+  if (isTileUnderConstruction(tile)) {
+    console.log(
+      tile.activeProject.progress,
+      '/',
+      projectCatalog[tile.activeProject.type].effort
+    )
+  }
 
   // Turn 2
   // Player wants to keep working on the fire station
   // Player adds workers to the project
-  playerAssignWorkers(state, selectedTileIndex, workerCount)
+  state = playerAssignWorkers(state, selectedTileIndex, workerCount)
 
   // End turn 2
-  advanceTurn(state)
+  state = advanceTurn(state)
 
   // Inspect the state of the game and see how work is progressing
   // MAJOR TODO: make it easier to inspect this state
-  tile = (state.map.tiles.at(selectedTileIndex) as TileUnderConstruction)
-  console.log(
-    tile.activeProject.progress,
-    '/',
-    projectCatalog[tile.activeProject.type].effort
-  )
+  tile = state.map.tiles[selectedTileIndex]
+  if (isTileUnderConstruction(tile)) {
+    console.log(
+      tile.activeProject.progress,
+      '/',
+      projectCatalog[tile.activeProject.type].effort
+    )
+  }
 
   // Turn 3
   // Player wants to keep working on the fire station
   // Player adds workers to the project
-  playerAssignWorkers(state, selectedTileIndex, workerCount)
+  state = playerAssignWorkers(state, selectedTileIndex, workerCount)
 
   // End turn 3
-  advanceTurn(state)
+  state = advanceTurn(state)
 
   // Inspect the state of the game and see how work is progressing
   // MAJOR TODO: make it easier to inspect this state
-  tile = (state.map.tiles.at(selectedTileIndex) as TileUnderConstruction)
+  tile = state.map.tiles[selectedTileIndex]
   console.log(tile.type)
 }

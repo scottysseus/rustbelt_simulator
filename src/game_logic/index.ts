@@ -1,5 +1,5 @@
 import { GameState, isTileUnderConstruction, Tile, TileType, TileUnderConstruction } from './interfaces'
-import { advanceTurnCounter, applyRevenue, applyWorkers, checkWinLoss, resetWorkers, resolveContracts } from './turn'
+import { advanceTurnCounter, applyRevenue, applyWorkers, resetWorkers, resolveContracts } from './turn'
 import { map as mapDefinition } from '../data/map'
 import { catalog as tileCatalog } from '../data/tile-catalog'
 import { catalog as projectCatalog } from '../data/project-catalog'
@@ -46,35 +46,75 @@ export function createGameState (): GameState {
 
 function initializeTiles (): Array<Tile> {
   return mapDefinition.tiles.map((catalogEntryId: TileType): Tile => ({
-    type: catalogEntryId
+    type: catalogEntryId,
+    activeProject: null
   }))
 }
 
-export function playerInitiateProject (state: GameState, tileIndex: number, projectIndex: number) {
+export function playerInitiateProject (state: GameState, tileIndex: number, projectIndex: number): GameState {
   const tile = state.map.tiles[tileIndex] as TileUnderConstruction
   const tileDefinition = tileCatalog[tile.type]
-  tile.activeProject = {
-    project: tileDefinition.projects[projectIndex],
+  const activeProject = {
+    type: tileDefinition.projects[projectIndex],
     progress: 0,
     assignedWorkers: 0
   }
+  return {
+    ...state,
+    map: {
+      ...state.map,
+      tiles: state.map.tiles.map((v, i) => i === tileIndex
+        ? {
+            ...v,
+            activeProject
+          }
+        : v)
+    }
+  } // TODO extract helper funcs?
 }
 
-export function playerAssignWorkers (state: GameState, tileIndex: number, workerCount: number) {
+export function playerAssignWorkers (initialState: GameState, tileIndex: number, workerCount: number): GameState {
+  let state = initialState
   const tile = state.map.tiles[tileIndex]
   if (isTileUnderConstruction(tile)) {
     const priorWorkers = tile.activeProject.assignedWorkers
     const delta = workerCount - priorWorkers
-    tile.activeProject.assignedWorkers += delta
-    state.player.resources.workers.free -= delta
+    state = {
+      ...state,
+      map: {
+        ...state.map,
+        tiles: state.map.tiles.map((v, i) => i === tileIndex && isTileUnderConstruction(v)
+          ? {
+              ...v,
+              activeProject: {
+                ...v.activeProject,
+                assignedWorkers: v.activeProject.assignedWorkers + delta
+              }
+            }
+          : v)
+      },
+      player: {
+        ...state.player,
+        resources: {
+          ...state.player.resources,
+          workers: {
+            ...state.player.resources.workers,
+            free: state.player.resources.workers.free - delta
+          }
+        }
+      }
+    }
   }
+  return state
 }
 
-export function advanceTurn (state: GameState) {
-  applyRevenue(state)
-  applyWorkers(state)
-  resetWorkers(state)
-  resolveContracts(state)
-  advanceTurnCounter(state)
-  return checkWinLoss(state)
+export function advanceTurn (initialState: GameState): GameState {
+  let state = initialState
+  state = applyRevenue(state)
+  state = applyWorkers(state)
+  state = resetWorkers(state)
+  state = resolveContracts(state)
+  state = advanceTurnCounter(state)
+  // checkWinLoss(state)
+  return state
 }
