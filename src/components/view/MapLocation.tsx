@@ -44,7 +44,7 @@ export function MapLocation (props: {row: number, column: number, gridInterval: 
   return (
     <primitive
       ref={ref}
-      object={gltf.scene}
+      object={gltf.scene.clone(true)}
       position={[x, 0, z]}
       onClick={onClick}
       onPointerOver={() => {
