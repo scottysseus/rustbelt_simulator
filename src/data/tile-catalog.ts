@@ -1,7 +1,7 @@
 import { TileCatalog } from '../game_logic'
 
 // This file implements a "database" of tiles, each with unique appearance, choices, etc
-export const catalog: TileCatalog = {
+export const tileCatalog: TileCatalog = {
   empty: {
     name: 'Empty Lot',
     description: '',

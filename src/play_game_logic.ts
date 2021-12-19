@@ -1,4 +1,4 @@
-import { catalog as projectCatalog } from './data/project-catalog'
+import { projectCatalog } from './data/project-catalog'
 import { advanceTurn, createGameState, isTileUnderConstruction, playerAssignWorkers, playerInitiateProject } from './game_logic'
 
 export function playGameLogic () {

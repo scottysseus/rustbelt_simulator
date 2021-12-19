@@ -1,7 +1,7 @@
 import { ProjectCatalog } from '../game_logic'
 
 // This file implements a "database" of tiles, each with unique appearance, choices, etc
-export const catalog: ProjectCatalog = { // TODO rename
+export const projectCatalog: ProjectCatalog = {
   // 'repair-firehouse': {
   //   name: 'Repair',
   //   description: 'Fix it up!',

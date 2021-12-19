@@ -1,6 +1,6 @@
 import { Button, Table, TableBody, TableCell, TableHead, TableRow, Typography } from '@mui/material'
-import { catalog as projectCatalog } from '../../data/project-catalog'
-import { catalog as tileCatalog } from '../../data/tile-catalog'
+import { projectCatalog } from '../../data/project-catalog'
+import { tileCatalog } from '../../data/tile-catalog'
 import { Tile } from '../../game_logic'
 import { dispatcher } from '../reducers'
 

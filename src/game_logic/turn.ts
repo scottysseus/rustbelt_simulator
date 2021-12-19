@@ -3,8 +3,8 @@
  */
 
 import { TileUnderConstruction } from '.'
-import { catalog as projectCatalog } from '../data/project-catalog'
-import { catalog as tileCatalog } from '../data/tile-catalog'
+import { projectCatalog } from '../data/project-catalog'
+import { tileCatalog } from '../data/tile-catalog'
 import { GameState, Tile, isTileUnderConstruction, Contract } from './interfaces'
 
 export function applyRevenue (state: GameState): GameState {

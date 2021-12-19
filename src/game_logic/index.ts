@@ -1,8 +1,8 @@
 import { GameState, isTileUnderConstruction, Tile, TileType, TileUnderConstruction } from './interfaces'
 import { advanceTurnCounter, applyRevenue, applyWorkers, resetWorkers, resolveContracts } from './turn'
 import { map as mapDefinition } from '../data/map'
-import { catalog as tileCatalog } from '../data/tile-catalog'
-import { catalog as projectCatalog } from '../data/project-catalog'
+import { tileCatalog } from '../data/tile-catalog'
+import { projectCatalog } from '../data/project-catalog'
 export * from './interfaces'
 
 const STARTING_MONEY = 1000000
