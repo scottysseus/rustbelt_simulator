@@ -28,9 +28,15 @@ export function reducer (state: State, action: Action): State {
       return { ...state, ui: { ...state.ui, selectedTile: action.tileIndex } }
     case 'deselectTile':
       return { ...state, ui: { ...state.ui, selectedTile: null } }
+    case 'selectProject':
+      return state
     default:
-      return { ...state } // TODO prevent with typechecking
+      assertUnreachable(action)
   }
+}
+
+function assertUnreachable (_x: never): never {
+  throw new Error('One or more action types is unimplemented.')
 }
 
 export type dispatcher = (action: Action) => void
