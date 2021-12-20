@@ -15,7 +15,12 @@ function PlainPlane () {
   )
 }
 
-export function GameView (props: {state: State, dispatch: dispatcher}) {
+type GameViewProps = {
+  state: State
+  dispatch: dispatcher
+}
+
+function GameView (props: GameViewProps) {
   //    -    +
   // X  Left Right
   // Y  Down Up
@@ -34,7 +39,7 @@ export function GameView (props: {state: State, dispatch: dispatcher}) {
   )
 }
 
-export function GameViewPort (props: {state: State, dispatch: dispatcher}) {
+export function GameViewPort (props: GameViewProps) {
   return (
     <Canvas
       camera={{ position: [10, 10, 30], fov: 45 }}

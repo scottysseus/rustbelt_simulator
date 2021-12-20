@@ -1,5 +1,4 @@
-import { advanceTurn } from '../game_logic'
-import { GameState } from '../game_logic/interfaces'
+import { advanceTurn, GameState } from '../game_logic'
 
 export interface UIState {
   selectedTile?: number

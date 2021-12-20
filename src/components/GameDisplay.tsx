@@ -4,7 +4,7 @@ import { map } from '../data/map'
 import { catalog as projectCatalog } from '../data/project-catalog'
 import { catalog as tileCatalog } from '../data/tile-catalog'
 import { createGameState } from '../game_logic'
-import { Hud } from './Hud'
+import { Hud } from './hud/Hud'
 import { reducer, State } from './reducers'
 import { GameViewPort } from './view/GameViewPort'
 
