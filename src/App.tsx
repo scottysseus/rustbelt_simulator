@@ -12,10 +12,10 @@ function App () {
 
   return (
     <>
-      <Fade mountOnEnter unmountOnExit appear={false} in={!inGame}>
+      <Fade unmountOnExit appear={false} in={!inGame}>
         <Menu onStart={onStart} />
       </Fade>
-      <Fade mountOnEnter unmountOnExit in={inGame}>
+      <Fade in={inGame}>
         <GameDisplay />
       </Fade>
     </>
