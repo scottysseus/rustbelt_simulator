@@ -7,7 +7,7 @@ function App () {
   const [inGame, setInGame] = useState(false)
 
   const onStart = () => {
-    setInGame((prev) => !prev)
+    setInGame(() => true)
   }
 
   return (
