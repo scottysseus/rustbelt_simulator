@@ -30,7 +30,7 @@ export function playGameLogic () {
   state = advanceTurn(state)
 
   // Inspect the state of the game and see how work is progressing
-  // MAJOR TODO: make it easier to inspect this state
+  // NOTE: refresh stale reference
   tile = state.map.tiles[selectedTileIndex]
   if (isTileUnderConstruction(tile)) {
     console.log(
@@ -49,7 +49,6 @@ export function playGameLogic () {
   state = advanceTurn(state)
 
   // Inspect the state of the game and see how work is progressing
-  // MAJOR TODO: make it easier to inspect this state
   tile = state.map.tiles[selectedTileIndex]
   if (isTileUnderConstruction(tile)) {
     console.log(
@@ -68,7 +67,6 @@ export function playGameLogic () {
   state = advanceTurn(state)
 
   // Inspect the state of the game and see how work is progressing
-  // MAJOR TODO: make it easier to inspect this state
   tile = state.map.tiles[selectedTileIndex]
   console.log(tile.type)
 }
