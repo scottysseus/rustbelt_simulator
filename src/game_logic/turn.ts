@@ -130,28 +130,32 @@ export function resetWorkers (state: GameState): GameState {
 
 export function resolveContracts (initialState: GameState): GameState {
   let state = initialState
-  // TODO: fix staleness
-  for (const contract of state.player.contracts.open) {
-    state = contractMaybeComplete(state, contract)
-    if (contract.completed) {
-      state = contractCollectRewards(state, contract)
-    }
+  let contractIndex: number | null
+  while ((contractIndex = findIndexOfSatisfiedOpenContract(state)) !== null) {
+    state = contractComplete(state, contractIndex)
   }
-
   state = organizeContracts(state)
   return state
 }
 
-function contractMaybeComplete (state: GameState, contract: Contract): GameState {
-  throw new Error('Not implemented')
-}
-
-function contractCollectRewards (state: GameState, contract: Contract): GameState {
+/**
+ * Returns the index of the first open contract whose conditions have
+ * been satisfied or, if none was found, null.
+ */
+function findIndexOfSatisfiedOpenContract (state: GameState): number | null {
   throw new Error('Not implemented')
 }
 
 /**
- * move any contracts set as 'completed' to the completed array
+ * Collects the rewards of the contract at contractIndex of the `open` list,
+ * and marks the contract as 'completed'. Assumes the contract has been satisfied.
+ */
+function contractComplete (state: GameState, contractIndex: number): GameState {
+  throw new Error('Not implemented')
+}
+
+/**
+ * Moves any contracts marked as 'completed' to the end of the completed list, maintaining order.
  */
 function organizeContracts (state: GameState): GameState {
   return {

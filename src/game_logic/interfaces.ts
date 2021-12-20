@@ -81,8 +81,19 @@ export interface Contract {
   readonly name: string
   // Long form description / flavor text
   readonly description: string
-  // Indicates if this contract has been resolved
+  // Indicates whether the rewards of this contract have been collected
   readonly completed: boolean
+
+  // properties necessary for dynamically-generated contracts
+  /**
+   * indicates if the conditions of the contract are satisfied
+   */
+  readonly isSatisfied: (state: GameState) => boolean
+  /**
+   * returns a set of rewards that would be given based on the current state
+   * OR the minimum required conditions, whichever is greater
+   */
+  readonly getRewards: (state: GameState) => { revenue: number, happiness: number }
 }
 
 export interface MapState {
