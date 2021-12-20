@@ -1,7 +1,7 @@
 import { Button, Stack } from '@mui/material'
-import React from 'react'
+import { forwardRef } from 'react'
 
-export const Menu = React.forwardRef((props, ref) => {
+export const Menu = forwardRef<HTMLDivElement>((props, ref) => {
   return (
     <div style={props.style} ref={ref} className='menu-main'>
       Rustfield Revival
