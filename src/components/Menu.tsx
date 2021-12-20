@@ -1,7 +1,12 @@
 import { Button, Stack } from '@mui/material'
-import { forwardRef } from 'react'
+import { CSSProperties, forwardRef } from 'react'
 
-export const Menu = forwardRef<HTMLDivElement>((props, ref) => {
+type MenuProps = {
+  style?: CSSProperties // applied by transition
+  onStart: () => void
+}
+
+export const Menu = forwardRef<HTMLDivElement, MenuProps>((props, ref) => {
   return (
     <div style={props.style} ref={ref} className='menu-main'>
       Rustfield Revival

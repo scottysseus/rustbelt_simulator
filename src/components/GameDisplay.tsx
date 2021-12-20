@@ -1,4 +1,4 @@
-import { forwardRef, useReducer } from 'react'
+import { CSSProperties, forwardRef, useReducer } from 'react'
 import { hydrate } from '../data/hydrate'
 import { map } from '../data/map'
 import { catalog as projectCatalog } from '../data/project-catalog'
@@ -8,7 +8,11 @@ import { Hud } from './hud/Hud'
 import { reducer, State } from './reducers'
 import { GameViewPort } from './view/GameViewPort'
 
-export const GameDisplay = forwardRef<HTMLDivElement>((props, ref) => {
+type GameDisplayProps = {
+  style?: CSSProperties // applied by transition
+}
+
+export const GameDisplay = forwardRef<HTMLDivElement, GameDisplayProps>((props, ref) => {
   const catalogs = hydrate(tileCatalog, projectCatalog)
 
   // To begin the game, we need an initial state

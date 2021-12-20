@@ -1,4 +1,4 @@
-import { Fade, Slide } from '@mui/material'
+import { Fade } from '@mui/material'
 import { useState } from 'react'
 import { GameDisplay } from './components/GameDisplay'
 import { Menu } from './components/Menu'
