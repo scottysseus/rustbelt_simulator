@@ -3,13 +3,14 @@ import { ProjectsDisplay } from './ProjectsDisplay'
 import { Tile } from '../../game_logic'
 import { dispatcher } from '../reducers'
 import CloseIcon from '@mui/icons-material/Close'
+import { tileCatalog } from '../../data/tile-catalog'
 
 export function TileSummary (props: {
-  tile?: Tile,
+  tile: Tile | null,
   dispatch: dispatcher
 }) {
-  if (!props.tile) {
-    return (<div />)
+  if (props.tile === null) {
+    return null
   }
 
   const onCloseClick = () => {
@@ -18,10 +19,12 @@ export function TileSummary (props: {
     })
   }
 
+  const tileDefinition = tileCatalog[props.tile.type]
+
   return (
     <Card elevation={3}>
       <CardHeader
-        title={`${props.tile.definition.name} Details`}
+        title={`${tileDefinition.name} Details`}
         action={
           <IconButton onClick={onCloseClick}><CloseIcon /></IconButton>
         }

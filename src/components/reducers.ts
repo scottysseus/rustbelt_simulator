@@ -1,40 +1,42 @@
 import { advanceTurn, GameState } from '../game_logic'
 
 export interface UIState {
-  selectedTile?: number
+  readonly selectedTile: number | null
 }
 
-export interface Action {
-  type: 'selectTile' | 'deselectTile' | 'advanceTurn' | 'selectProject'
-  tileIndex?: number
-  projectIndex?: number
+type Action = {
+  type: 'advanceTurn' | 'deselectTile'
+} | {
+  type: 'selectTile'
+  tileIndex: number
+} | {
+  type: 'selectProject'
+  projectIndex: number
 }
 
 export interface State {
-  ui: UIState
-  game: GameState
+  readonly ui: UIState
+  readonly game: GameState
 }
 
 export function reducer (state: State, action: Action): State {
-  console.log(action)
+  console.log('old state', state)
   switch (action.type) {
-    // TODO make advanceTurn a pure function?
     case 'advanceTurn':
-      advanceTurn(state.game)
-      return Object.assign({}, state, { game: state.game })
-    case 'selectTile': {
-      const newState = Object.assign({}, state)
-      newState.ui.selectedTile = action.tileIndex
-      return newState
-    }
-    case 'deselectTile': {
-      const newState = Object.assign({}, state)
-      delete newState.ui.selectedTile
-      return newState
-    }
+      return { ...state, game: advanceTurn(state.game) }
+    case 'selectTile':
+      return { ...state, ui: { ...state.ui, selectedTile: action.tileIndex } }
+    case 'deselectTile':
+      return { ...state, ui: { ...state.ui, selectedTile: null } }
+    case 'selectProject':
+      return state
     default:
-      return Object.assign({}, state)
+      assertUnreachable(action)
   }
+}
+
+function assertUnreachable (_x: never): never {
+  throw new Error('One or more action types is unimplemented.')
 }
 
 export type dispatcher = (action: Action) => void

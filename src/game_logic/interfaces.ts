@@ -1,54 +1,55 @@
 /**
+ * State rules (this applies to UIState too):
+ * - All properties are readonly
+ * - Use ReadonlyArrays instead of Arrays
+ * - Use ReadonlyRecords instead of Records
+ * - Use readonly varieties of Maps, Sets, etc
+ * - No optionals, use nullables instead
+ */
+
+type ReadonlyRecord<K extends string, T> = Readonly<Record<K, T>>
+
+/**
  * Represents the project a player assigns workers to in order to improve a tile.
  */
-export interface ProjectCatalogEntry {
+export interface ProjectDefinition {
   readonly name: string
   readonly description: string
-  readonly targetTileDefinition: string
+  readonly targetTileType: TileType
   readonly cost: number
   readonly effort: number
 }
 
-export interface ProjectDefinition extends Omit<ProjectCatalogEntry, 'targetTileDefinition'> {
-  readonly targetTileDefinition: TileDefinition
-}
-
-export type ProjectCatalogId = string
-export type RawProjectCatalog = Record<ProjectCatalogId, ProjectCatalogEntry>
-export type ProjectCatalog = Record<ProjectCatalogId, ProjectDefinition>
+export type ProjectType = 'demolish' | 'refine'
+export type ProjectCatalog = ReadonlyRecord<ProjectType, ProjectDefinition>
 
 /**
  * A TileDBEntry stores the "starting point" and static information about tiles
  * When an actual tile is added to game board, it holds a pointer to an entry in this catalog to lookup things like assets.
  */
-export interface TileCatalogEntry {
+export interface TileDefinition {
   // Short form name suitable for displaying in most places
   readonly name: string
   // Long form description or flavor text, shown in a "detail" view
   readonly description: string
   // An array of 0 to 3 projects for a tile
   // 0 projects indicates a "final" tile that can't be improved any more
-  readonly projects: Array<ProjectCatalogId>
+  readonly projects: ReadonlyArray<ProjectType>
   // An array of "tags" that categorize this tile.
-  readonly tags: Array<string>
+  readonly tags: ReadonlyArray<string>
   readonly revenue: number
   readonly happiness: number
   readonly modelPath: string
 }
 
-export interface TileDefinition extends Omit<TileCatalogEntry, 'projects'> {
-  readonly projects: Array<ProjectDefinition>
-}
-
-export type TileCatalogEntryId = string
-export type RawTileCatalog = Record<TileCatalogEntryId, TileCatalogEntry>
-export type TileCatalog = Record<TileCatalogEntryId, TileDefinition>
+export type TileType = 'empty' | 'grocery' | 'library' | 'gas'
+export type TileCatalog = ReadonlyRecord<TileType, TileDefinition>
 
 export interface ActiveProject {
-  readonly project: ProjectDefinition
+  readonly type: ProjectType
   // Invariant: progress < project.effort
-  progress: number
-  assignedWorkers: number
+  readonly progress: number
+  readonly assignedWorkers: number
 }
 
 /**
@@ -56,14 +57,14 @@ export interface ActiveProject {
  */
 export interface Tile {
   // Pointer into a database of tile decsriptions that are IMMUTABLE
-  definition: TileDefinition
+  readonly type: TileType
 
-  activeProject?: ActiveProject
+  readonly activeProject: ActiveProject | null
 }
 
 export interface TileUnderConstruction extends Tile {
   // Defined if this tile is currently under construction
-  activeProject: ActiveProject
+  readonly activeProject: ActiveProject
 }
 
 export function isTileUnderConstruction (tile: Tile): tile is TileUnderConstruction {
@@ -80,54 +81,36 @@ export interface Contract {
   readonly name: string
   // Long form description / flavor text
   readonly description: string
-  /**
-   * Look at the current game state and determine if this contract has been fulfilled
-   *
-   * changes `isCompeleted()` if has been completed
-   *
-   * DO NOT modify the game state
-   * @param state
-   */
-  check(state: GameState): boolean
-
-  /**
-   * Modify the current game state to apply the rewards of this contract
-   * @param state
-   */
-  reward(state: GameState): void
-
-  /**
-   * Indicates if this contract has been resolved
-   */
+  // Indicates if this contract has been resolved
   readonly completed: boolean
 }
 
 export interface MapState {
-  tiles: Array<Tile>,
-  size: {
-    x: number,
-    y: number
+  readonly tiles: ReadonlyArray<Tile>,
+  readonly size: {
+    readonly x: number,
+    readonly y: number
   }
 }
 
 export interface PlayerState {
-  resources: {
-    money: {
-      balance: number,
-      revenue: number
+  readonly resources: {
+    readonly money: {
+      readonly balance: number,
+      readonly revenue: number
     },
-    workers: {
-      max: number,
-      free: number
+    readonly workers: {
+      readonly max: number,
+      readonly free: number
     }
   },
-  victory: {
-    happiness: number,
-    goal: number
+  readonly victory: {
+    readonly happiness: number,
+    readonly goal: number
   },
-  contracts: {
-    completed: Array<Contract>,
-    open: Array<Contract>
+  readonly contracts: {
+    readonly completed: ReadonlyArray<Contract>,
+    readonly open: ReadonlyArray<Contract>
   }
 }
 
@@ -135,21 +118,20 @@ export interface PlayerState {
  * The state of the game, design to be transformed only through specific functions, but observed by any elements.
  */
 export interface GameState {
-  game: {
-    turnCounter: number
+  readonly game: {
+    readonly turnCounter: number
   },
-  player: PlayerState,
+  readonly player: PlayerState,
   // A flat-buffer of
-  map: MapState,
-  tileCatalog: TileCatalog
+  readonly map: MapState
 }
 
 export interface GameMapDefinition {
   // A flat array of
-  tiles: Array<TileCatalogEntryId>
+  readonly tiles: ReadonlyArray<TileType>
   // The dimensions
-  size: {
-    x: number
-    y: number
+  readonly size: {
+    readonly x: number
+    readonly y: number
   }
 }
