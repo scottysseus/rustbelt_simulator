@@ -123,8 +123,7 @@ export interface GameState {
   },
   readonly player: PlayerState,
   // A flat-buffer of
-  readonly map: MapState,
-  readonly tileCatalog: TileCatalog
+  readonly map: MapState
 }
 
 export interface GameMapDefinition {

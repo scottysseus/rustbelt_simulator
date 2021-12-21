@@ -1,8 +1,6 @@
 import { GameState, Tile, TileType } from './interfaces'
 import { advanceTurnCounter, applyRevenue, applyWorkers, resetWorkers, resolveContracts } from './turn'
 import { map as mapDefinition } from '../data/map'
-import { tileCatalog } from '../data/tile-catalog'
-import { projectCatalog } from '../data/project-catalog'
 export * from './interfaces'
 export * from './player-actions'
 
@@ -10,7 +8,7 @@ const STARTING_MONEY = 1000000
 const STARTING_WORKERS = 3
 
 export function createGameState (): GameState {
-  const state = {
+  return {
     game: {
       turnCounter: 0
     },
@@ -37,12 +35,8 @@ export function createGameState (): GameState {
     map: {
       tiles: initializeTiles(),
       size: mapDefinition.size
-    },
-    tileCatalog,
-    projectCatalog
+    }
   }
-
-  return state
 }
 
 function initializeTiles (): Array<Tile> {

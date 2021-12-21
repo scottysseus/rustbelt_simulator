@@ -8,7 +8,7 @@
 
 import { projectCatalog } from '../data/project-catalog'
 import { tileCatalog } from '../data/tile-catalog'
-import { Contract, GameState, isTileUnderConstruction } from './interfaces'
+import { Contract, GameState, TileUnderConstruction, isTileUnderConstruction, Tile } from './interfaces'
 import { replaceOne } from './shared'
 
 export function applyRevenue (state: GameState): GameState {
@@ -55,7 +55,7 @@ function applyProgressAtTile (state: GameState, tileIndex: number): GameState {
   }
   const delta = tile.activeProject.assignedWorkers
   const newProgress = tile.activeProject.progress + delta
-  const newTile = {
+  const newTile: TileUnderConstruction = {
     ...tile,
     activeProject: {
       ...tile.activeProject,
@@ -83,7 +83,7 @@ function checkIfTileCompleted (state: GameState, tileIndex: number): GameState {
     return state
   }
 
-  const newTile = {
+  const newTile: Tile = {
     // morph the tile into the target type
     type: projectDefinition.targetTileType,
     activeProject: null
