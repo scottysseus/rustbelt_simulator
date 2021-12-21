@@ -15,8 +15,10 @@ export function Hud (props: {
     props.dispatch({ type: 'advanceTurn' })
   }
 
-  let selectedTile: Tile | undefined
-  if (props.state.ui.selectedTile !== undefined) {
+  let selectedTile: Tile | null
+  if (props.state.ui.selectedTile === null) {
+    selectedTile = null
+  } else {
     selectedTile = props.state.game.map.tiles[props.state.ui.selectedTile]
   }
 

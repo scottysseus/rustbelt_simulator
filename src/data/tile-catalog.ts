@@ -1,14 +1,16 @@
-import { RawTileCatalog } from '../game_logic'
+import { TileCatalog } from '../game_logic'
 
 // This file implements a "database" of tiles, each with unique appearance, choices, etc
-export const catalog: RawTileCatalog = {
+export const tileCatalog: TileCatalog = {
   empty: {
     name: 'Empty Lot',
     description: '',
     tags: [],
     happiness: 0,
     revenue: 0,
-    projects: [],
+    projects: [
+      'refine'
+    ],
     modelPath: 'models/tile.glb'
   },
   grocery: {
@@ -35,7 +37,7 @@ export const catalog: RawTileCatalog = {
   },
   gas: {
     name: 'Gas',
-    description: 'Books!',
+    description: 'Smells.',
     tags: [],
     happiness: 0,
     revenue: 0,

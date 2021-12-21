@@ -1,9 +1,12 @@
 import { Button, Table, TableBody, TableCell, TableHead, TableRow, Typography } from '@mui/material'
+import { projectCatalog } from '../../data/project-catalog'
+import { tileCatalog } from '../../data/tile-catalog'
 import { Tile } from '../../game_logic'
 import { dispatcher } from '../reducers'
 
 export function SelectProjectDisplay (props: {tile: Tile, dispatch: dispatcher}) {
-  const projects = props.tile.definition.projects
+  const tileDefinition = tileCatalog[props.tile.type]
+  const projects = tileDefinition.projects.map((id) => projectCatalog[id])
   console.log('projects', projects, props.tile)
   const projectList = projects.map((project, index) => {
     const onClick = () => {
@@ -11,12 +14,13 @@ export function SelectProjectDisplay (props: {tile: Tile, dispatch: dispatcher})
       // that I don't know what the tile index is
       props.dispatch({ type: 'selectProject', projectIndex: index })
     }
+    const targetTileDefinition = tileCatalog[project.targetTileType]
     return (
       <TableRow key={project.name}>
         <TableCell><Typography>{project.name}</Typography></TableCell>
         <TableCell><Typography>{project.cost}</Typography></TableCell>
         <TableCell><Typography>{project.effort}</Typography></TableCell>
-        <TableCell><Typography>{project.targetTileDefinition.name}</Typography></TableCell>
+        <TableCell><Typography>{targetTileDefinition.name}</Typography></TableCell>
         <TableCell><Button onClick={onClick}>Start</Button></TableCell>
       </TableRow>
     )
