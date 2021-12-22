@@ -1,6 +1,6 @@
 
 import { useLoader } from '@react-three/fiber'
-import { useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import * as THREE from 'three'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import { tileCatalog } from '../../data/tile-catalog'
@@ -38,10 +38,10 @@ export function MapLocation (props: {row: number, column: number, gridInterval: 
     }
   }, [ref, color])
 
-  const onClick = (event: THREE.Event) => {
+  const onClick = useCallback((event: THREE.Event) => {
     console.log('Clicked on Map Location', tileDefinition.name, props.row, props.column)
     props.onSelected()
-  }
+  }, [props, tileDefinition.name])
 
   return (
     <primitive
