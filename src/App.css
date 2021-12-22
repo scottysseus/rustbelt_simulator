@@ -96,8 +96,8 @@ html, body {
     margin-right: 16px;
 }
 
-.contract-list > .contract-list-item {
-    padding: 8px;
+.contract-list-item-collapse.contract-list-item-collapse {
+    padding: 0 0 8px 0;
 }
 
 .contract-card {
