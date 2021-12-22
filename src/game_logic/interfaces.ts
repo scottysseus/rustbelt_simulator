@@ -88,6 +88,9 @@ export interface Contract {
   readonly completed: boolean
 }
 
+export type ContractCatalogId = string
+export type ContractCatalog = Record<ContractCatalogId, Contract>
+
 export interface MapState {
   readonly tiles: ReadonlyArray<Tile>,
   readonly size: {
