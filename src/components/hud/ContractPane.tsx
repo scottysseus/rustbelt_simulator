@@ -10,7 +10,7 @@ function contractItem (props: {contract: Contract}) {
         <Typography sx={{ fontSize: 'h6.fontSize' }}>{props.contract.name}</Typography>
         <Typography variant='caption'>
           {/* TODO devise a way to consistently display rewards */}
-          (+${props.rewardMoneyPerTurn}/turn) +<SentimentSatisfiedAltIcon fontSize='inherit' />{props.rewardHappiness}
+          {props.contract.reward}
         </Typography>
       </div>
       <Typography>{props.contract.description}</Typography>

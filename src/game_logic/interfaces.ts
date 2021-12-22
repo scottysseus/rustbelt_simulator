@@ -86,6 +86,8 @@ export interface Contract {
   readonly description: string
   // Indicates if this contract has been resolved
   readonly completed: boolean
+  // Informs the user of the reward for this contract
+  readonly reward: string
 }
 
 export type ContractCatalogId = string
