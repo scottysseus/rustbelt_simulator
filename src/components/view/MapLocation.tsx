@@ -59,6 +59,15 @@ export function MapLocation (props: {row: number, column: number, gridInterval: 
   )
 }
 
+function forEachMesh (object3d: THREE.Object3D, cb: (mesh: THREE.Mesh) => void) {
+  if (object3d instanceof THREE.Mesh) {
+    cb(object3d)
+  }
+  for (const child of object3d.children) {
+    forEachMesh(child, cb)
+  }
+}
+
 /**
  * Changes the color of a primitive. A color of null resets to the original color.
  *
@@ -69,8 +78,7 @@ export function MapLocation (props: {row: number, column: number, gridInterval: 
  * @returns
  */
 function setColorRecursive (object3d: THREE.Object3D, color: THREE.Color | null) {
-  if (object3d instanceof THREE.Mesh) {
-    const mesh = object3d as THREE.Mesh
+  forEachMesh(object3d, (mesh) => {
     if (!(mesh.material instanceof THREE.MeshStandardMaterial)) {
       console.warn('Found wrong material type:', mesh.material.constructor.name)
       return
@@ -84,8 +92,5 @@ function setColorRecursive (object3d: THREE.Object3D, color: THREE.Color | null)
     } else {
       material.color = color
     }
-  }
-  for (const child of object3d.children) {
-    setColorRecursive(child, color)
-  }
+  })
 }
