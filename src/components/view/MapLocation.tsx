@@ -1,6 +1,6 @@
 
 import { useLoader } from '@react-three/fiber'
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import * as THREE from 'three'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import { tileCatalog } from '../../data/tile-catalog'
@@ -20,6 +20,7 @@ export function MapLocation (props: {row: number, column: number, gridInterval: 
 
   const tileDefinition = tileCatalog[props.tile.type]
   const gltf = useLoader(GLTFLoader, tileDefinition.modelPath)
+  const scene = useMemo(() => sceneCloneIncludingMaterials(gltf.scene), [gltf.scene])
 
   const ref = useRef<THREE.Group>(null)
   const [color, setColor] = useState<THREE.Color | null>(null)
@@ -46,7 +47,7 @@ export function MapLocation (props: {row: number, column: number, gridInterval: 
   return (
     <primitive
       ref={ref}
-      object={gltf.scene.clone(true)}
+      object={scene}
       position={[x, 0, z]}
       onClick={onClick}
       onPointerOver={() => {
@@ -66,6 +67,18 @@ function forEachMesh (object3d: THREE.Object3D, cb: (mesh: THREE.Mesh) => void) 
   for (const child of object3d.children) {
     forEachMesh(child, cb)
   }
+}
+
+function sceneCloneIncludingMaterials (originalScene: THREE.Group) {
+  const newScene = originalScene.clone(true)
+  forEachMesh(newScene, (mesh) => {
+    if (!(mesh.material instanceof THREE.MeshStandardMaterial)) {
+      console.warn('Found wrong material type:', mesh.material.constructor.name)
+      return
+    }
+    mesh.material = mesh.material.clone()
+  })
+  return newScene
 }
 
 /**
