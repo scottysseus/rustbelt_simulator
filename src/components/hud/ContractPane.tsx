@@ -1,4 +1,4 @@
-import { Card, Collapse, List, ListItem, Stack, Typography } from '@mui/material'
+import { Card, Collapse, List, ListItem, Typography } from '@mui/material'
 import { Contract } from '../../game_logic'
 import { catalog } from '../../data/contract-catalog'
 import { TransitionGroup } from 'react-transition-group'
@@ -26,7 +26,7 @@ export function ContractPane () {
   const contracts = Object.keys(catalog).map(contractId => contractItem({ contract: catalog[contractId] }))
 
   return (
-    <List className='contract-pane pane contract-list' spacing={2}>
+    <List className='contract-pane pane contract-list'>
       <TransitionGroup>
         {contracts}
       </TransitionGroup>
