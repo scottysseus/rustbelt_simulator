@@ -42,8 +42,7 @@ export function Map (props: {mapState: MapState, gridInterval: number, uiState: 
   }
 
   return (
-    <group position={[0, 0, 0]}>
-      <gridHelper args={[100, 100, 'white', 'gray']} />
+    <group>
       {mapLocations}
     </group>
   )

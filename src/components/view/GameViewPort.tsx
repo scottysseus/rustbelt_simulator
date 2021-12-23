@@ -8,7 +8,7 @@ import { Skybox } from './Skybox'
 function PlainPlane () {
   return (
     <mesh
-      position={[0, -0.01, 0]}
+      position={[0, -0.002, 0]}
       rotation={new THREE.Euler(-Math.PI / 2)}
     >
       <planeGeometry args={[1000, 1000, 20, 20]} />
@@ -37,7 +37,8 @@ function GameView (props: GameViewProps) {
       <directionalLight intensity={2} position={[-3, 10, 5]} />
       <Map gridInterval={1} mapState={props.state.game.map} uiState={props.state.ui} dispatch={props.dispatch} />
       <Stats className='stats' showPanel={1} />
-      <axesHelper args={[10]} />
+      <gridHelper position={[0, 0.002, 0]} args={[100, 100, 'white', 'gray']} />
+      <axesHelper position={[0, 0.004, 0]} args={[10]} />
     </>
   )
 }
