@@ -20,7 +20,10 @@ export function MapLocation (props: {row: number, column: number, gridInterval: 
 
   const tileDefinition = tileCatalog[props.tile.type]
   const gltf = useLoader(GLTFLoader, tileDefinition.modelPath)
-  const scene = useMemo(() => sceneCloneIncludingMaterials(gltf.scene), [gltf.scene])
+  const scene = useMemo(
+    () => sceneCloneIncludingMaterials(gltf.scene, tileDefinition.name),
+    [gltf.scene, tileDefinition.name]
+  )
 
   const ref = useRef<THREE.Group>(null)
   const [color, setColor] = useState<THREE.Color | null>(null)
@@ -69,8 +72,9 @@ function forEachMesh (object3d: THREE.Object3D, cb: (mesh: THREE.Mesh) => void) 
   }
 }
 
-function sceneCloneIncludingMaterials (originalScene: THREE.Group) {
+function sceneCloneIncludingMaterials (originalScene: THREE.Group, newName: string) {
   const newScene = originalScene.clone(true)
+  newScene.name = newName
   forEachMesh(newScene, (mesh) => {
     if (!(mesh.material instanceof THREE.MeshStandardMaterial)) {
       console.warn('Found wrong material type:', mesh.material.constructor.name)
