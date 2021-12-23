@@ -5,6 +5,7 @@ import * as THREE from 'three'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import { tileCatalog } from '../../data/tile-catalog'
 import { Tile } from '../../game_logic'
+import { GroupPrimitive } from './GroupPrimitive'
 
 const COLOR_HOVERED = new THREE.Color(0x663399)
 const COLOR_SELECTED = new THREE.Color(0x660000)
@@ -48,7 +49,7 @@ export function MapLocation (props: {row: number, column: number, gridInterval: 
   }, [props, tileDefinition.name])
 
   return (
-    <primitive
+    <GroupPrimitive
       ref={ref}
       object={scene}
       position={[x, 0, z]}
