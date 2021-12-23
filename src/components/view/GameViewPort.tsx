@@ -3,6 +3,8 @@ import { Canvas } from '@react-three/fiber'
 import { MapControls, Stats } from '@react-three/drei'
 import { Map } from './Map'
 import { dispatcher, State } from '../reducers'
+import { Skybox } from './Skybox'
+
 function PlainPlane () {
   return (
     <mesh
@@ -30,6 +32,7 @@ function GameView (props: GameViewProps) {
     <>
       <MapControls target={[10, 0, 10]} />
       <PlainPlane />
+      <Skybox />
       <ambientLight intensity={0.3} />
       <directionalLight intensity={2} position={[-3, 10, 5]} />
       <Map gridInterval={1} mapState={props.state.game.map} uiState={props.state.ui} dispatch={props.dispatch} />
