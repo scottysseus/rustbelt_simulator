@@ -31,7 +31,7 @@ export function Hud (props: {
             <Typography variant='h6'>Contracts</Typography>
           </AccordionSummary>
           <AccordionDetails>
-            <ContractPane />
+            <ContractPane contracts={props.state.game.player.contracts.open} />
           </AccordionDetails>
         </Accordion>
       </div>

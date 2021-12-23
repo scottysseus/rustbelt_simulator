@@ -86,8 +86,18 @@ export interface Contract {
   readonly description: string
   // Indicates if this contract has been resolved
   readonly completed: boolean
-  // Informs the user of the reward for this contract
+  // Prose string for the reward
   readonly reward: string
+  // properties necessary for dynamically-generated contracts
+  /**
+   * indicates if the conditions of the contract are satisfied
+   */
+   readonly isSatisfied: (state: GameState) => boolean
+   /**
+    * returns a set of rewards that would be given based on the current state
+    * OR the minimum required conditions, whichever is greater
+    */
+   readonly applyReward: (state: GameState) => GameState
 }
 
 export type ContractCatalogId = string

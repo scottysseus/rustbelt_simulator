@@ -1,5 +1,5 @@
 import { Card, Collapse, List, ListItem, Typography } from '@mui/material'
-import { Contract } from '../../game_logic'
+import { Contract, GameState } from '../../game_logic'
 import { catalog } from '../../data/contract-catalog'
 import { TransitionGroup } from 'react-transition-group'
 
@@ -11,7 +11,6 @@ function contractItem (props: {contract: Contract}) {
           <div className='contract-card-heading'>
             <Typography sx={{ fontSize: 'h6.fontSize' }}>{props.contract.name}</Typography>
             <Typography variant='caption'>
-              {/* TODO devise a way to consistently display rewards */}
               {props.contract.reward}
             </Typography>
           </div>
@@ -22,8 +21,8 @@ function contractItem (props: {contract: Contract}) {
   )
 }
 
-export function ContractPane () {
-  const contracts = Object.keys(catalog).map(contractId => contractItem({ contract: catalog[contractId] }))
+export function ContractPane (props: {contracts: Contract[]}) {
+  const contracts = props.contracts.map(contract => contractItem({ contract }))
 
   return (
     <List className='contract-pane pane contract-list'>

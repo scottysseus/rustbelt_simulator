@@ -7,6 +7,8 @@
  */
 
 import produce from 'immer'
+import { contractQueue } from '../data/contract-catalog'
+import { NUM_OPEN_CONTRACTS } from './constants'
 import { projectCatalog } from '../data/project-catalog'
 import { tileCatalog } from '../data/tile-catalog'
 import { Contract, GameState, TileUnderConstruction, isTileUnderConstruction, Tile } from './interfaces'
@@ -87,31 +89,43 @@ export function resetWorkers (state: GameState): GameState {
 export function resolveContracts (initialState: GameState): GameState {
   let state = initialState
   // TODO: fix staleness
-  for (const contract of state.player.contracts.open) {
-    state = contractMaybeComplete(state, contract)
-    if (contract.completed) {
-      state = contractCollectRewards(state, contract)
-    }
+  let contractIndex: number | null
+
+  while ((contractIndex = findIndexOfSatisfiedOpenContract(state)) !== null) {
+    state = contractComplete(state, contractIndex)
   }
 
   state = organizeContracts(state)
   return state
 }
 
-function contractMaybeComplete (state: GameState, contract: Contract): GameState {
-  throw new Error('Not implemented')
-}
-
-function contractCollectRewards (state: GameState, contract: Contract): GameState {
+/**
+ * Returns the index of the first open contract whose conditions have
+ * been satisfied or, if none was found, null.
+ */
+function findIndexOfSatisfiedOpenContract (state: GameState): number | null {
   throw new Error('Not implemented')
 }
 
 /**
- * move any contracts set as 'completed' to the completed array
+ * Collects the rewards of the contract at contractIndex of the `open` list,
+ * and marks the contract as 'completed'. Assumes the contract has been satisfied.
+ */
+function contractComplete (state: GameState, contractIndex: number): GameState {
+  return state.player.contracts.open[contractIndex].applyReward(state)
+}
+
+/**
+ * Moves any contracts marked as 'completed' to the end of the completed list, maintaining order.
+ * Ensures that the open contracts list has 3 contracts, or all remaining contracts if fewer than NUM_OPEN_CONTRACTS are remaining.
  */
 function organizeContracts (state: GameState): GameState {
+  const openContracts: Contract[] = [...state.player.contracts.open.filter((v) => !v.completed)]
+  for (let contract = contractQueue.pop(); contract !== undefined && openContracts.length < NUM_OPEN_CONTRACTS; contract = contractQueue.pop()) {
+    openContracts.push(contract)
+  }
   return produce(state, draft => {
-    draft.player.contracts.open = draft.player.contracts.open.filter((v) => !v.completed)
+    draft.player.contracts.open = openContracts
     draft.player.contracts.completed.push(...draft.player.contracts.open.filter((v) => v.completed))
   })
 }

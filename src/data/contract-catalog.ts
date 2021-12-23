@@ -1,9 +1,10 @@
-import { ContractCatalog } from '../game_logic'
+import { Contract, ContractCatalog } from '../game_logic'
 
 export const contractIDs = {
   imLovinIt: 'i\'m lovin\' it',
   greenTourism: 'green tourism',
-  brokenWindowsTheory: 'broken windows theory'
+  brokenWindowsTheory: 'broken windows theory',
+  educatedWorkforce: 'educated workforce'
 }
 
 export const catalog:ContractCatalog = {
@@ -24,5 +25,16 @@ export const catalog:ContractCatalog = {
     description: 'Improve each property at least once',
     completed: false,
     reward: '🙂22'
+  },
+  [contractIDs.educatedWorkforce]: {
+    name: 'Educated Workforce',
+    description: 'Build 1 new library to educate the Rustfield citizenry',
+    completed: false,
+    reward: '🙂5, 👤2'
   }
 }
+
+export const contractQueue: Contract[] = Object.keys(catalog)
+  .map(key => ({ value: catalog[key], sort: Math.random() }))
+  .sort((a, b) => a.sort - b.sort)
+  .map(el => el.value)
