@@ -81,6 +81,8 @@ function sceneCloneIncludingMaterials (originalScene: THREE.Group, newName: stri
       console.warn('Found wrong material type:', mesh.material.constructor.name)
       return
     }
+    mesh.castShadow = true
+    mesh.receiveShadow = true
     mesh.material = mesh.material.clone()
   })
   return newScene

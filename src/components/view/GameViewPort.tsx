@@ -10,9 +10,10 @@ function PlainPlane () {
     <mesh
       position={[0, -0.002, 0]}
       rotation={new THREE.Euler(-Math.PI / 2)}
+      receiveShadow
     >
       <planeGeometry args={[1000, 1000, 20, 20]} />
-      <meshBasicMaterial color='#747A36' />
+      <meshStandardMaterial color='#747A36' />
     </mesh>
   )
 }
@@ -34,7 +35,16 @@ function GameView (props: GameViewProps) {
       <PlainPlane />
       <Skybox />
       <ambientLight intensity={0.3} />
-      <directionalLight intensity={2} position={[-3, 10, 5]} />
+      <directionalLight
+        args={['white', 0.6]}
+        position={[-3, 7, 2]}
+        castShadow
+        shadow-mapSize-width={4096}
+        shadow-mapSize-height={4096}
+        shadow-camera-near={0.5}
+        shadow-camera-far={500}
+        shadow-bias={-0.00006}
+      />
       <Map gridInterval={1} mapState={props.state.game.map} uiState={props.state.ui} dispatch={props.dispatch} />
       <Stats className='stats' showPanel={1} />
       <gridHelper position={[0, 0.002, 0]} args={[100, 100, 'white', 'gray']} />
@@ -46,6 +56,7 @@ function GameView (props: GameViewProps) {
 export function GameViewPort (props: GameViewProps) {
   return (
     <Canvas
+      shadows
       camera={{ position: [10, 10, 30], fov: 45 }}
       raycaster={{
         filter: (items, state) => {
