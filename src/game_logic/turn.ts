@@ -104,7 +104,7 @@ export function resolveContracts (initialState: GameState): GameState {
  * been satisfied or, if none was found, null.
  */
 function findIndexOfSatisfiedOpenContract (state: GameState): number | null {
-  throw new Error('Not implemented')
+  return state.player.contracts.open.findIndex(contract => contract.isSatisfied(state))
 }
 
 /**
