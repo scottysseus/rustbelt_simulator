@@ -6,25 +6,15 @@
  * - Any other stale reference
  */
 
+import produce from 'immer'
 import { projectCatalog } from '../data/project-catalog'
 import { tileCatalog } from '../data/tile-catalog'
 import { Contract, GameState, TileUnderConstruction, isTileUnderConstruction, Tile } from './interfaces'
-import { replaceOne } from './shared'
 
 export function applyRevenue (state: GameState): GameState {
-  return {
-    ...state,
-    player: {
-      ...state.player,
-      resources: {
-        ...state.player.resources,
-        money: {
-          ...state.player.resources.money,
-          balance: state.player.resources.money.balance + state.player.resources.money.revenue
-        }
-      }
-    }
-  }
+  return produce(state, draft => {
+    draft.player.resources.money.balance += draft.player.resources.money.revenue
+  })
 }
 
 export function applyWorkers (initialState: GameState): GameState {
@@ -55,22 +45,14 @@ function applyProgressAtTile (state: GameState, tileIndex: number): GameState {
   }
   const delta = tile.activeProject.assignedWorkers
   const newProgress = tile.activeProject.progress + delta
-  const newTile: TileUnderConstruction = {
-    ...tile,
-    activeProject: {
-      ...tile.activeProject,
-      progress: newProgress,
-      assignedWorkers: 0
-    }
-  }
 
-  return {
-    ...state,
-    map: {
-      ...state.map,
-      tiles: replaceOne(state.map.tiles, tile, newTile)
-    }
-  }
+  const newTile: TileUnderConstruction = produce(tile, draft => {
+    draft.activeProject.progress = newProgress
+  })
+
+  return produce(state, draft => {
+    draft.map.tiles[tileIndex] = newTile
+  })
 }
 
 function checkIfTileCompleted (state: GameState, tileIndex: number): GameState {
@@ -88,44 +70,18 @@ function checkIfTileCompleted (state: GameState, tileIndex: number): GameState {
     type: projectDefinition.targetTileType,
     activeProject: null
   }
-  return {
-    ...state,
-    map: {
-      ...state.map,
-      tiles: replaceOne(state.map.tiles, tile, newTile)
-    },
-    player: {
-      ...state.player,
-      // dole out the rewards
-      victory: {
-        ...state.player.victory,
-        happiness: state.player.victory.happiness + tileDefinition.happiness
-      },
-      resources: {
-        ...state.player.resources,
-        money: {
-          ...state.player.resources.money,
-          revenue: state.player.resources.money.revenue + tileDefinition.revenue
-        }
-      }
-    }
-  }
+
+  return produce(state, draft => {
+    draft.map.tiles[tileIndex] = newTile
+    draft.player.victory.happiness += tileDefinition.happiness
+    draft.player.resources.money.revenue += tileDefinition.revenue
+  })
 }
 
 export function resetWorkers (state: GameState): GameState {
-  return {
-    ...state,
-    player: {
-      ...state.player,
-      resources: {
-        ...state.player.resources,
-        workers: {
-          ...state.player.resources.workers,
-          free: state.player.resources.workers.max
-        }
-      }
-    }
-  }
+  return produce(state, draft => {
+    draft.player.resources.workers.free = draft.player.resources.workers.max
+  })
 }
 
 export function resolveContracts (initialState: GameState): GameState {
@@ -154,26 +110,16 @@ function contractCollectRewards (state: GameState, contract: Contract): GameStat
  * move any contracts set as 'completed' to the completed array
  */
 function organizeContracts (state: GameState): GameState {
-  return {
-    ...state,
-    player: {
-      ...state.player,
-      contracts: {
-        open: state.player.contracts.open.filter((v) => !v.completed),
-        completed: [...state.player.contracts.completed, ...state.player.contracts.open.filter((v) => v.completed)]
-      }
-    }
-  }
+  return produce(state, draft => {
+    draft.player.contracts.open = draft.player.contracts.open.filter((v) => !v.completed)
+    draft.player.contracts.completed.push(...draft.player.contracts.open.filter((v) => v.completed))
+  })
 }
 
 export function advanceTurnCounter (state: GameState): GameState {
-  return {
-    ...state,
-    game: {
-      ...state.game,
-      turnCounter: state.game.turnCounter + 1
-    }
-  }
+  return produce(state, draft => {
+    draft.game.turnCounter += 1
+  })
 }
 
 export function checkWinLoss (state: GameState): boolean {
