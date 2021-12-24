@@ -71,13 +71,21 @@ html, body {
     display: flex;
     flex-direction: row;
     gap: 10px;
-    padding: 4px;
+    padding: 12px;
     align-items: center;
+    background-color: transparent;
+    color: #130701;
+    box-shadow: none;
+    padding-left: 24px;
+}
+
+.player-summary-strip>.MuiTypography-root {
+    min-width: 100px;
 }
 
 /* the extra specifity is needed here to override @mui's styling */
 .hud-pane-expander.hud-pane-expander.hud-pane-expander.hud-pane-expander {
-    margin: 24px 24px 0 24px;
+    margin: 48px 24px 0 24px;
 }
 
 .MuiSvgIcon-root {

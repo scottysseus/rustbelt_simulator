@@ -25,7 +25,7 @@ export function Hud (props: {
   return (
     <>
       <div className='hud'>
-        <PlayerSummaryStrip id='playerSummaryPane' playerState={props.state.game.player} />
+        <PlayerSummaryStrip gameState={props.state.game} />
         <Accordion defaultExpanded className='hud-pane-expander'>
           <AccordionSummary expandIcon={<ExpandMoreIcon />}>
             <Typography variant='h6'>Contracts</Typography>

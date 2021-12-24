@@ -1,16 +1,5 @@
-import { AppBar, Chip, Divider, Typography } from '@mui/material'
-import { ComponentPropsWithoutRef } from 'react'
-import { PlayerState } from '../../game_logic'
-
-type MuiColor = ComponentPropsWithoutRef<typeof Chip>['color']
-type SummaryPaneRowProps = {
-  icon: string
-  value: number
-  chip?: {
-    caption: string
-    color: MuiColor
-  }
-}
+import { AppBar, Badge, Chip, Divider, Typography } from '@mui/material'
+import { GameState } from '../../game_logic'
 
 function formatRevenue (value: number) {
   if (value >= 0) {
@@ -20,37 +9,25 @@ function formatRevenue (value: number) {
   }
 }
 
-export function PlayerSummaryStrip (props: {id: string, playerState: PlayerState}) {
-  const summary: SummaryPaneRowProps[] = [
-    {
-      icon: 'attach_money',
-      value: props.playerState.resources.money.balance,
-      chip: {
-        caption: formatRevenue(props.playerState.resources.money.revenue),
-        color: 'primary'
-      }
-    },
-    {
-      icon: 'sentiment_satisfied_alt',
-      value: props.playerState.victory.happiness
-    },
-    {
-      icon: 'person',
-      value: props.playerState.resources.workers.max,
-      chip: {
-        caption: `${props.playerState.resources.workers.free} idle`,
-        color: 'warning'
-      }
-    }
-  ]
-
-  const revenue = props.playerState.resources.money.revenue
+export function PlayerSummaryStrip (props: {gameState: GameState}) {
+  const revenue = props.gameState.player.resources.money.revenue
+  const idle = props.gameState.player.resources.workers.free
 
   return (
-    <AppBar id={props.id} className='player-summary-strip'>
-      <Typography>${props.playerState.resources.money.balance}</Typography>
-      <Chip color={revenue < 0 ? 'error' : 'default'} label={formatRevenue(revenue)} />
+    <AppBar className='player-summary-strip'>
+      <Typography>${props.gameState.player.resources.money.balance}</Typography>
       <Divider orientation='vertical' variant='middle' />
+      <Typography>{formatRevenue(revenue)}/turn</Typography>
+      <Divider orientation='vertical' variant='middle' />
+      <Typography>🙂{props.gameState.player.victory.happiness}</Typography>
+      <Divider orientation='vertical' variant='middle' />
+      <Typography>
+        <Badge invisible={idle < 1} badgeContent={idle} color='primary'>
+          👤{props.gameState.player.resources.workers.max}
+        </Badge>
+      </Typography>
+      <Divider orientation='vertical' variant='middle' />
+      <Typography>↩️{props.gameState.game.turnCounter}</Typography>
     </AppBar>
   )
 }
