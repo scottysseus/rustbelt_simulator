@@ -1,4 +1,4 @@
-import { castDraft, Draft } from 'immer'
+import { castDraft } from 'immer'
 import { Reducer } from 'use-immer'
 import { advanceTurn, GameState } from '../game_logic'
 
@@ -25,13 +25,15 @@ export const reducer: Reducer<State, Action> = (draft, action) => {
   console.log('old state', draft)
   switch (action.type) {
     case 'advanceTurn':
+      // TypeScript sometimes complains about writing to readonly properties on the draft.
+      // castDraft reassures it that nothing funny is going on here
       draft.game = castDraft(advanceTurn(draft.game))
       break
     case 'selectTile':
       draft.ui.selectedTile = action.tileIndex
       break
     case 'deselectTile':
-      draft.ui.selectedTile = castDraft(null)
+      draft.ui.selectedTile = null
       break
     case 'selectProject':
       break
