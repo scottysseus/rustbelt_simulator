@@ -4,7 +4,7 @@ import { Tile } from '../../game_logic'
 import { ContractPane } from './ContractPane'
 import { State, dispatcher } from '../reducers'
 import { TileSummary } from './TileSummary'
-import { PlayerSummaryPane } from './PlayerSummaryPane'
+import { PlayerSummaryStrip } from './PlayerSummaryStrip'
 import NextPlanIcon from '@mui/icons-material/NextPlan'
 
 export function Hud (props: {
@@ -25,16 +25,7 @@ export function Hud (props: {
   return (
     <>
       <div className='hud'>
-        <Accordion defaultExpanded className='hud-pane-expander'>
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-          >
-            <Typography variant='h6'>Summary</Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <PlayerSummaryPane id='playerSummaryPane' playerState={props.state.game.player} />
-          </AccordionDetails>
-        </Accordion>
+        <PlayerSummaryStrip id='playerSummaryPane' playerState={props.state.game.player} />
         <Accordion defaultExpanded className='hud-pane-expander'>
           <AccordionSummary expandIcon={<ExpandMoreIcon />}>
             <Typography variant='h6'>Contracts</Typography>

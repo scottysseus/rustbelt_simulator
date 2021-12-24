@@ -67,6 +67,14 @@ html, body {
     overflow: hidden;
 }
 
+.player-summary-strip.player-summary-strip.player-summary-strip {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    padding: 4px;
+    align-items: center;
+}
+
 /* the extra specifity is needed here to override @mui's styling */
 .hud-pane-expander.hud-pane-expander.hud-pane-expander.hud-pane-expander {
     margin: 24px 24px 0 24px;
@@ -76,19 +84,6 @@ html, body {
     vertical-align: middle;
 }
 
-.player-summary-pane-row {
-    border-bottom: none;
-}
-
-.player-summary-pane-row:hover {
-    background-color: rgb(0, 0, 0, 0.04);
-}
-
-.player-summary-pane-row > td {
-    padding: 5px 0;
-    text-align: left;
-    border-bottom: none;
-}
 .contract-list {
     margin-right: 16px;
 }
