@@ -5,9 +5,9 @@ import { GameMapDefinition } from '../game_logic'
 // This creates a 3x3 map, with each space referring to a tiel catalog entry
 export const map: GameMapDefinition = {
   tiles: [
-    'empty', 'gas', 'grocery',
-    'empty', 'library', 'empty',
-    'empty', 'empty', 'empty'
+    'empty', 'gas-0', 'shop-0',
+    'empty', 'library-0', 'empty',
+    'house-2', 'empty', 'empty'
   ],
   size: {
     x: 3,

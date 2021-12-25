@@ -13,6 +13,7 @@ type ReadonlyRecord<K extends string, T> = Readonly<Record<K, T>>
  * Represents the project a player assigns workers to in order to improve a tile.
  */
 export interface ProjectDefinition {
+  readonly id: string
   readonly name: string
   readonly description: string
   readonly targetTileType: TileType
@@ -20,7 +21,7 @@ export interface ProjectDefinition {
   readonly effort: number
 }
 
-export type ProjectType = 'demolish' | 'refine'
+export type ProjectType = string
 export type ProjectCatalog = ReadonlyRecord<ProjectType, ProjectDefinition>
 
 /**
@@ -28,6 +29,7 @@ export type ProjectCatalog = ReadonlyRecord<ProjectType, ProjectDefinition>
  * When an actual tile is added to game board, it holds a pointer to an entry in this catalog to lookup things like assets.
  */
 export interface TileDefinition {
+  readonly id: string
   // Short form name suitable for displaying in most places
   readonly name: string
   // Long form description or flavor text, shown in a "detail" view
@@ -39,10 +41,11 @@ export interface TileDefinition {
   readonly tags: ReadonlyArray<string>
   readonly revenue: number
   readonly happiness: number
+  readonly happinessGrowth: number
   readonly modelPath: string
 }
 
-export type TileType = 'empty' | 'grocery' | 'library' | 'gas'
+export type TileType = string
 export type TileCatalog = ReadonlyRecord<TileType, TileDefinition>
 
 export interface ActiveProject {
