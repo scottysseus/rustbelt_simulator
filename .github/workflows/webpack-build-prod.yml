@@ -22,7 +22,7 @@ jobs:
         
     - name: Reset
       run: |
-        git reset --hard main
+        git reset --hard origin/main
 
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
