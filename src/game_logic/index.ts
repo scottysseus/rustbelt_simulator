@@ -1,8 +1,12 @@
+import { enableMapSet } from 'immer'
+
 import { GameState, Tile, TileType } from './interfaces'
 import { advanceTurnCounter, applyRevenue, applyWorkers, resetWorkers, resolveContracts } from './turn'
 import { map as mapDefinition } from '../data/map'
 export * from './interfaces'
 export * from './player-actions'
+
+enableMapSet()
 
 const STARTING_MONEY = 1000000
 const STARTING_WORKERS = 3

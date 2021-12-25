@@ -1,10 +1,12 @@
+import { castDraft } from 'immer'
+import { Reducer } from 'use-immer'
 import { advanceTurn, GameState } from '../game_logic'
 
 export interface UIState {
   readonly selectedTile: number | null
 }
 
-type Action = {
+export type Action = {
   type: 'advanceTurn' | 'deselectTile'
 } | {
   type: 'selectTile'
@@ -19,17 +21,22 @@ export interface State {
   readonly game: GameState
 }
 
-export function reducer (state: State, action: Action): State {
-  console.log('old state', state)
+export const reducer: Reducer<State, Action> = (draft, action) => {
+  console.log('old state', draft)
   switch (action.type) {
     case 'advanceTurn':
-      return { ...state, game: advanceTurn(state.game) }
+      // TypeScript sometimes complains about writing to readonly properties on the draft.
+      // castDraft reassures it that nothing funny is going on here
+      draft.game = castDraft(advanceTurn(draft.game))
+      break
     case 'selectTile':
-      return { ...state, ui: { ...state.ui, selectedTile: action.tileIndex } }
+      draft.ui.selectedTile = action.tileIndex
+      break
     case 'deselectTile':
-      return { ...state, ui: { ...state.ui, selectedTile: null } }
+      draft.ui.selectedTile = null
+      break
     case 'selectProject':
-      return state
+      break
     default:
       assertUnreachable(action)
   }

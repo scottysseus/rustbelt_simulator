@@ -1,25 +1,22 @@
+import produce from 'immer'
 import { tileCatalog } from '../data/tile-catalog'
-import { GameState, isTileUnderConstruction, TileUnderConstruction } from './interfaces'
-import { replaceOne } from './shared'
+import { GameState, isTileUnderConstruction } from './interfaces'
 
 export function playerInitiateProject (state: GameState, tileIndex: number, projectIndex: number): GameState {
   const tile = state.map.tiles[tileIndex]
   const tileDefinition = tileCatalog[tile.type]
-  const newTile: TileUnderConstruction = {
-    ...tile,
-    activeProject: {
+
+  const newTile = produce(tile, draft => {
+    draft.activeProject = {
       type: tileDefinition.projects[projectIndex],
       progress: 0,
-      assignedWorkers: 0
+      assignedWorkers: 1
     }
-  }
-  return {
-    ...state,
-    map: {
-      ...state.map,
-      tiles: replaceOne(state.map.tiles, tile, newTile)
-    }
-  }
+  })
+
+  return produce(state, draft => {
+    draft.map.tiles[tileIndex] = newTile
+  })
 }
 
 export function playerAssignWorkers (state: GameState, tileIndex: number, workerCount: number): GameState {
@@ -29,29 +26,13 @@ export function playerAssignWorkers (state: GameState, tileIndex: number, worker
   }
   const priorWorkers = tile.activeProject.assignedWorkers
   const delta = workerCount - priorWorkers
-  const newTile: TileUnderConstruction = {
-    ...tile,
-    activeProject: {
-      ...tile.activeProject,
-      assignedWorkers: tile.activeProject.assignedWorkers + delta
-    }
-  }
 
-  return {
-    ...state,
-    map: {
-      ...state.map,
-      tiles: replaceOne(state.map.tiles, tile, newTile)
-    },
-    player: {
-      ...state.player,
-      resources: {
-        ...state.player.resources,
-        workers: {
-          ...state.player.resources.workers,
-          free: state.player.resources.workers.free - delta
-        }
-      }
-    }
-  }
+  const newTile = produce(tile, draft => {
+    draft.activeProject.assignedWorkers += delta
+  })
+
+  return produce(state, draft => {
+    draft.map.tiles[tileIndex] = newTile
+    draft.player.resources.workers.free -= delta
+  })
 }
