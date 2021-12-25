@@ -16,17 +16,18 @@ jobs:
     
     steps:
     - uses: actions/checkout@v2
+      with:
+        ref: deploy
+        
+        
+    - name: Reset
+      run: |
+        git reset --hard main
 
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-
-    - name: Rebase
-      uses: DeeDeeG/rebase-github-action@1.0-beta3
-      with:
-        base_ref: deploy
-        head_branch: main
 
     - name: Build
       run: |
