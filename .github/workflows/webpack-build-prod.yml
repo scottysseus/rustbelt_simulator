@@ -22,6 +22,12 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
 
+    - name: Rebase
+      uses: DeeDeeG/rebase-github-action@1.0-beta3
+      with:
+        base_ref: deploy
+        head_branch: main
+
     - name: Build
       run: |
         npm install
@@ -31,5 +37,6 @@ jobs:
       uses: EndBug/add-and-commit@v7
       with:
         add: 'docs'
+        branch: deploy
         pull: --rebase
         push: -u origin deploy --force
