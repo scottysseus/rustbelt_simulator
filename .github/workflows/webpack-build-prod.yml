@@ -22,7 +22,6 @@ jobs:
         
     - name: Reset
       run: |
-        git checkout deploy
         git reset --hard origin/main
 
     - name: Use Node.js ${{ matrix.node-version }}
@@ -34,3 +33,6 @@ jobs:
       run: |
         npm install
         npm run build
+        git add .
+        git commit -m "updating deployment"
+        git push --force
