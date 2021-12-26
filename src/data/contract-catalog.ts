@@ -1,3 +1,4 @@
+import produce from 'immer'
 import { Contract, ContractCatalog, GameState } from '../game_logic'
 
 export const contractIDs = {
@@ -14,7 +15,10 @@ export const catalog:ContractCatalog = {
     completed: false,
     reward: '$100/turn, 🙂3',
     isSatisfied: function (state: GameState): boolean { return false },
-    applyReward: function (state: GameState): GameState { return state }
+    applyReward: produce((draft) => {
+      draft.player.resources.money.revenue += 100
+      draft.player.victory.happiness += 3
+    })
   },
   [contractIDs.greenTourism]: {
     name: 'Green Tourism',
@@ -22,25 +26,10 @@ export const catalog:ContractCatalog = {
     completed: false,
     reward: '$85, 🙂5',
     isSatisfied: function (state: GameState): boolean { return false },
-    applyReward: function (state: GameState): GameState {
-      return {
-        ...state,
-        player: {
-          ...state.player,
-          resources: {
-            ...state.player.resources,
-            money: {
-              ...state.player.resources.money,
-              balance: state.player.resources.money.balance + 85
-            }
-          },
-          victory: {
-            ...state.player.victory,
-            happiness: state.player.victory.happiness + 5
-          }
-        }
-      }
-    }
+    applyReward: produce((draft) => {
+      draft.player.resources.money.balance += 85
+      draft.player.victory.happiness += 5
+    })
   },
   [contractIDs.brokenWindowsTheory]: {
     name: 'Broken Windows Theory',
@@ -48,7 +37,9 @@ export const catalog:ContractCatalog = {
     completed: false,
     reward: '🙂22',
     isSatisfied: function (state: GameState): boolean { return false },
-    applyReward: function (state: GameState): GameState { return state }
+    applyReward: produce((draft) => {
+      draft.player.victory.happiness += 22
+    })
   },
   [contractIDs.educatedWorkforce]: {
     name: 'Educated Workforce',
@@ -56,7 +47,10 @@ export const catalog:ContractCatalog = {
     completed: false,
     reward: '🙂5, 👤2',
     isSatisfied: function (state: GameState): boolean { return false },
-    applyReward: function (state: GameState): GameState { return state }
+    applyReward: produce((draft) => {
+      draft.player.victory.happiness += 5
+      draft.player.resources.workers.max += 2
+    })
   }
 }
 

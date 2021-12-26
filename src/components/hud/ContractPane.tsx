@@ -1,6 +1,5 @@
 import { Card, Collapse, List, ListItem, Typography } from '@mui/material'
-import { Contract, GameState } from '../../game_logic'
-import { catalog } from '../../data/contract-catalog'
+import { Contract } from '../../game_logic'
 import { TransitionGroup } from 'react-transition-group'
 
 function contractItem (props: {contract: Contract}) {
