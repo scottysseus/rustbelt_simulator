@@ -86,23 +86,26 @@ html, body {
 /* the extra specifity is needed here to override @mui's styling */
 .hud-pane-expander.hud-pane-expander.hud-pane-expander.hud-pane-expander {
     margin: 48px 24px 0 24px;
+    max-width: 350px;
 }
 
 .MuiSvgIcon-root {
     vertical-align: middle;
 }
 
-.contract-list {
-    margin-right: 16px;
+.contract-list.contract-list.contract-list {
+    overflow-y: auto;
+    padding-top: 0;
 }
 
 .contract-list-item-collapse.contract-list-item-collapse {
-    padding: 0 0 8px 0;
+    padding: 2px 2px 8px 2px;
 }
 
 .contract-card {
     width: 100%;
     text-align: left;
+    overflow-wrap: break-word;
     padding: 8px;
     display: block;
 }
@@ -111,10 +114,18 @@ html, body {
     background-color: rgb(0, 0, 0, 0.04);
 }
 
-.contract-card-heading {
+.contract-card-heading.contract-card-heading {
+    padding: 0;
     margin-bottom: 8px;
 }
 
+.contract-card-content.contract-card-content.contract-card-content.contract-card-content {
+    padding: 0;
+}
+
+.MuiAccordionDetails-root.MuiAccordionDetails-root.MuiAccordionDetails-root {
+    padding-top: 0;
+}
 
 .bottom-hud {
     position:fixed;

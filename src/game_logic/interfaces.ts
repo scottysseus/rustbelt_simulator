@@ -84,8 +84,6 @@ export interface Contract {
   readonly name: string
   // Long form description / flavor text
   readonly description: string
-  // Indicates if this contract has been resolved
-  readonly completed: boolean
   // Prose string for the reward
   readonly reward: string
   // properties necessary for dynamically-generated contracts
