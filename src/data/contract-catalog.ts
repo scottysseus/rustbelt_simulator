@@ -50,6 +50,10 @@ export const catalog:ContractCatalog = {
   }
 }
 
+/**
+ * contractQueue is a shuffled queue of contracts. It will be used to randomly select
+ * new contracts.
+ */
 export const contractQueue: Contract[] = Object.keys(catalog)
   .map(key => ({ value: catalog[key], sort: Math.random() }))
   .sort((a, b) => a.sort - b.sort)

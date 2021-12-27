@@ -88,13 +88,10 @@ export function resetWorkers (state: GameState): GameState {
 
 export function resolveContracts (initialState: GameState): GameState {
   let state = initialState
-  // TODO: fix staleness
-  let contractIndex: number | null
 
-  contractIndex = findIndexOfSatisfiedOpenContract(state)
-  while (contractIndex !== null && contractIndex >= 0) {
+  let contractIndex: number
+  while ((contractIndex = findIndexOfSatisfiedOpenContract(state)) !== -1) {
     state = completeContract(state, contractIndex)
-    contractIndex = findIndexOfSatisfiedOpenContract(state)
   }
 
   return openNewContracts(state)
@@ -102,9 +99,9 @@ export function resolveContracts (initialState: GameState): GameState {
 
 /**
  * Returns the index of the first open contract whose conditions have
- * been satisfied or, if none was found, null.
+ * been satisfied or, if none was found, -1.
  */
-function findIndexOfSatisfiedOpenContract (state: GameState): number | null {
+function findIndexOfSatisfiedOpenContract (state: GameState): number {
   return state.player.contracts.open.findIndex(contract => contract.isSatisfied(state))
 }
 
