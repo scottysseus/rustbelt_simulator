@@ -1,13 +1,12 @@
 
 import { useLoader } from '@react-three/fiber'
-import { useEffect, useRef, useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 import * as THREE from 'three'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import { tileCatalog } from '../../data/tile-catalog'
 import { Tile } from '../../game_logic'
-
-const COLOR_HOVERED = new THREE.Color(0x663399)
-const COLOR_SELECTED = new THREE.Color(0x660000)
+import { GroupPrimitive } from './GroupPrimitive'
+import { SelectAura } from './SelectAura'
 
 /**
  * Represents an occupied tile on the map.
@@ -16,76 +15,55 @@ const COLOR_SELECTED = new THREE.Color(0x660000)
  */
 export function MapLocation (props: {row: number, column: number, gridInterval: number, tile: Tile, selected: boolean, onSelected: () => void}) {
   const x = props.gridInterval * props.column
-  const z = props.gridInterval * (props.row + 1)
+  const z = props.gridInterval * props.row
 
   const tileDefinition = tileCatalog[props.tile.type]
   const gltf = useLoader(GLTFLoader, tileDefinition.modelPath)
+  const scene = useMemo(
+    () => sceneClone(gltf.scene, tileDefinition.name),
+    [gltf.scene, tileDefinition.name]
+  )
 
-  const ref = useRef<THREE.Group>(null)
-  const [color, setColor] = useState<THREE.Color | null>(null)
+  const [hover, setHover] = useState(false)
+  const onPointerOver = useCallback(() => setHover(true), [])
+  const onPointerOut = useCallback(() => setHover(false), [])
 
-  useEffect(() => {
-    if (props.selected) {
-      setColor(COLOR_SELECTED)
-    } else {
-      setColor(null)
-    }
-  }, [props.selected])
-
-  useEffect(() => {
-    if (ref.current) {
-      setColorRecursive(ref.current, color)
-    }
-  }, [ref, color])
-
-  const onClick = (event: THREE.Event) => {
+  const onClick = useCallback((event: THREE.Event) => {
     console.log('Clicked on Map Location', tileDefinition.name, props.row, props.column)
     props.onSelected()
-  }
+  }, [props, tileDefinition.name])
 
   return (
-    <primitive
-      ref={ref}
-      object={gltf.scene.clone(true)}
+    <group
       position={[x, 0, z]}
-      onClick={onClick}
-      onPointerOver={() => {
-        if (!props.selected) { setColor(COLOR_HOVERED) }
-      }}
-      onPointerOut={() => {
-        if (!props.selected) { setColor(null) }
-      }}
-    />
+    >
+      <GroupPrimitive
+        position={[0, 0, 1]}
+        object={scene}
+        onClick={onClick}
+        onPointerOver={onPointerOver}
+        onPointerOut={onPointerOut}
+      />
+      <SelectAura hover={hover} selected={props.selected} />
+    </group>
   )
 }
 
-/**
- * Changes the color of a primitive. A color of null resets to the original color.
- *
- * Technical answer: Updates the color of the material of all Mesh descendants belonging to an Object3D node.
- * Object3D is the base class for both Group (the actual type of our primitive) and Mesh.
- * @param object3d
- * @param color
- * @returns
- */
-function setColorRecursive (object3d: THREE.Object3D, color: THREE.Color | null) {
+function forEachMesh (object3d: THREE.Object3D, cb: (mesh: THREE.Mesh) => void) {
   if (object3d instanceof THREE.Mesh) {
-    const mesh = object3d as THREE.Mesh
-    if (!(mesh.material instanceof THREE.MeshStandardMaterial)) {
-      console.warn('Found wrong material type:', mesh.material.constructor.name)
-      return
-    }
-    const material = mesh.material
-    if (!material.userData.originalColor) {
-      material.userData.originalColor = material.color
-    }
-    if (!color) {
-      material.color = material.userData.originalColor
-    } else {
-      material.color = color
-    }
+    cb(object3d)
   }
   for (const child of object3d.children) {
-    setColorRecursive(child, color)
+    forEachMesh(child, cb)
   }
+}
+
+function sceneClone (originalScene: THREE.Group, newName: string) {
+  const newScene = originalScene.clone(true)
+  newScene.name = newName
+  forEachMesh(newScene, (mesh) => {
+    mesh.castShadow = true
+    mesh.receiveShadow = true
+  })
+  return newScene
 }
