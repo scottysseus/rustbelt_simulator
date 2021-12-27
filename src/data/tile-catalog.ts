@@ -631,5 +631,27 @@ export const tileCatalog: TileCatalog = {
     projects: [
       'demolish'
     ]
+  },
+  'trees-0': {
+    id: 'trees-0',
+    name: 'Pristine Forest',
+    description: 'lorem ipsum',
+    tags: [],
+    happiness: 5,
+    happinessGrowth: 1,
+    revenue: 3,
+    modelPath: 'models/trees-0.glb',
+    projects: []
+  },
+  'trees-1': {
+    id: 'trees-1',
+    name: 'Pristine Forest',
+    description: 'lorem ipsum',
+    tags: [],
+    happiness: 5,
+    happinessGrowth: 1,
+    revenue: 3,
+    modelPath: 'models/trees-1.glb',
+    projects: []
   }
 }
