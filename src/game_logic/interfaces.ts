@@ -96,16 +96,18 @@ export interface MapState {
   }
 }
 
+export interface WorkerState {
+  readonly max: number,
+  readonly free: number
+}
+
 export interface PlayerState {
   readonly resources: {
     readonly money: {
       readonly balance: number,
       readonly revenue: number
     },
-    readonly workers: {
-      readonly max: number,
-      readonly free: number
-    }
+    readonly workers: WorkerState
   },
   readonly victory: {
     readonly happiness: number,

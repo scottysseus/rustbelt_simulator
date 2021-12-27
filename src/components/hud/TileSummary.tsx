@@ -1,15 +1,17 @@
 import { Card, CardContent, CardHeader, IconButton } from '@mui/material'
 import { ProjectsDisplay } from './ProjectsDisplay'
-import { Tile } from '../../game_logic'
+import { Tile, WorkerState } from '../../game_logic'
 import { dispatcher } from '../reducers'
 import CloseIcon from '@mui/icons-material/Close'
 import { tileCatalog } from '../../data/tile-catalog'
 
 export function TileSummary (props: {
   tile: Tile | null,
+  tileIndex: number | null,
+  workers: WorkerState,
   dispatch: dispatcher
 }) {
-  if (props.tile === null) {
+  if (props.tile === null || props.tileIndex === null) {
     return null
   }
 
@@ -30,7 +32,7 @@ export function TileSummary (props: {
         }
       />
       <CardContent>
-        <ProjectsDisplay tile={props.tile} dispatch={props.dispatch} />
+        <ProjectsDisplay tile={props.tile} tileIndex={props.tileIndex} workers={props.workers} dispatch={props.dispatch} />
       </CardContent>
     </Card>
   )
