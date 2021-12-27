@@ -1,8 +1,10 @@
 import { enableMapSet } from 'immer'
 
-import { GameState, Tile, TileType } from './interfaces'
+import { GameState, Tile, TileType, Contract } from './interfaces'
 import { advanceTurnCounter, applyRevenue, applyWorkers, resetWorkers, resolveContracts } from './turn'
 import { map as mapDefinition } from '../data/map'
+import { contractQueue } from '../data/contract-catalog'
+import { NUM_OPEN_CONTRACTS } from './constants'
 export * from './interfaces'
 export * from './player-actions'
 
@@ -12,6 +14,17 @@ const STARTING_MONEY = 1000000
 const STARTING_WORKERS = 3
 
 export function createGameState (): GameState {
+  const openContracts: Contract[] = []
+  console.log(`contract queue initialized as: ${contractQueue}`)
+  do {
+    const toOpen = contractQueue.pop()
+    if (toOpen !== undefined) {
+      openContracts.push(toOpen)
+    }
+  } while (openContracts.length < NUM_OPEN_CONTRACTS)
+
+  console.log(`contract queue has been reduced to: ${contractQueue}`)
+
   return {
     game: {
       turnCounter: 0
@@ -32,7 +45,7 @@ export function createGameState (): GameState {
         goal: 100
       },
       contracts: {
-        open: [],
+        open: openContracts,
         completed: []
       }
     },
