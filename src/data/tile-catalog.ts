@@ -521,70 +521,6 @@ export const tileCatalog: TileCatalog = {
       'convert-wind'
     ]
   },
-  'movie-0': {
-    id: 'movie-0',
-    name: 'Sketchy Theater',
-    description: 'lorem ipsum',
-    tags: [
-      'commercial',
-      ' entertainment'
-    ],
-    happiness: 0,
-    happinessGrowth: 0,
-    revenue: 0,
-    modelPath: 'models/movie-0.glb',
-    projects: [
-      'demolish'
-    ]
-  },
-  'movie-1': {
-    id: 'movie-1',
-    name: 'Movie Theater',
-    description: 'lorem ipsum',
-    tags: [
-      'commercial',
-      ' corporate',
-      ' entertainment'
-    ],
-    happiness: 10,
-    happinessGrowth: 0,
-    revenue: 8,
-    modelPath: 'models/movie-1.glb',
-    projects: [
-      'demolish'
-    ]
-  },
-  'school-0': {
-    id: 'school-0',
-    name: 'school',
-    description: 'lorem ipsum',
-    tags: [
-      'civic',
-      ' education'
-    ],
-    happiness: 12,
-    happinessGrowth: 1,
-    revenue: -10,
-    modelPath: 'models/school-0.glb',
-    projects: [
-      'demolish'
-    ]
-  },
-  'jail-0': {
-    id: 'jail-0',
-    name: 'jail',
-    description: 'lorem ipsum',
-    tags: [
-      'civic'
-    ],
-    happiness: 2,
-    happinessGrowth: -1,
-    revenue: -20,
-    modelPath: 'models/jail-0.glb',
-    projects: [
-      'demolish'
-    ]
-  },
   superstore: {
     id: 'superstore',
     name: 'walmart',
@@ -597,37 +533,6 @@ export const tileCatalog: TileCatalog = {
     happinessGrowth: -1,
     revenue: 9,
     modelPath: 'models/superstore.glb',
-    projects: [
-      'demolish'
-    ]
-  },
-  fireworks: {
-    id: 'fireworks',
-    name: 'fireworks store',
-    description: 'lorem ipsum',
-    tags: [
-      'retail',
-      ' commercial'
-    ],
-    happiness: 2,
-    happinessGrowth: 0,
-    revenue: 2,
-    modelPath: 'models/fireworks.glb',
-    projects: [
-      'demolish'
-    ]
-  },
-  bowling: {
-    id: 'bowling',
-    name: 'bowling alley',
-    description: 'lorem ipsum',
-    tags: [
-      'commerical'
-    ],
-    happiness: 5,
-    happinessGrowth: 1,
-    revenue: 3,
-    modelPath: 'models/bowling.glb',
     projects: [
       'demolish'
     ]
