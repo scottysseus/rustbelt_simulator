@@ -18,6 +18,10 @@ export function MapLocation (props: {row: number, column: number, gridInterval: 
   const z = props.gridInterval * props.row
 
   const tileDefinition = tileCatalog[props.tile.type]
+
+  if (!tileDefinition || !tileDefinition.modelPath) {
+    console.log(props.tile.type)
+  }
   const gltf = useLoader(GLTFLoader, tileDefinition.modelPath)
 
   const scene = useMemo(
