@@ -60,7 +60,8 @@ export function SelectAura (props: SelectAuraProps) {
           args={[{
             color: theBottomColor,
             opacity: AURA_BOTTOM_PLANE_ALPHA,
-            blending: THREE.CustomBlending
+            depthWrite: false,
+            transparent: true
           }]}
         />
       </mesh>
@@ -91,7 +92,7 @@ function AuraSide (props: AuraSideProps) {
             },
             vertexShader,
             fragmentShader,
-            blending: THREE.CustomBlending,
+            transparent: true,
             depthWrite: false
           }]}
           side={THREE.FrontSide}
