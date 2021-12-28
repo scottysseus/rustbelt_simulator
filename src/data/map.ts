@@ -5,7 +5,7 @@ import { GameMapDefinition } from '../game_logic'
 // This creates a 3x3 map, with each space referring to a tiel catalog entry
 export const map: GameMapDefinition = {
   tiles: [
-    'library-2', 'empty', 'shop-super', 'library-1', 'road-straight', 'trees-0', 'trees-0', 'trees-0', 'road-straight', 'trees-0', 'trees-0', 'trees-0', 'trees-0', 'trees-0', 'trees-0',
+    'library-2', 'empty', 'meadow', 'library-1', 'road-straight', 'trees-0', 'trees-0', 'trees-0', 'road-straight', 'trees-0', 'trees-0', 'trees-0', 'trees-0', 'trees-0', 'trees-0',
     'trees-0', 'trees-0', 'trees-0', 'trees-0', 'road-straight', 'trees-0', 'trees-0', 'trees-0', 'road-straight', 'trees-0', 'trees-0', 'trees-0', 'trees-0', 'trees-0', 'trees-0',
     'trees-0', 'trees-0', 'trees-0', 'trees-0', 'road-straight', 'trees-0', 'trees-0', 'trees-0', 'road-straight', 'trees-0', 'trees-0', 'trees-0', 'trees-0', 'trees-0', 'trees-0',
     'trees-0', 'trees-0', 'trees-0', 'trees-0', 'road-straight', 'trees-0', 'trees-0', 'trees-0', 'road-straight', 'trees-0', 'trees-0', 'trees-0', 'trees-0', 'trees-0', 'trees-0',

@@ -558,5 +558,16 @@ export const tileCatalog: TileCatalog = {
     revenue: 3,
     modelPath: 'models/trees-1.glb',
     projects: []
+  },
+  meadow: {
+    id: 'meadow',
+    name: 'Pristine Meadow',
+    description: 'lorem ipsum',
+    tags: [],
+    happiness: 5,
+    happinessGrowth: 1,
+    revenue: 3,
+    modelPath: 'models/meadow.glb',
+    projects: []
   }
 }
