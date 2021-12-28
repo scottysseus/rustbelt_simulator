@@ -1,6 +1,6 @@
 import { enableMapSet } from 'immer'
 
-import { Contract, GameState, Tile, TilePlacement } from './interfaces'
+import { Contract, GameState, Tile, TileType } from './interfaces'
 import { advanceTurnCounter, applyRevenue, applyWorkers, resetWorkers, resolveContracts } from './turn'
 import { map as mapDefinition } from '../data/map'
 import { contractQueue } from '../data/contract-catalog'
@@ -57,8 +57,9 @@ export function createGameState (): GameState {
 }
 
 function initializeTiles (): Array<Tile> {
-  return mapDefinition.tiles.map((catalogEntryId: TilePlacement): Tile => ({
-    type: catalogEntryId.type,
+  return mapDefinition.tiles.map((catalogEntryId: TileType, i: number): Tile => ({
+    type: catalogEntryId,
+    rotation: mapDefinition.rotations[i],
     activeProject: null
   }))
 }
