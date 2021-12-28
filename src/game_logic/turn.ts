@@ -63,7 +63,7 @@ function checkIfTileCompleted (state: GameState, tileIndex: number): GameState {
   const projectDefinition = projectCatalog[tile.activeProject.type]
   const tileDefinition = tileCatalog[tile.type]
 
-  if (tile.activeProject.progress !== projectDefinition.effort) {
+  if (tile.activeProject.progress < projectDefinition.effort) {
     return state
   }
 
@@ -83,6 +83,11 @@ function checkIfTileCompleted (state: GameState, tileIndex: number): GameState {
 export function resetWorkers (state: GameState): GameState {
   return produce(state, draft => {
     draft.player.resources.workers.free = draft.player.resources.workers.max
+    for (const tile of draft.map.tiles) {
+      if (tile.activeProject) {
+        tile.activeProject.assignedWorkers = 0
+      }
+    }
   })
 }
 

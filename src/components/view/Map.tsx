@@ -22,7 +22,10 @@ export function Map (props: {mapState: MapState, gridInterval: number, uiState: 
 
   for (let i = 0; i < props.mapState.size.x; i++) {
     for (let j = 0; j < props.mapState.size.y; j++) {
-      const index = ijToIndex(i, j, props.mapState.size.x)
+      const index = ijToIndex(i, j, props.mapState.size.y)
+      if (index > props.mapState.tiles.length) {
+        throw new Error('Invalid Index')
+      }
       mapLocations.push(
         <Suspense key={`${i},${j}`} fallback={<Loader />}>
           <MapLocation

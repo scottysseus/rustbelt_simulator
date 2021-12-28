@@ -11,7 +11,7 @@ export * from './player-actions'
 enableMapSet()
 
 const STARTING_MONEY = 1000000
-const STARTING_WORKERS = 3
+const STARTING_WORKERS = 10
 
 export function createGameState (): GameState {
   const openContracts: Contract[] = []

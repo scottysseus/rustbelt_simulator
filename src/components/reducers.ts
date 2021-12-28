@@ -1,6 +1,6 @@
 import { castDraft } from 'immer'
 import { Reducer } from 'use-immer'
-import { advanceTurn, GameState } from '../game_logic'
+import { advanceTurn, GameState, playerAssignWorkers, playerInitiateProject } from '../game_logic'
 
 export interface UIState {
   readonly selectedTile: number | null
@@ -14,6 +14,11 @@ export type Action = {
 } | {
   type: 'selectProject'
   projectIndex: number
+  tileIndex: number
+} | {
+  type: 'assignWorkers'
+  tileIndex: number
+  workerCount: number
 }
 
 export interface State {
@@ -36,6 +41,10 @@ export const reducer: Reducer<State, Action> = (draft, action) => {
       draft.ui.selectedTile = null
       break
     case 'selectProject':
+      draft.game = castDraft(playerInitiateProject(draft.game, action.tileIndex, action.projectIndex))
+      break
+    case 'assignWorkers':
+      draft.game = castDraft(playerAssignWorkers(draft.game, action.tileIndex, action.workerCount))
       break
     default:
       assertUnreachable(action)

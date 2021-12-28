@@ -7,10 +7,11 @@ export const map: GameMapDefinition = {
   tiles: [
     'empty', 'gas-0', 'shop-0',
     'empty', 'library-0', 'empty',
-    'house-2', 'empty', 'empty'
+    'house-0', 'empty', 'empty',
+    'restaurant-0', 'fire-0', 'energy-coal'
   ],
   size: {
-    x: 3,
+    x: 4,
     y: 3
   }
 }

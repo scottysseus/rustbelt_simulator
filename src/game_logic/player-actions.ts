@@ -14,8 +14,15 @@ export function playerInitiateProject (state: GameState, tileIndex: number, proj
     }
   })
 
+  const workers = state.player.resources.workers
+
+  const newWorkers = produce(workers, draft => {
+    draft.free = draft.free - 1
+  })
+
   return produce(state, draft => {
     draft.map.tiles[tileIndex] = newTile
+    draft.player.resources.workers = newWorkers
   })
 }
 
