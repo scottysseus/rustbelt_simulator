@@ -48,76 +48,19 @@ export function ActiveProjectDisplay (props: {activeProject: ActiveProject, tile
       props.dispatch({ type: 'assignWorkers', tileIndex: props.tileIndex, workerCount })
     }
   }
-  /*
-  const grid2 = (
-    <Grid item xs>
-      <Input
-        value={value}
-        size='small'
-        onChange={onWorkersChange}
-        inputProps={{
-          step: 1,
-          min,
-          max,
-          type: 'number',
-          'aria-labelledby': 'input-slider'
-        }}
-      />
-    </Grid>
-  )
 
-  const grid1 = (
-    <Grid item xs>
-      <Slider
-        value={typeof value === 'number' ? value : 0}
-        min={min}
-        max={max}
-        onChange={onWorkersChange}
-        aria-labelledby='input-slider'
-      />
-    </Grid>
-  )
-*/
+  const onCancelProject = () => {
+    props.dispatch({ type: 'cancelProject', tileIndex: props.tileIndex })
+  }
+
   return (
     <ProjectCard
       project={projectDefinition} action={
-        <Button>Cancel</Button>
+        <Button onClick={onCancelProject}>Cancel</Button>
     }
       content={
         activeProjectContent({ activeProject: props.activeProject, projectDefinition: projectDefinition, onWorkersChange: onWorkersChange, workers: props.workers })
     }
     />
   )
-/*
-  return (
-    <div>
-      <Grid container spacing={2}>
-        <Grid item xs={12}>
-          <Typography>
-            Project: {projectDefinition.name}
-          </Typography>
-          <LinearProgress variant='buffer' value={progress} valueBuffer={bufferProgress} />
-        </Grid>
-        <Grid container item xs={6}>
-          <Card>
-            <CardContent>
-              <Typography>
-                {projectDefinition.description}
-              </Typography>
-            </CardContent>
-          </Card>
-        </Grid>
-        <Grid container item xs={6} spacing={2}>
-          <Grid item xs>
-            <Typography gutterBottom>
-              Workers
-            </Typography>
-          </Grid>
-          {grid1}
-          {grid2}
-        </Grid>
-      </Grid>
-    </div>
-  )
-  */
 }

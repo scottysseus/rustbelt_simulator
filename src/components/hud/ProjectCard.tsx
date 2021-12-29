@@ -1,4 +1,4 @@
-import { Button, Card, CardContent, CardHeader, Typography } from '@mui/material'
+import { Card, CardContent, CardHeader } from '@mui/material'
 import { tileCatalog } from '../../data/tile-catalog'
 import { ProjectDefinition } from '../../game_logic'
 import { TagList } from './TagList'

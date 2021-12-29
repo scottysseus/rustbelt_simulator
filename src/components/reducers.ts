@@ -9,7 +9,7 @@ export interface UIState {
 export type Action = {
   type: 'advanceTurn' | 'deselectTile'
 } | {
-  type: 'selectTile'
+  type: 'selectTile' | 'cancelProject'
   tileIndex: number
 } | {
   type: 'selectProject'
@@ -46,6 +46,15 @@ export const reducer: Reducer<State, Action> = (draft, action) => {
     case 'assignWorkers':
       draft.game = castDraft(playerAssignWorkers(draft.game, action.tileIndex, action.workerCount))
       break
+    case 'cancelProject': {
+      if (!draft.game.map.tiles[action.tileIndex].activeProject) {
+        break
+      }
+      const workersToClear = draft.game.map.tiles[action.tileIndex].activeProject.assignedWorkers
+      draft.game.map.tiles[action.tileIndex].activeProject = castDraft(null)
+      draft.game.player.resources.workers.free += workersToClear
+      break
+    }
     default:
       assertUnreachable(action)
   }
