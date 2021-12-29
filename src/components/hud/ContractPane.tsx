@@ -1,8 +1,8 @@
 import { Card, CardContent, CardHeader, Collapse, List, ListSubheader, ListItem, Typography } from '@mui/material'
-import { Contract } from '../../game_logic'
+import { Contract, ContractProgress, GameState } from '../../game_logic'
 import { TransitionGroup } from 'react-transition-group'
 
-function contractItem (props: {contract: Contract}) {
+function contractItem (props: {contract: Contract, progress: ContractProgress}) {
   return (
     <Collapse appear className='contract-list-item-collapse' key={props.contract.name}>
       <ListItem className='contract-list-item-collapse'>
@@ -16,6 +16,7 @@ function contractItem (props: {contract: Contract}) {
           />
           <CardContent className='contract-card-content'>
             <Typography>{props.contract.description}</Typography>
+            <Typography variant='caption'>{props.progress.current} / {props.progress.required}</Typography>
           </CardContent>
         </Card>
       </ListItem>
@@ -23,14 +24,16 @@ function contractItem (props: {contract: Contract}) {
   )
 }
 
-export function ContractPane (props: {openContracts: ReadonlyArray<Contract>, completeContracts: ReadonlyArray<Contract>}) {
+export function ContractPane (props: {gameState: GameState}) {
   return (
     <List className='contract-pane pane contract-list'>
       <TransitionGroup>
         <Collapse appear><ListSubheader>Open</ListSubheader></Collapse>
-        {props.openContracts.map(contract => contractItem({ contract }))}
-        {props.completeContracts.length > 0 && <Collapse appear><ListSubheader>Complete</ListSubheader></Collapse>}
-        {props.completeContracts.length > 0 && props.completeContracts.map(contract => contractItem({ contract }))}
+        {props.gameState.player.contracts.open.map(contract => contractItem({ contract, progress: contract.calculateProgress(props.gameState) }))}
+        {props.gameState.player.contracts.completed.length > 0 &&
+          <Collapse appear><ListSubheader>Complete</ListSubheader></Collapse>}
+        {props.gameState.player.contracts.completed.length > 0 &&
+          props.gameState.player.contracts.completed.map(contract => contractItem({ contract, progress: contract.calculateProgress(props.gameState) }))}
       </TransitionGroup>
     </List>
   )

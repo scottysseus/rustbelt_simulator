@@ -96,10 +96,19 @@ export interface Contract {
     * OR the minimum required conditions, whichever is greater
     */
    readonly applyReward: (state: GameState) => GameState
+
+   /**
+    * returns a string (to be shown to the player) indicating current progress
+    */
+   readonly calculateProgress: (state: GameState) => ContractProgress
 }
 
 export type ContractCatalogId = string
 export type ContractCatalog = ReadonlyRecord<ContractCatalogId, Contract>
+export interface ContractProgress {
+  readonly current: number
+  readonly required: number
+}
 
 export interface MapState {
   readonly tiles: ReadonlyArray<Tile>,

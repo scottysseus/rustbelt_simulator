@@ -86,7 +86,7 @@ html, body {
 /* the extra specifity is needed here to override @mui's styling */
 .hud-pane-expander.hud-pane-expander.hud-pane-expander.hud-pane-expander {
     margin: 48px 24px 0 24px;
-    max-width: 350px;
+    width: 350px;
 }
 
 .MuiSvgIcon-root {
