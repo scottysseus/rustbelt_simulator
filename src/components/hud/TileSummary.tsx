@@ -1,4 +1,4 @@
-import { Card, CardContent, CardHeader, IconButton } from '@mui/material'
+import { Card, CardContent, CardHeader, IconButton, Typography } from '@mui/material'
 import { ProjectsDisplay } from './ProjectsDisplay'
 import { Tile, WorkerState } from '../../game_logic'
 import { dispatcher } from '../reducers'
