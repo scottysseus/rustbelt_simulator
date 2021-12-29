@@ -70,7 +70,8 @@ function checkIfTileCompleted (state: GameState, tileIndex: number): GameState {
   const newTile: Tile = {
     // morph the tile into the target type
     type: projectDefinition.targetTileType,
-    activeProject: null
+    activeProject: null,
+    rotation: tile.rotation
   }
 
   return produce(state, draft => {
