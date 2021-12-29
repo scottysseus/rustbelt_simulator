@@ -32,3 +32,4 @@ After each commit to the `main` branch...
 
 1. The [webpack-build-prod](https://github.com/scottysseus/rustfield-revival/actions/workflows/webpack-build-prod.yml) workflow copies the new commits from `main` to the `deploy` branch. It uses `webpack` to build the production bundle, and commits the production bundle to the `deploy` branch.
 2. The [pages-build-deployment](https://github.com/scottysseus/rustfield-revival/actions/workflows/pages/pages-build-deployment) workflow (which is managed by the GitHub Pages feature, which can be configured in the repository settings) deploys the app out of the `docs/` directory of the `deploy` branch.
+
