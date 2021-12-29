@@ -10,7 +10,8 @@ export const contractIDs = {
   civicLeader: 'civic leader',
   conservationist: 'conservationist',
   theCoalIndustryIsBack: 'the coal industry is back',
-  thisOldHouse: 'this old house'
+  thisOldHouse: 'this old house',
+  whiteCollar: 'white collar'
 }
 
 export const catalog:ContractCatalog = {
@@ -104,6 +105,17 @@ export const catalog:ContractCatalog = {
   [contractIDs.thisOldHouse]: {
     name: 'This Old House',
     description: 'Repair 4 abandoned houses.',
+    reward: '🙂5',
+    isSatisfied: function (state: GameState): boolean { return false },
+    applyReward: produce((draft) => {
+      draft.player.victory.happiness += 5
+      draft.player.resources.workers.max += 2
+    }),
+    getDisplayableProgress: function (state: GameState): string { return '' }
+  },
+  [contractIDs.whiteCollar]: {
+    name: 'White Collar',
+    description: 'Build 3 new offices.',
     reward: '🙂5',
     isSatisfied: function (state: GameState): boolean { return false },
     applyReward: produce((draft) => {
