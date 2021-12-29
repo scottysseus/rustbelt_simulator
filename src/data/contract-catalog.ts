@@ -5,7 +5,12 @@ export const contractIDs = {
   imLovinIt: 'i\'m lovin\' it',
   greenTourism: 'green tourism',
   brokenWindowsTheory: 'broken windows theory',
-  educatedWorkforce: 'educated workforce'
+  educatedWorkforce: 'educated workforce',
+  mansBestFriend: 'man\'s best friend',
+  civicLeader: 'civic leader',
+  conservationist: 'conservationist',
+  theCoalIndustryIsBack: 'the coal industry is back',
+  thisOldHouse: 'this old house'
 }
 
 export const catalog:ContractCatalog = {
@@ -13,21 +18,23 @@ export const catalog:ContractCatalog = {
     name: 'I\'m Lovin\' It',
     description: 'Build at least one drive thru restaurant.',
     reward: '$100/turn, 🙂3',
-    isSatisfied: function (state: GameState): boolean { return true },
+    isSatisfied: function (state: GameState): boolean { return false },
     applyReward: produce((draft) => {
       draft.player.resources.money.revenue += 100
       draft.player.victory.happiness += 3
-    })
+    }),
+    getDisplayableProgress: function (state: GameState): string { return '' }
   },
   [contractIDs.greenTourism]: {
     name: 'Green Tourism',
     description: 'Build at least 1 park.',
     reward: '$85, 🙂5',
-    isSatisfied: function (state: GameState): boolean { return true },
+    isSatisfied: function (state: GameState): boolean { return false },
     applyReward: produce((draft) => {
       draft.player.resources.money.balance += 85
       draft.player.victory.happiness += 5
-    })
+    }),
+    getDisplayableProgress: function (state: GameState): string { return '' }
   },
   [contractIDs.brokenWindowsTheory]: {
     name: 'Broken Windows Theory',
@@ -36,7 +43,8 @@ export const catalog:ContractCatalog = {
     isSatisfied: function (state: GameState): boolean { return false },
     applyReward: produce((draft) => {
       draft.player.victory.happiness += 22
-    })
+    }),
+    getDisplayableProgress: function (state: GameState): string { return '' }
   },
   [contractIDs.educatedWorkforce]: {
     name: 'Educated Workforce',
@@ -46,7 +54,63 @@ export const catalog:ContractCatalog = {
     applyReward: produce((draft) => {
       draft.player.victory.happiness += 5
       draft.player.resources.workers.max += 2
-    })
+    }),
+    getDisplayableProgress: function (state: GameState): string { return '' }
+  },
+  [contractIDs.mansBestFriend]: {
+    name: 'Man\'s Best Friend',
+    description: 'Build 2 dog parks.',
+    reward: '$100, 🙂5',
+    isSatisfied: function (state: GameState): boolean { return false },
+    applyReward: produce((draft) => {
+      draft.player.victory.happiness += 5
+      draft.player.resources.workers.max += 2
+    }),
+    getDisplayableProgress: function (state: GameState): string { return '' }
+  },
+  [contractIDs.civicLeader]: {
+    name: 'Civic Leader',
+    description: 'Repair 4 #civic buildings.',
+    reward: '🙂10',
+    isSatisfied: function (state: GameState): boolean { return false },
+    applyReward: produce((draft) => {
+      draft.player.victory.happiness += 5
+      draft.player.resources.workers.max += 2
+    }),
+    getDisplayableProgress: function (state: GameState): string { return '' }
+  },
+  [contractIDs.conservationist]: {
+    name: 'Conservationist',
+    description: 'Restore 3 #nature properties.',
+    reward: '🙂5',
+    isSatisfied: function (state: GameState): boolean { return false },
+    applyReward: produce((draft) => {
+      draft.player.victory.happiness += 5
+      draft.player.resources.workers.max += 2
+    }),
+    getDisplayableProgress: function (state: GameState): string { return '' }
+  },
+  [contractIDs.theCoalIndustryIsBack]: {
+    name: 'The Coal Industry is Back',
+    description: 'Convert 2 coal power plants to wind farms.',
+    reward: '🙂5',
+    isSatisfied: function (state: GameState): boolean { return false },
+    applyReward: produce((draft) => {
+      draft.player.victory.happiness += 5
+      draft.player.resources.workers.max += 2
+    }),
+    getDisplayableProgress: function (state: GameState): string { return '' }
+  },
+  [contractIDs.thisOldHouse]: {
+    name: 'This Old House',
+    description: 'Repair 4 abandoned houses.',
+    reward: '🙂5',
+    isSatisfied: function (state: GameState): boolean { return false },
+    applyReward: produce((draft) => {
+      draft.player.victory.happiness += 5
+      draft.player.resources.workers.max += 2
+    }),
+    getDisplayableProgress: function (state: GameState): string { return '' }
   }
 }
 

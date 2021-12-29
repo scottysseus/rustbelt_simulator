@@ -96,6 +96,11 @@ export interface Contract {
     * OR the minimum required conditions, whichever is greater
     */
    readonly applyReward: (state: GameState) => GameState
+
+   /**
+    * returns a string (to be shown to the player) indicating current progress
+    */
+   readonly getDisplayableProgress: (state: GameState) => string
 }
 
 export type ContractCatalogId = string
