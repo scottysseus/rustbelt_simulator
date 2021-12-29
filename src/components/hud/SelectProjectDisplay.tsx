@@ -1,9 +1,9 @@
-import { Button, Card, CardActions, CardContent, CardHeader, List, ListItem, ListSubheader, Table, TableBody, TableCell, TableHead, TableRow, Typography } from '@mui/material'
+import { Button, List, ListItem, Typography } from '@mui/material'
 import { projectCatalog } from '../../data/project-catalog'
 import { tileCatalog } from '../../data/tile-catalog'
 import { Tile } from '../../game_logic'
 import { dispatcher } from '../reducers'
-import { TagList } from './TagList'
+import { ProjectCard } from './ProjectCard'
 
 export function SelectProjectDisplay (props: {tile: Tile, tileIndex: number, dispatch: dispatcher}) {
   const tileDefinition = tileCatalog[props.tile.type]
@@ -13,30 +13,18 @@ export function SelectProjectDisplay (props: {tile: Tile, tileIndex: number, dis
     const onClick = () => {
       props.dispatch({ type: 'selectProject', projectIndex: index, tileIndex: props.tileIndex })
     }
-    const targetTileDefinition = tileCatalog[project.targetTileType]
+
     return (
       <ListItem className='project-list-item' key={project.id}>
-        <Card className='project-card'>
-          <CardHeader
-            className='project-card-header'
-            title={project.name}
-            subheader={
-              <>
-                {'$' + project.cost + ' 👤' + project.effort + ' → ' +
-                targetTileDefinition.name + ' $' + targetTileDefinition.revenue + '/turn 🙂' + targetTileDefinition.happiness}
-                <TagList tags={targetTileDefinition.tags} />
-              </>
-            }
-            titleTypographyProps={{ variant: 'button' }}
-            subheaderTypographyProps={{ variant: 'body2' }}
-            action={
-              <Button onClick={onClick}>Start</Button>
-            }
-          />
-          <CardContent className='project-card-content'>
+        <ProjectCard
+          project={project}
+          content={
             <Typography variant='body2'>{project.description}</Typography>
-          </CardContent>
-        </Card>
+        }
+          action={
+            <Button onClick={onClick}>Start</Button>
+        }
+        />
       </ListItem>
     )
   })

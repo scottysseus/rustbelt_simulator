@@ -150,9 +150,9 @@ html, body {
 .project-card {
     width: 100%;
     text-align: left;
-    overflow-wrap: break-word;
     padding: 8px;
     display: block;
+    word-break: break-all;
 }
 
  .project-list-item.project-list-item.project-list-item {
