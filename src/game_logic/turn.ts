@@ -11,7 +11,7 @@ import { contractQueue } from '../data/contract-catalog'
 import { NUM_OPEN_CONTRACTS } from './constants'
 import { projectCatalog } from '../data/project-catalog'
 import { tileCatalog } from '../data/tile-catalog'
-import { Contract, GameState, TileUnderConstruction, isTileUnderConstruction, Tile } from './interfaces'
+import { GameState, TileUnderConstruction, isTileUnderConstruction, Tile } from './interfaces'
 
 export function applyRevenue (state: GameState): GameState {
   return produce(state, draft => {

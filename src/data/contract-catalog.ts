@@ -1,5 +1,5 @@
 import produce from 'immer'
-import { Contract, ContractCatalog, ContractProgress, GameState } from '../game_logic'
+import { Contract, ContractCatalog } from '../game_logic'
 
 export const contractIDs = {
   imLovinIt: 'i\'m lovin\' it',
@@ -14,115 +14,115 @@ export const contractIDs = {
   whiteCollar: 'white collar'
 }
 
-export const catalog:ContractCatalog = {
+export const catalog: ContractCatalog = {
   [contractIDs.imLovinIt]: {
     name: 'I\'m Lovin\' It',
     description: 'Build at least one drive thru restaurant.',
     reward: '$100/turn, 🙂3',
-    isSatisfied: function (state: GameState): boolean { return false },
+    isSatisfied: () => false,
     applyReward: produce((draft) => {
       draft.player.resources.money.revenue += 100
       draft.player.victory.happiness += 3
     }),
-    calculateProgress: function (state: GameState): string { return { current: 0, required: 2 } }
+    calculateProgress: () => ({ current: 0, required: 2 })
   },
   [contractIDs.greenTourism]: {
     name: 'Green Tourism',
     description: 'Build at least 1 park.',
     reward: '$85, 🙂5',
-    isSatisfied: function (state: GameState): boolean { return false },
+    isSatisfied: () => false,
     applyReward: produce((draft) => {
       draft.player.resources.money.balance += 85
       draft.player.victory.happiness += 5
     }),
-    calculateProgress: function (state: GameState): string { return { current: 0, required: 2 } }
+    calculateProgress: () => ({ current: 0, required: 2 })
   },
   [contractIDs.brokenWindowsTheory]: {
     name: 'Broken Windows Theory',
     description: 'Improve each property at least once.',
     reward: '🙂22',
-    isSatisfied: function (state: GameState): boolean { return false },
+    isSatisfied: () => false,
     applyReward: produce((draft) => {
       draft.player.victory.happiness += 22
     }),
-    calculateProgress: function (state: GameState): string { return { current: 0, required: 2 } }
+    calculateProgress: () => ({ current: 0, required: 2 })
   },
   [contractIDs.educatedWorkforce]: {
     name: 'Educated Workforce',
     description: 'Build 1 new library to educate the Rustfield citizenry.',
     reward: '🙂5, 👤2',
-    isSatisfied: function (state: GameState): boolean { return false },
+    isSatisfied: () => false,
     applyReward: produce((draft) => {
       draft.player.victory.happiness += 5
       draft.player.resources.workers.max += 2
     }),
-    calculateProgress: function (state: GameState): string { return { current: 0, required: 2 } }
+    calculateProgress: () => ({ current: 0, required: 2 })
   },
   [contractIDs.mansBestFriend]: {
     name: 'Man\'s Best Friend',
     description: 'Build 2 dog parks.',
     reward: '$100, 🙂5',
-    isSatisfied: function (state: GameState): boolean { return false },
+    isSatisfied: () => false,
     applyReward: produce((draft) => {
       draft.player.victory.happiness += 5
       draft.player.resources.workers.max += 2
     }),
-    calculateProgress: function (state: GameState): string { return { current: 0, required: 2 } }
+    calculateProgress: () => ({ current: 0, required: 2 })
   },
   [contractIDs.civicLeader]: {
     name: 'Civic Leader',
     description: 'Repair 4 #civic buildings.',
     reward: '🙂10',
-    isSatisfied: function (state: GameState): boolean { return false },
+    isSatisfied: () => false,
     applyReward: produce((draft) => {
       draft.player.victory.happiness += 5
       draft.player.resources.workers.max += 2
     }),
-    calculateProgress: function (state: GameState): string { return { current: 0, required: 2 } }
+    calculateProgress: () => ({ current: 0, required: 2 })
   },
   [contractIDs.conservationist]: {
     name: 'Conservationist',
     description: 'Restore 3 #nature properties.',
     reward: '🙂5',
-    isSatisfied: function (state: GameState): boolean { return false },
+    isSatisfied: () => false,
     applyReward: produce((draft) => {
       draft.player.victory.happiness += 5
       draft.player.resources.workers.max += 2
     }),
-    calculateProgress: function (state: GameState): string { return { current: 0, required: 2 } }
+    calculateProgress: () => ({ current: 0, required: 2 })
   },
   [contractIDs.theCoalIndustryIsBack]: {
     name: 'The Coal Industry is Back',
     description: 'Convert 2 coal power plants to wind farms.',
     reward: '🙂5',
-    isSatisfied: function (state: GameState): boolean { return false },
+    isSatisfied: () => false,
     applyReward: produce((draft) => {
       draft.player.victory.happiness += 5
       draft.player.resources.workers.max += 2
     }),
-    calculateProgress: function (state: GameState): string { return { current: 0, required: 2 } }
+    calculateProgress: () => ({ current: 0, required: 2 })
   },
   [contractIDs.thisOldHouse]: {
     name: 'This Old House',
     description: 'Repair 4 abandoned houses.',
     reward: '🙂5',
-    isSatisfied: function (state: GameState): boolean { return false },
+    isSatisfied: () => false,
     applyReward: produce((draft) => {
       draft.player.victory.happiness += 5
       draft.player.resources.workers.max += 2
     }),
-    calculateProgress: function (state: GameState): string { return { current: 0, required: 2 } }
+    calculateProgress: () => ({ current: 0, required: 2 })
   },
   [contractIDs.whiteCollar]: {
     name: 'White Collar',
     description: 'Build 3 new offices.',
     reward: '🙂5',
-    isSatisfied: function (state: GameState): boolean { return false },
+    isSatisfied: () => false,
     applyReward: produce((draft) => {
       draft.player.victory.happiness += 5
       draft.player.resources.workers.max += 2
     }),
-    calculateProgress: function (state: GameState): string { return { current: 0, required: 2 } }
+    calculateProgress: () => ({ current: 0, required: 2 })
   }
 }
 

@@ -1,6 +1,5 @@
 import { CardContent, Typography } from '@mui/material'
 import LinearProgress from '@mui/material/LinearProgress'
-import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
 import Grid from '@mui/material/Grid'
 import Input from '@mui/material/Input'
@@ -11,7 +10,7 @@ import { dispatcher } from '../reducers'
 
 export function ActiveProjectDisplay (props: {activeProject: ActiveProject, tileIndex: number, workers: WorkerState, dispatch: dispatcher}) {
   const projectDefinition = projectCatalog[props.activeProject.type]
-  const onWorkersChange = (event) => {
+  const onWorkersChange = (event: any) => {
     const workerCount = parseInt(event.target.value)
     if (!isNaN(workerCount)) {
       props.dispatch({ type: 'assignWorkers', tileIndex: props.tileIndex, workerCount })
