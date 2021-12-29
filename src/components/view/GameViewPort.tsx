@@ -47,8 +47,8 @@ function GameView (props: GameViewProps) {
       />
       <Map gridInterval={1} mapState={props.state.game.map} uiState={props.state.ui} dispatch={props.dispatch} />
       <Stats className='stats' showPanel={1} />
-      <gridHelper position={[0, 0.002, 0]} args={[100, 100, 'white', 'gray']} />
-      <axesHelper position={[0, 0.004, 0]} args={[10]} />
+      {/* <gridHelper position={[0, 0.002, 0]} args={[100, 100, 'white', 'gray']} />
+      <axesHelper position={[0, 0.004, 0]} args={[10]} /> */}
     </>
   )
 }

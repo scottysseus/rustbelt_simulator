@@ -1,6 +1,6 @@
 
 import { useLoader } from '@react-three/fiber'
-import { useCallback, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import * as THREE from 'three'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import { tileCatalog } from '../../data/tile-catalog'
@@ -18,11 +18,22 @@ export function MapLocation (props: {row: number, column: number, gridInterval: 
   const z = props.gridInterval * props.row
 
   const tileDefinition = tileCatalog[props.tile.type]
+
+  if (!tileDefinition || !tileDefinition.modelPath) {
+    console.log(props.tile.type)
+  }
   const gltf = useLoader(GLTFLoader, tileDefinition.modelPath)
+
   const scene = useMemo(
     () => sceneClone(gltf.scene, tileDefinition.name),
     [gltf.scene, tileDefinition.name]
   )
+
+  useEffect(() => {
+    if (props.tile.rotation !== 0) {
+      rotateAboutPoint(scene, new THREE.Vector3(0.5, 1, 0.5), new THREE.Vector3(0, 1, 0), props.tile.rotation, false)
+    }
+  }, [scene, props.tile.rotation, x, z])
 
   const [hover, setHover] = useState(false)
   const onPointerOver = useCallback(() => setHover(true), [])
@@ -66,4 +77,27 @@ function sceneClone (originalScene: THREE.Group, newName: string) {
     mesh.receiveShadow = true
   })
   return newScene
+}
+
+// obj - your object (THREE.Object3D or derived)
+// point - the point of rotation (THREE.Vector3)
+// axis - the axis of rotation (normalized THREE.Vector3)
+// theta - radian value of rotation
+// pointIsWorld - boolean indicating the point is in world coordinates (default = false)
+function rotateAboutPoint (obj: THREE.Object3D, point: THREE.Vector3, axis: THREE.Vector3, theta:number, pointIsWorld: boolean) {
+  pointIsWorld = (pointIsWorld === undefined) ? false : pointIsWorld
+
+  if (pointIsWorld) {
+    obj.parent?.localToWorld(obj.position) // compensate for world coordinate
+  }
+
+  obj.position.sub(point) // remove the offset
+  obj.position.applyAxisAngle(axis, theta) // rotate the POSITION
+  obj.position.add(point) // re-add the offset
+
+  if (pointIsWorld) {
+    obj.parent?.worldToLocal(obj.position) // undo world coordinates compensation
+  }
+
+  obj.rotateOnAxis(axis, theta) // rotate the OBJECT
 }

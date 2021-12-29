@@ -46,6 +46,10 @@ export interface TileDefinition {
 }
 
 export type TileType = string
+export interface TilePlacement {
+  readonly type: TileType
+  readonly rotation?: number
+}
 export type TileCatalog = ReadonlyRecord<TileType, TileDefinition>
 
 export interface ActiveProject {
@@ -61,7 +65,7 @@ export interface ActiveProject {
 export interface Tile {
   // Pointer into a database of tile decsriptions that are IMMUTABLE
   readonly type: TileType
-
+  readonly rotation: number
   readonly activeProject: ActiveProject | null
 }
 
@@ -156,6 +160,7 @@ export interface GameState {
 export interface GameMapDefinition {
   // A flat array of
   readonly tiles: ReadonlyArray<TileType>
+  readonly rotations: ReadonlyArray<number>
   // The dimensions
   readonly size: {
     readonly x: number
