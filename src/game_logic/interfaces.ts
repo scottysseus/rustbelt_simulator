@@ -100,11 +100,15 @@ export interface Contract {
    /**
     * returns a string (to be shown to the player) indicating current progress
     */
-   readonly getDisplayableProgress: (state: GameState) => string
+   readonly calculateProgress: (state: GameState) => ContractProgress
 }
 
 export type ContractCatalogId = string
 export type ContractCatalog = ReadonlyRecord<ContractCatalogId, Contract>
+export interface ContractProgress {
+  readonly current: number
+  readonly required: number
+}
 
 export interface MapState {
   readonly tiles: ReadonlyArray<Tile>,

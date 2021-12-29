@@ -1,5 +1,5 @@
 import produce from 'immer'
-import { Contract, ContractCatalog, GameState } from '../game_logic'
+import { Contract, ContractCatalog, ContractProgress, GameState } from '../game_logic'
 
 export const contractIDs = {
   imLovinIt: 'i\'m lovin\' it',
@@ -24,7 +24,7 @@ export const catalog:ContractCatalog = {
       draft.player.resources.money.revenue += 100
       draft.player.victory.happiness += 3
     }),
-    getDisplayableProgress: function (state: GameState): string { return '' }
+    calculateProgress: function (state: GameState): string { return { current: 0, required: 2 } }
   },
   [contractIDs.greenTourism]: {
     name: 'Green Tourism',
@@ -35,7 +35,7 @@ export const catalog:ContractCatalog = {
       draft.player.resources.money.balance += 85
       draft.player.victory.happiness += 5
     }),
-    getDisplayableProgress: function (state: GameState): string { return '' }
+    calculateProgress: function (state: GameState): string { return { current: 0, required: 2 } }
   },
   [contractIDs.brokenWindowsTheory]: {
     name: 'Broken Windows Theory',
@@ -45,7 +45,7 @@ export const catalog:ContractCatalog = {
     applyReward: produce((draft) => {
       draft.player.victory.happiness += 22
     }),
-    getDisplayableProgress: function (state: GameState): string { return '' }
+    calculateProgress: function (state: GameState): string { return { current: 0, required: 2 } }
   },
   [contractIDs.educatedWorkforce]: {
     name: 'Educated Workforce',
@@ -56,7 +56,7 @@ export const catalog:ContractCatalog = {
       draft.player.victory.happiness += 5
       draft.player.resources.workers.max += 2
     }),
-    getDisplayableProgress: function (state: GameState): string { return '' }
+    calculateProgress: function (state: GameState): string { return { current: 0, required: 2 } }
   },
   [contractIDs.mansBestFriend]: {
     name: 'Man\'s Best Friend',
@@ -67,7 +67,7 @@ export const catalog:ContractCatalog = {
       draft.player.victory.happiness += 5
       draft.player.resources.workers.max += 2
     }),
-    getDisplayableProgress: function (state: GameState): string { return '' }
+    calculateProgress: function (state: GameState): string { return { current: 0, required: 2 } }
   },
   [contractIDs.civicLeader]: {
     name: 'Civic Leader',
@@ -78,7 +78,7 @@ export const catalog:ContractCatalog = {
       draft.player.victory.happiness += 5
       draft.player.resources.workers.max += 2
     }),
-    getDisplayableProgress: function (state: GameState): string { return '' }
+    calculateProgress: function (state: GameState): string { return { current: 0, required: 2 } }
   },
   [contractIDs.conservationist]: {
     name: 'Conservationist',
@@ -89,7 +89,7 @@ export const catalog:ContractCatalog = {
       draft.player.victory.happiness += 5
       draft.player.resources.workers.max += 2
     }),
-    getDisplayableProgress: function (state: GameState): string { return '' }
+    calculateProgress: function (state: GameState): string { return { current: 0, required: 2 } }
   },
   [contractIDs.theCoalIndustryIsBack]: {
     name: 'The Coal Industry is Back',
@@ -100,7 +100,7 @@ export const catalog:ContractCatalog = {
       draft.player.victory.happiness += 5
       draft.player.resources.workers.max += 2
     }),
-    getDisplayableProgress: function (state: GameState): string { return '' }
+    calculateProgress: function (state: GameState): string { return { current: 0, required: 2 } }
   },
   [contractIDs.thisOldHouse]: {
     name: 'This Old House',
@@ -111,7 +111,7 @@ export const catalog:ContractCatalog = {
       draft.player.victory.happiness += 5
       draft.player.resources.workers.max += 2
     }),
-    getDisplayableProgress: function (state: GameState): string { return '' }
+    calculateProgress: function (state: GameState): string { return { current: 0, required: 2 } }
   },
   [contractIDs.whiteCollar]: {
     name: 'White Collar',
@@ -122,7 +122,7 @@ export const catalog:ContractCatalog = {
       draft.player.victory.happiness += 5
       draft.player.resources.workers.max += 2
     }),
-    getDisplayableProgress: function (state: GameState): string { return '' }
+    calculateProgress: function (state: GameState): string { return { current: 0, required: 2 } }
   }
 }
 
