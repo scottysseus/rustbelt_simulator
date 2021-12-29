@@ -14,17 +14,22 @@ jobs:
       with:
         node-version: 16.13.1
 
+    # checkout the deploy branch
     - uses: actions/checkout@v2
       with:
         ref: deploy
-      
+    
+    # - configure the git credentials using the github-actions user
+    # - fetch the main branch so we can reference it in subsequent commands
+    # - reset --hard to force the deploy branch to match main before we begin building
     - run: |
         git config user.name github-actions
         git config user.email github-actions@github.com
         git -c protocol.version=2 fetch --no-tags --prune --progress --no-recurse-submodules --depth=1 origin +refs/heads/main*:refs/remotes/origin/main* +refs/tags/main*:refs/tags/main*
-        git branch -a
         git reset --hard remotes/origin/main
 
+    # - build the production bundle
+    # - commit and push the production bundle to the deploy branch, where it will get deployed by the GitHub Pages action later
     - name: Build
       run: |
         npm install
