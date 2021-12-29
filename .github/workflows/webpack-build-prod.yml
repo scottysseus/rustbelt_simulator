@@ -23,7 +23,7 @@ jobs:
         git config user.email github-actions@github.com
         git -c protocol.version=2 fetch --no-tags --prune --progress --no-recurse-submodules --depth=1 origin +refs/heads/main*:refs/remotes/origin/main* +refs/tags/main*:refs/tags/main*
         git branch -a
-        git reset --hard main
+        git reset --hard remotes/origin/main
 
     - name: Build
       run: |
