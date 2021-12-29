@@ -308,8 +308,7 @@ export const tileCatalog: TileCatalog = {
     description: "Don't waste your time reading. ",
     tags: [
       'civic',
-      ' damaged',
-      ' entertainment'
+      'damaged'
     ],
     happiness: -10,
     happinessGrowth: 0,
