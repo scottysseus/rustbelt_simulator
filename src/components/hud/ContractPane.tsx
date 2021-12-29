@@ -15,8 +15,7 @@ function contractItem (props: {contract: Contract, progress: ContractProgress}) 
             subheaderTypographyProps={{ variant: 'body2' }}
           />
           <CardContent className='contract-card-content'>
-            <Typography>{props.contract.description}</Typography>
-            <Typography variant='caption'>{props.progress.current} / {props.progress.required}</Typography>
+            <Typography variant='body2'>{props.contract.description}</Typography>
           </CardContent>
         </Card>
       </ListItem>

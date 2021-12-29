@@ -141,3 +141,30 @@ html, body {
     bottom:5%;
     z-index: 10;
  }
+
+ .tile-tag.tile-tag.tile-tag {
+     margin-left: 3px;
+     cursor: pointer;
+ }
+
+.project-card {
+    width: 100%;
+    text-align: left;
+    overflow-wrap: break-word;
+    padding: 8px;
+    display: block;
+}
+
+ .project-list-item.project-list-item.project-list-item {
+     width: 100%;
+     padding: 2px 2px 8px 2px;
+ }
+
+ .project-card-header.project-card-header.project-card-header {
+    padding: 0;
+    margin-bottom: 8px;
+ }
+
+ .project-card-content.project-card-content.project-card-content.project-card-content {
+    padding: 0;
+ }

@@ -1,8 +1,9 @@
-import { Button, Table, TableBody, TableCell, TableHead, TableRow, Typography } from '@mui/material'
+import { Button, Card, CardActions, CardContent, CardHeader, List, ListItem, ListSubheader, Table, TableBody, TableCell, TableHead, TableRow, Typography } from '@mui/material'
 import { projectCatalog } from '../../data/project-catalog'
 import { tileCatalog } from '../../data/tile-catalog'
 import { Tile } from '../../game_logic'
 import { dispatcher } from '../reducers'
+import { TagList } from './TagList'
 
 export function SelectProjectDisplay (props: {tile: Tile, tileIndex: number, dispatch: dispatcher}) {
   const tileDefinition = tileCatalog[props.tile.type]
@@ -10,35 +11,40 @@ export function SelectProjectDisplay (props: {tile: Tile, tileIndex: number, dis
   console.log('projects', projects, props.tile)
   const projectList = projects.map((project, index) => {
     const onClick = () => {
-      // TODO: Get the tile index here to pass up with the dispatch or otherwise figure out how to fix the fact
-      // that I don't know what the tile index is
       props.dispatch({ type: 'selectProject', projectIndex: index, tileIndex: props.tileIndex })
     }
     const targetTileDefinition = tileCatalog[project.targetTileType]
     return (
-      <TableRow key={project.name}>
-        <TableCell><Typography>{project.name}</Typography></TableCell>
-        <TableCell><Typography>{project.cost}</Typography></TableCell>
-        <TableCell><Typography>{project.effort}</Typography></TableCell>
-        <TableCell><Typography>{targetTileDefinition.name}</Typography></TableCell>
-        <TableCell><Button onClick={onClick}>Start</Button></TableCell>
-      </TableRow>
+      <ListItem className='project-list-item' key={project.id}>
+        <Card className='project-card'>
+          <CardHeader
+            className='project-card-header'
+            title={project.name}
+            subheader={
+              <>
+                {'$' + project.cost + ' 👤' + project.effort + ' → ' +
+                targetTileDefinition.name + ' $' + targetTileDefinition.revenue + '/turn 🙂' + targetTileDefinition.happiness}
+                <TagList tags={targetTileDefinition.tags} />
+              </>
+            }
+            titleTypographyProps={{ variant: 'button' }}
+            subheaderTypographyProps={{ variant: 'body2' }}
+            action={
+              <Button onClick={onClick}>Start</Button>
+            }
+          />
+          <CardContent className='project-card-content'>
+            <Typography variant='body2'>{project.description}</Typography>
+          </CardContent>
+        </Card>
+      </ListItem>
     )
   })
 
   return (
     <>
-      <Typography variant='h6'>Projects</Typography>
-      <Table>
-        <TableHead>
-          <TableRow>
-            {['Name', 'Cost', 'Effort', 'Goal', ''].map((s) => (<TableCell key={s}>{s}</TableCell>))}
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {projectList}
-        </TableBody>
-      </Table>
+      <Typography><b>Projects</b></Typography>
+      <List>{projectList}</List>
     </>
   )
 }
