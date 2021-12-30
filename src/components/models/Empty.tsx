@@ -24,7 +24,7 @@ type GLTFResult = GLTF & {
 
 export default function Model ({ ...props }: JSX.IntrinsicElements['group']) {
   const group = useRef<THREE.Group>()
-  const { nodes, materials } = useGLTF('/models/empty.glb') as GLTFResult
+  const { nodes, materials } = useGLTF('models/empty.glb') as GLTFResult
   return (
     <group ref={group} {...props} dispose={null}>
       <group position={[1, 0, -1]} rotation={[0, Math.PI / 2, 0]}>
@@ -37,4 +37,4 @@ export default function Model ({ ...props }: JSX.IntrinsicElements['group']) {
   )
 }
 
-useGLTF.preload('/models/empty.glb')
+useGLTF.preload('models/empty.glb')
