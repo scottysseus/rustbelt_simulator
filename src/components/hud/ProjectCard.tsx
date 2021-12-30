@@ -1,6 +1,7 @@
 import { Card, CardContent, CardHeader } from '@mui/material'
 import { tileCatalog } from '../../data/tile-catalog'
 import { ProjectDefinition } from '../../game_logic'
+import { TextUnit } from '../TextUnit'
 import { TagList } from './TagList'
 
 export function ProjectCard (props: {
@@ -16,10 +17,10 @@ export function ProjectCard (props: {
         title={props.project.name}
         subheader={
           <>
-            <div style={{ display: 'flex', justifyContent: 'flex-start', gap: '4px' }}>
+            <div style={{ display: 'flex', justifyContent: 'flex-start', gap: '16px' }}>
               <div style={{ flexShrink: 0 }}>{'🏷️ $' + props.project.cost + ' 👤' + props.project.effort + ' '}</div>🡆
               <div style={{ flexGrow: 3 }}>
-                <b>{' ' + targetTileDefinition.name}</b> {' $' + targetTileDefinition.revenue + '/turn 🙂' + targetTileDefinition.happiness}
+                <b>{' ' + targetTileDefinition.name}</b> {' $' + targetTileDefinition.revenue + '/turn'} <TextUnit text={'🙂' + targetTileDefinition.happiness} />
                 <TagList tags={targetTileDefinition.tags} />
               </div>
             </div>

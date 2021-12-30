@@ -105,7 +105,7 @@ html, body {
 .contract-card {
     width: 100%;
     text-align: left;
-    overflow-wrap: break-word;
+    overflow-wrap: normal;
     padding: 8px;
     display: block;
 }
@@ -152,7 +152,7 @@ html, body {
     text-align: left;
     padding: 8px;
     display: block;
-    word-break: break-all;
+    word-break: keep-all;
 }
 
  .project-list-item.project-list-item.project-list-item {
