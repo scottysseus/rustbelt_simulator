@@ -1,5 +1,5 @@
 
-import { useCallback, useState } from 'react'
+import { ReactNode, useCallback, useState } from 'react'
 import * as THREE from 'three'
 import { tileCatalog } from '../../data/tile-catalog'
 import { Tile } from '../../game_logic'
@@ -21,14 +21,10 @@ export function MapLocation (props: {row: number, column: number, gridInterval: 
   //   console.log(props.tile.type)
   // }
 
-  // TODO: rotate with groups
-  // useEffect(() => {
-  //   if (props.tile.rotation !== 0) {
-  //     rotateAboutPoint(scene, new THREE.Vector3(0.5, 1, 0.5), new THREE.Vector3(0, 1, 0), props.tile.rotation, false)
-  //   }
-  // }, [scene, props.tile.rotation, x, z])
-
+  // TODO lint all GLTFJSX
   // TODO shop-market is all ... askew
+  // TODO check all models
+  // TODO update @react-three/fiber
 
   const ModelComponent = tileDefinition.modelComponent
 
@@ -45,13 +41,33 @@ export function MapLocation (props: {row: number, column: number, gridInterval: 
     <group
       position={[x, 0, z]}
     >
-      <ModelComponent
-        position={[0, 0, 1]}
-        onClick={onClick}
-        onPointerOver={onPointerOver}
-        onPointerOut={onPointerOut}
-      />
+      <RotateY angle={props.tile.rotation}>
+        <ModelComponent
+          position={[0, 0, 1]}
+          onClick={onClick}
+          onPointerOver={onPointerOver}
+          onPointerOut={onPointerOut}
+        />
+      </RotateY>
       <SelectAura hover={hover} selected={props.selected} />
+    </group>
+  )
+}
+
+// rotate the child, whose size is 1-by-1, about its center, around the Y axis, by `angle` radians.
+function RotateY (props: { children: ReactNode, angle: number }) {
+  return (
+    <group
+      // from the top-left to the center
+      position={[0.5, 0, 0.5]}
+      rotation={[0, props.angle, 0]}
+    >
+      <group
+        // from the center to the top-left
+        position={[-0.5, 0, -0.5]}
+      >
+        {props.children}
+      </group>
     </group>
   )
 }
