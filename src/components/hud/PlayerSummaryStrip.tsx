@@ -1,4 +1,4 @@
-import { AppBar, Badge, Chip, Divider, Typography } from '@mui/material'
+import { AppBar, Badge, Divider, Typography } from '@mui/material'
 import { GameState } from '../../game_logic'
 
 function formatRevenue (value: number) {
