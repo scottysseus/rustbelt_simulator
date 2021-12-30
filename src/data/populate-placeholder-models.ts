@@ -1,3 +1,6 @@
+// @ts-nocheck
+// since we no longer use modelPaths this helper app is completely broken.
+
 import { tileCatalog } from './tile-catalog'
 import { access, cp } from 'fs/promises'
 import { constants } from 'fs'
