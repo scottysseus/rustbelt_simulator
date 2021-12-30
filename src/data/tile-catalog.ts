@@ -577,5 +577,3 @@ export const tileCatalog: TileCatalog = {
 // - (-3) office-1 thru office-4 use Office1 model
 // - (+1) Tile model is unused
 // ...35 models.
-
-console.log('how many tiles', Object.keys(tileCatalog).length)
