@@ -22,7 +22,7 @@ type GLTFResult = GLTF & {
 
 export default function Model ({ ...props }: JSX.IntrinsicElements['group']) {
   const group = useRef<THREE.Group>()
-  const { nodes, materials } = useGLTF('/models/road-intersection.glb') as GLTFResult
+  const { nodes, materials } = useGLTF('models/road-intersection.glb') as GLTFResult
   return (
     <group ref={group} {...props} dispose={null}>
       <group position={[0.5, 0, -0.5]} rotation={[Math.PI, -3.9e-7, Math.PI]} scale={[0.75, 0.10000005, 0.75]}>
@@ -44,4 +44,4 @@ export default function Model ({ ...props }: JSX.IntrinsicElements['group']) {
   )
 }
 
-useGLTF.preload('/models/road-intersection.glb')
+useGLTF.preload('models/road-intersection.glb')
