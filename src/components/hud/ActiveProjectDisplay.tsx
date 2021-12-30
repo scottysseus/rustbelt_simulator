@@ -32,7 +32,8 @@ function activeProjectContent (props: {
             step: 1,
             min,
             max,
-            type: 'number'
+            type: 'number',
+            pattern: '[0-9]+'
           }}
           />
       </Grid>
@@ -42,10 +43,13 @@ function activeProjectContent (props: {
 
 export function ActiveProjectDisplay (props: {activeProject: ActiveProject, tileIndex: number, workers: WorkerState, dispatch: dispatcher}) {
   const projectDefinition = projectCatalog[props.activeProject.type]
+  const remainingEffort = projectDefinition.effort - props.activeProject.progress
+  const max = Math.min(props.activeProject.assignedWorkers + props.workers.free, remainingEffort)
   const onWorkersChange = (event: MouseEvent) => {
     if (event.target && event.target instanceof HTMLInputElement) {
-      const workerCount = parseInt(event.target.value)
+      let workerCount = parseInt(event.target.value)
       if (!isNaN(workerCount)) {
+        workerCount = Math.min(workerCount, max)
         props.dispatch({ type: 'assignWorkers', tileIndex: props.tileIndex, workerCount })
       }
     }
