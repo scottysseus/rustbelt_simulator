@@ -13,7 +13,6 @@ export const tileCatalog: TileCatalog = {
     happiness: 0,
     happinessGrowth: 0,
     revenue: 0,
-    modelPath: 'models/empty.glb',
     modelComponent: Empty,
     projects: [
       'build-park',
@@ -31,7 +30,6 @@ export const tileCatalog: TileCatalog = {
     happiness: -5,
     happinessGrowth: 0,
     revenue: 2,
-    modelPath: 'models/gas-0.glb',
     modelComponent: Gas0,
     projects: [
       'demolish',
@@ -49,7 +47,6 @@ export const tileCatalog: TileCatalog = {
     happinessGrowth: 0,
     revenue: 10,
     modelComponent: Gas1,
-    modelPath: 'models/gas-1.glb',
     projects: [
       'demolish'
     ]
@@ -66,7 +63,6 @@ export const tileCatalog: TileCatalog = {
     happinessGrowth: 0,
     revenue: -5,
     modelComponent: Park0,
-    modelPath: 'models/park-0.glb',
     projects: [
       'demolish',
       'repair-park'
@@ -83,7 +79,6 @@ export const tileCatalog: TileCatalog = {
     happinessGrowth: 0,
     revenue: -3,
     modelComponent: Park1,
-    modelPath: 'models/park-1.glb',
     projects: [
       'demolish',
       'upgrade-park-dog',
@@ -101,7 +96,6 @@ export const tileCatalog: TileCatalog = {
     happinessGrowth: 0,
     revenue: -5,
     modelComponent: ParkDog,
-    modelPath: 'models/park-dog.glb',
     projects: [
       'demolish',
       'upgrade-park-sports',
@@ -119,7 +113,6 @@ export const tileCatalog: TileCatalog = {
     happinessGrowth: 1,
     revenue: -5,
     modelComponent: ParkMem,
-    modelPath: 'models/park-mem.glb',
     projects: [
       'demolish',
       'upgrade-park-sports',
@@ -138,7 +131,6 @@ export const tileCatalog: TileCatalog = {
     happinessGrowth: 2,
     revenue: -10,
     modelComponent: ParkSports,
-    modelPath: 'models/park-sports.glb',
     projects: [
       'demolish'
     ]
@@ -155,7 +147,6 @@ export const tileCatalog: TileCatalog = {
     happinessGrowth: 0,
     revenue: 0,
     modelComponent: House0,
-    modelPath: 'models/house-0.glb',
     projects: [
       'demolish',
       'repair-house'
@@ -172,7 +163,6 @@ export const tileCatalog: TileCatalog = {
     happinessGrowth: 0,
     revenue: 0,
     modelComponent: House1,
-    modelPath: 'models/house-1.glb',
     projects: [
       'demolish'
     ]
@@ -188,7 +178,6 @@ export const tileCatalog: TileCatalog = {
     happinessGrowth: 0,
     revenue: 2,
     modelComponent: House2,
-    modelPath: 'models/house-2.glb',
     projects: [
       'demolish',
       'upgrade-house-family'
@@ -206,7 +195,6 @@ export const tileCatalog: TileCatalog = {
     happinessGrowth: 0,
     revenue: 0,
     modelComponent: Shop0,
-    modelPath: 'models/shop-0.glb',
     projects: [
       'demolish',
       'repair-shop'
@@ -223,7 +211,6 @@ export const tileCatalog: TileCatalog = {
     happinessGrowth: 0,
     revenue: 5,
     modelComponent: ShopSmall,
-    modelPath: 'models/shop-small.glb',
     projects: [
       'demolish',
       'upgrade-shop-market'
@@ -240,7 +227,6 @@ export const tileCatalog: TileCatalog = {
     happinessGrowth: 0,
     revenue: 8,
     modelComponent: ShopMarket,
-    modelPath: 'models/shop-market.glb',
     projects: [
       'demolish',
       'upgrade-shop-supermarket'
@@ -257,7 +243,6 @@ export const tileCatalog: TileCatalog = {
     happinessGrowth: 1,
     revenue: 21,
     modelComponent: ShopSuper,
-    modelPath: 'models/shop-super.glb',
     projects: [
       'demolish'
     ]
@@ -274,7 +259,6 @@ export const tileCatalog: TileCatalog = {
     happinessGrowth: 0,
     revenue: -5,
     modelComponent: Library0,
-    modelPath: 'models/library-0.glb',
     projects: [
       'demolish',
       'repair-library'
@@ -292,7 +276,6 @@ export const tileCatalog: TileCatalog = {
     happinessGrowth: 1,
     revenue: -10,
     modelComponent: Library1,
-    modelPath: 'models/library-1.glb',
     projects: [
       'demolish',
       'upgrade-library'
@@ -309,7 +292,6 @@ export const tileCatalog: TileCatalog = {
     happinessGrowth: 2,
     revenue: -15,
     modelComponent: Library2,
-    modelPath: 'models/library-2.glb',
     projects: [
       'demolish'
     ]
@@ -326,7 +308,6 @@ export const tileCatalog: TileCatalog = {
     happinessGrowth: 0,
     revenue: -20,
     modelComponent: Fire0,
-    modelPath: 'models/fire-0.glb',
     projects: [
       'demolish',
       'repair-firestation'
@@ -343,7 +324,6 @@ export const tileCatalog: TileCatalog = {
     happinessGrowth: 0,
     revenue: -10,
     modelComponent: Fire1,
-    modelPath: 'models/fire-1.glb',
     projects: [
       'demolish'
     ]
@@ -360,7 +340,6 @@ export const tileCatalog: TileCatalog = {
     happinessGrowth: 0,
     revenue: 0,
     modelComponent: Restaurant0,
-    modelPath: 'models/restaurant-0.glb',
     projects: [
       'demolish',
       'upgrade-restaurant-family'
@@ -377,7 +356,6 @@ export const tileCatalog: TileCatalog = {
     happinessGrowth: 0,
     revenue: 4,
     modelComponent: Restaurant1,
-    modelPath: 'models/restaurant-1.glb',
     projects: [
       'demolish',
       'upgrade-restaurant-fine'
@@ -394,7 +372,6 @@ export const tileCatalog: TileCatalog = {
     happinessGrowth: 0,
     revenue: 10,
     modelComponent: Restaurant2,
-    modelPath: 'models/restaurant-2.glb',
     projects: [
       'demolish'
     ]
@@ -410,7 +387,6 @@ export const tileCatalog: TileCatalog = {
     happinessGrowth: 0,
     revenue: 0,
     modelComponent: RoadStraight,
-    modelPath: 'models/road-straight.glb',
     projects: [
       'demolish'
     ]
@@ -426,7 +402,6 @@ export const tileCatalog: TileCatalog = {
     happinessGrowth: 0,
     revenue: 0,
     modelComponent: RoadTurn,
-    modelPath: 'models/road-turn.glb',
     projects: [
       'demolish'
     ]
@@ -442,7 +417,6 @@ export const tileCatalog: TileCatalog = {
     happinessGrowth: 0,
     revenue: 0,
     modelComponent: RoadIntersection,
-    modelPath: 'models/road-intersection.glb',
     projects: [
       'demolish'
     ]
@@ -459,7 +433,6 @@ export const tileCatalog: TileCatalog = {
     happinessGrowth: 0,
     revenue: 5,
     modelComponent: Office1,
-    modelPath: 'models/office-1.glb',
     projects: [
       'demolish',
       'upgrade-office-2'
@@ -477,7 +450,6 @@ export const tileCatalog: TileCatalog = {
     happinessGrowth: 0,
     revenue: 10,
     modelComponent: Office1,
-    modelPath: 'models/office-1.glb',
     projects: [
       'demolish',
       'upgrade-office-3'
@@ -495,7 +467,6 @@ export const tileCatalog: TileCatalog = {
     happinessGrowth: 0,
     revenue: 15,
     modelComponent: Office1,
-    modelPath: 'models/office-1.glb',
     projects: [
       'demolish',
       'upgrade-office-4'
@@ -513,7 +484,6 @@ export const tileCatalog: TileCatalog = {
     happinessGrowth: 0,
     revenue: 20,
     modelComponent: Office1,
-    modelPath: 'models/office-1.glb',
     projects: [
       'demolish'
     ]
@@ -530,7 +500,6 @@ export const tileCatalog: TileCatalog = {
     happinessGrowth: 1,
     revenue: 10,
     modelComponent: EnergyWind,
-    modelPath: 'models/energy-wind.glb',
     projects: [
       'demolish'
     ]
@@ -547,7 +516,6 @@ export const tileCatalog: TileCatalog = {
     happinessGrowth: -1,
     revenue: 30,
     modelComponent: EnergyCoal,
-    modelPath: 'models/energy-coal.glb',
     projects: [
       'demolish',
       'convert-wind'
@@ -565,7 +533,6 @@ export const tileCatalog: TileCatalog = {
     happinessGrowth: -1,
     revenue: 9,
     modelComponent: Superstore,
-    modelPath: 'models/superstore.glb',
     projects: [
       'demolish'
     ]
@@ -579,7 +546,6 @@ export const tileCatalog: TileCatalog = {
     happinessGrowth: 1,
     revenue: 3,
     modelComponent: Trees0,
-    modelPath: 'models/trees-0.glb',
     projects: []
   },
   'trees-1': {
@@ -591,7 +557,6 @@ export const tileCatalog: TileCatalog = {
     happinessGrowth: 1,
     revenue: 3,
     modelComponent: Trees1,
-    modelPath: 'models/trees-1.glb',
     projects: []
   },
   meadow: {
@@ -603,7 +568,6 @@ export const tileCatalog: TileCatalog = {
     happinessGrowth: 1,
     revenue: 3,
     modelComponent: Meadow,
-    modelPath: 'models/meadow.glb',
     projects: []
   }
 }
