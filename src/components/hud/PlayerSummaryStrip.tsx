@@ -27,7 +27,7 @@ export function PlayerSummaryStrip (props: {gameState: GameState}) {
         </Badge>
       </Typography>
       <Divider orientation='vertical' variant='middle' />
-      <Typography>↩️{props.gameState.game.turnCounter}</Typography>
+      <Typography>Turns Elapsed: {props.gameState.game.turnCounter}</Typography>
     </AppBar>
   )
 }
