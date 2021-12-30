@@ -6,9 +6,10 @@ export const tileCatalog: TileCatalog = {
   empty: {
     id: 'empty',
     name: 'Empty Lot',
-    description: 'lorem ipsum',
+    description: "What? It's an empty lot.",
     tags: [
-      'empty'
+      'abandoned',
+      ' empty'
     ],
     happiness: 0,
     happinessGrowth: 0,
@@ -16,13 +17,55 @@ export const tileCatalog: TileCatalog = {
     modelComponent: Empty,
     projects: [
       'build-park',
-      'build-office-tower'
-    ]
+      'upgrade-office',
+      'build-shop-market'
+    ],
+    modelComponent: Empty
+  },
+  meadow: {
+    id: 'meadow',
+    name: 'Meadow',
+    description: 'Grassy meadow.',
+    tags: [
+      'nature',
+      ' empty'
+    ],
+    happiness: 1,
+    happinessGrowth: 0,
+    revenue: 0,
+    projects: [],
+    modelComponent: Meadow
+  },
+  'trees-0': {
+    id: 'trees-0',
+    name: 'Trees',
+    description: 'Trees! Trees! Trees!',
+    tags: [
+      'nature'
+    ],
+    happiness: 1,
+    happinessGrowth: 0,
+    revenue: 0,
+    projects: [],
+    modelComponent: Trees0
+  },
+  'trees-1': {
+    id: 'trees-1',
+    name: 'Apple Trees',
+    description: 'Apples? Mmmm. Tasty.',
+    tags: [
+      'nature'
+    ],
+    happiness: 1,
+    happinessGrowth: 0,
+    revenue: 0,
+    projects: [],
+    modelComponent: Trees1
   },
   'gas-0': {
     id: 'gas-0',
     name: 'Rundown Gas Station',
-    description: 'lorem ipsum',
+    description: 'Not for late night snack runs. ',
     tags: [
       'retail',
       'damaged'
@@ -34,12 +77,13 @@ export const tileCatalog: TileCatalog = {
     projects: [
       'demolish',
       'repair-gas'
-    ]
+    ],
+    modelComponent: Gas0
   },
   'gas-1': {
     id: 'gas-1',
     name: 'Gas Station',
-    description: 'lorem ipsum',
+    description: 'Come inside, grab a coffee!',
     tags: [
       'retail'
     ],
@@ -49,12 +93,13 @@ export const tileCatalog: TileCatalog = {
     modelComponent: Gas1,
     projects: [
       'demolish'
-    ]
+    ],
+    modelComponent: Gas1
   },
   'park-0': {
     id: 'park-0',
     name: 'Schitty Park',
-    description: 'lorem ipsum',
+    description: 'Find another field to play in. ',
     tags: [
       'park',
       'damaged'
@@ -66,12 +111,13 @@ export const tileCatalog: TileCatalog = {
     projects: [
       'demolish',
       'repair-park'
-    ]
+    ],
+    modelComponent: Park0
   },
   'park-1': {
     id: 'park-1',
     name: 'Park',
-    description: 'lorem ipsum',
+    description: 'Have a picnic! ',
     tags: [
       'park'
     ],
@@ -83,12 +129,13 @@ export const tileCatalog: TileCatalog = {
       'demolish',
       'upgrade-park-dog',
       'upgrade-park-memorial'
-    ]
+    ],
+    modelComponent: Park1
   },
   'park-dog': {
     id: 'park-dog',
     name: 'Dog Park',
-    description: 'lorem ipsum',
+    description: 'No cats allowed! ',
     tags: [
       'park'
     ],
@@ -100,12 +147,13 @@ export const tileCatalog: TileCatalog = {
       'demolish',
       'upgrade-park-sports',
       'upgrade-park-memorial'
-    ]
+    ],
+    modelComponent: ParkDog
   },
   'park-mem': {
     id: 'park-mem',
     name: 'Memorial Park',
-    description: 'lorem ipsum',
+    description: 'For memorials and memorial related activities.',
     tags: [
       'park'
     ],
@@ -117,12 +165,13 @@ export const tileCatalog: TileCatalog = {
       'demolish',
       'upgrade-park-sports',
       'upgrade-park-dog'
-    ]
+    ],
+    modelComponent: ParkMem
   },
   'park-sports': {
     id: 'park-sports',
-    name: 'Sports Complex',
-    description: 'lorem ipsum',
+    name: 'Rustfield Field ',
+    description: 'For sports and sport related activities.',
     tags: [
       'park',
       ' entertainment'
@@ -133,12 +182,13 @@ export const tileCatalog: TileCatalog = {
     modelComponent: ParkSports,
     projects: [
       'demolish'
-    ]
+    ],
+    modelComponent: ParkSports
   },
   'house-0': {
     id: 'house-0',
     name: 'Abandoned House',
-    description: 'lorem ipsum',
+    description: 'Might be haunted. ',
     tags: [
       'residential',
       'damaged'
@@ -150,12 +200,13 @@ export const tileCatalog: TileCatalog = {
     projects: [
       'demolish',
       'repair-house'
-    ]
+    ],
+    modelComponent: House0
   },
   'house-1': {
     id: 'house-1',
     name: 'Shack',
-    description: 'lorem ipsum',
+    description: 'Probably not haunted. ',
     tags: [
       'residential'
     ],
@@ -164,13 +215,15 @@ export const tileCatalog: TileCatalog = {
     revenue: 0,
     modelComponent: House1,
     projects: [
-      'demolish'
-    ]
+      'demolish',
+      'upgrade-house-luxury'
+    ],
+    modelComponent: House1
   },
   'house-2': {
     id: 'house-2',
     name: 'House',
-    description: 'lorem ipsum',
+    description: 'Home is where the heart is! ',
     tags: [
       'residential'
     ],
@@ -179,14 +232,14 @@ export const tileCatalog: TileCatalog = {
     revenue: 2,
     modelComponent: House2,
     projects: [
-      'demolish',
-      'upgrade-house-family'
-    ]
+      'demolish'
+    ],
+    modelComponent: House2
   },
   'shop-0': {
     id: 'shop-0',
-    name: 'Boarded up shop',
-    description: 'lorem ipsum',
+    name: 'Boarded-Up Shop',
+    description: 'Best to avoid. ',
     tags: [
       'retail',
       'damaged'
@@ -198,12 +251,13 @@ export const tileCatalog: TileCatalog = {
     projects: [
       'demolish',
       'repair-shop'
-    ]
+    ],
+    modelComponent: Shop0
   },
   'shop-small': {
     id: 'shop-small',
-    name: 'quaint small business',
-    description: 'lorem ipsum',
+    name: 'Stuff',
+    description: 'For stuff. ',
     tags: [
       'retail'
     ],
@@ -213,13 +267,14 @@ export const tileCatalog: TileCatalog = {
     modelComponent: ShopSmall,
     projects: [
       'demolish',
-      'upgrade-shop-market'
-    ]
+      'upgrade-shop-small'
+    ],
+    modelComponent: ShopSmall
   },
   'shop-market': {
     id: 'shop-market',
-    name: 'market',
-    description: 'lorem ipsum',
+    name: 'Food & Stuff',
+    description: 'For food and stuff. ',
     tags: [
       'retail'
     ],
@@ -230,12 +285,13 @@ export const tileCatalog: TileCatalog = {
     projects: [
       'demolish',
       'upgrade-shop-supermarket'
-    ]
+    ],
+    modelComponent: ShopMarket
   },
   'shop-super': {
     id: 'shop-super',
-    name: 'supermarket',
-    description: 'lorem ipsum',
+    name: 'Super-Mart ',
+    description: 'Average ordinary everyday supermarket.',
     tags: [
       'retail'
     ],
@@ -245,15 +301,17 @@ export const tileCatalog: TileCatalog = {
     modelComponent: ShopSuper,
     projects: [
       'demolish'
-    ]
+    ],
+    modelComponent: ShopSuper
   },
   'library-0': {
     id: 'library-0',
-    name: 'neglected library',
-    description: 'lorem ipsum',
+    name: 'Rusty Books',
+    description: "Don't waste your time reading. ",
     tags: [
       'civic',
-      'damaged'
+      ' damaged',
+      ' entertainment'
     ],
     happiness: -10,
     happinessGrowth: 0,
@@ -262,12 +320,13 @@ export const tileCatalog: TileCatalog = {
     projects: [
       'demolish',
       'repair-library'
-    ]
+    ],
+    modelComponent: Library0
   },
   'library-1': {
     id: 'library-1',
-    name: 'library',
-    description: 'lorem ipsum',
+    name: 'Rustfield Library ',
+    description: 'To read, or not to read? ',
     tags: [
       'civic',
       ' entertainment'
@@ -279,12 +338,13 @@ export const tileCatalog: TileCatalog = {
     projects: [
       'demolish',
       'upgrade-library'
-    ]
+    ],
+    modelComponent: Library1
   },
   'library-2': {
     id: 'library-2',
-    name: 'modern library',
-    description: 'lorem ipsum',
+    name: 'Library of Rustfield',
+    description: "It's not Alexandria, but it's still nice. ",
     tags: [
       'civic'
     ],
@@ -294,12 +354,13 @@ export const tileCatalog: TileCatalog = {
     modelComponent: Library2,
     projects: [
       'demolish'
-    ]
+    ],
+    modelComponent: Library2
   },
   'fire-0': {
     id: 'fire-0',
-    name: 'crumbling fire station',
-    description: 'lorem ipsum',
+    name: 'Fire Station 0',
+    description: 'Half the force was fired...',
     tags: [
       'civic',
       'damaged'
@@ -311,12 +372,13 @@ export const tileCatalog: TileCatalog = {
     projects: [
       'demolish',
       'repair-firestation'
-    ]
+    ],
+    modelComponent: Fire0
   },
   'fire-1': {
     id: 'fire-1',
-    name: 'fire station',
-    description: 'lorem ipsum',
+    name: 'Fire Station 1 ',
+    description: 'Smokeshows fighting smokeshows! ',
     tags: [
       'civic'
     ],
@@ -326,12 +388,13 @@ export const tileCatalog: TileCatalog = {
     modelComponent: Fire1,
     projects: [
       'demolish'
-    ]
+    ],
+    modelComponent: Fire1
   },
   'restaurant-0': {
     id: 'restaurant-0',
-    name: 'drive thru',
-    description: 'lorem ipsum',
+    name: 'Rust Burger ',
+    description: 'Would you like to super-size that order? ',
     tags: [
       'food',
       'damaged'
@@ -342,13 +405,14 @@ export const tileCatalog: TileCatalog = {
     modelComponent: Restaurant0,
     projects: [
       'demolish',
-      'upgrade-restaurant-family'
-    ]
+      'upgrade-rest-diner'
+    ],
+    modelComponent: Restaurant0
   },
   'restaurant-1': {
     id: 'restaurant-1',
-    name: 'diner',
-    description: 'lorem ipsum',
+    name: "Dalilah's Diner",
+    description: 'Half price apps and drinks! ',
     tags: [
       'food'
     ],
@@ -358,13 +422,14 @@ export const tileCatalog: TileCatalog = {
     modelComponent: Restaurant1,
     projects: [
       'demolish',
-      'upgrade-restaurant-fine'
-    ]
+      'upgrade-rest-fine-dining'
+    ],
+    modelComponent: Restaurant1
   },
   'restaurant-2': {
     id: 'restaurant-2',
-    name: 'fine dining',
-    description: 'lorem ipsum',
+    name: "Bianca's Bistro",
+    description: 'Look at you big spender. ',
     tags: [
       'food'
     ],
@@ -374,12 +439,13 @@ export const tileCatalog: TileCatalog = {
     modelComponent: Restaurant2,
     projects: [
       'demolish'
-    ]
+    ],
+    modelComponent: Restaurant2
   },
   'road-straight': {
     id: 'road-straight',
     name: 'Straight Road',
-    description: 'lorem ipsum',
+    description: 'Curves are overratted. ',
     tags: [
       'road'
     ],
@@ -394,7 +460,7 @@ export const tileCatalog: TileCatalog = {
   'road-turn': {
     id: 'road-turn',
     name: 'Turn Road',
-    description: 'lorem ipsum',
+    description: 'Curves are awesome! ',
     tags: [
       'road'
     ],
@@ -409,7 +475,7 @@ export const tileCatalog: TileCatalog = {
   'road-intersection': {
     id: 'road-intersection',
     name: 'Intersection Road',
-    description: 'lorem ipsum',
+    description: 'Two roads diverged... ',
     tags: [
       'road'
     ],
@@ -423,8 +489,8 @@ export const tileCatalog: TileCatalog = {
   },
   'office-1': {
     id: 'office-1',
-    name: 'Offices',
-    description: 'lorem ipsum',
+    name: 'Office One',
+    description: "Somebody's got a case of the Mondays!",
     tags: [
       'commercial',
       ' corporate'
@@ -436,12 +502,13 @@ export const tileCatalog: TileCatalog = {
     projects: [
       'demolish',
       'upgrade-office-2'
-    ]
+    ],
+    modelComponent: Office1
   },
   'office-2': {
     id: 'office-2',
-    name: 'Offices',
-    description: 'lorem ipsum',
+    name: 'Office Two',
+    description: 'Need those TPS reports ASAP.',
     tags: [
       'commercial',
       ' corporate'
@@ -453,12 +520,13 @@ export const tileCatalog: TileCatalog = {
     projects: [
       'demolish',
       'upgrade-office-3'
-    ]
+    ],
+    modelComponent: Office1
   },
   'office-3': {
     id: 'office-3',
-    name: 'Offices',
-    description: 'lorem ipsum',
+    name: 'Office Three',
+    description: 'Next Friday is Hawaiian shirt day! ',
     tags: [
       'commercial',
       ' corporate'
@@ -470,12 +538,13 @@ export const tileCatalog: TileCatalog = {
     projects: [
       'demolish',
       'upgrade-office-4'
-    ]
+    ],
+    modelComponent: Office1
   },
   'office-4': {
     id: 'office-4',
-    name: 'Offices',
-    description: 'lorem ipsum',
+    name: 'Office Four',
+    description: 'I believe you have my stapler. ',
     tags: [
       'commercial',
       ' corporate'
@@ -486,12 +555,13 @@ export const tileCatalog: TileCatalog = {
     modelComponent: Office1,
     projects: [
       'demolish'
-    ]
+    ],
+    modelComponent: Office1
   },
   'energy-wind': {
     id: 'energy-wind',
     name: 'Wind Farm',
-    description: 'lorem ipsum',
+    description: "Renewable energy? I'm a huge fan! ",
     tags: [
       'civic',
       'power'
@@ -501,13 +571,15 @@ export const tileCatalog: TileCatalog = {
     revenue: 10,
     modelComponent: EnergyWind,
     projects: [
-      'demolish'
-    ]
+      'demolish',
+      'upgrade-energy-coal'
+    ],
+    modelComponent: EnergyWind
   },
   'energy-coal': {
     id: 'energy-coal',
     name: 'Coal Plant',
-    description: 'lorem ipsum',
+    description: "Tell the kids it's a cloud factory. ",
     tags: [
       'civic',
       'power'
@@ -518,16 +590,7 @@ export const tileCatalog: TileCatalog = {
     modelComponent: EnergyCoal,
     projects: [
       'demolish',
-      'convert-wind'
-    ]
-  },
-  superstore: {
-    id: 'superstore',
-    name: 'walmart',
-    description: 'lorem ipsum',
-    tags: [
-      'retail',
-      ' commercial'
+      'upgrade-energy-wind'
     ],
     happiness: 12,
     happinessGrowth: -1,
