@@ -12,6 +12,7 @@ import { NUM_OPEN_CONTRACTS } from './constants'
 import { projectCatalog } from '../data/project-catalog'
 import { tileCatalog } from '../data/tile-catalog'
 import { GameState, TileUnderConstruction, isTileUnderConstruction, Tile } from './interfaces'
+import { clamp } from './shared'
 
 export function applyRevenue (state: GameState): GameState {
   return produce(state, draft => {
@@ -81,12 +82,17 @@ function checkIfTileCompleted (state: GameState, tileIndex: number): GameState {
   })
 }
 
-export function resetWorkers (state: GameState): GameState {
+export function adjustWorkers (state: GameState): GameState {
   return produce(state, draft => {
-    draft.player.resources.workers.free = draft.player.resources.workers.max
     for (const tile of draft.map.tiles) {
       if (tile.activeProject) {
-        tile.activeProject.assignedWorkers = 0
+        const remainingEffort = projectCatalog[tile.activeProject.type].effort - tile.activeProject.progress
+        // Re-adjust workers to fit within bounds
+        const oldAssignedWorkers = tile.activeProject.assignedWorkers
+        const newAssignedWorkers = clamp(tile.activeProject.assignedWorkers, 0, remainingEffort)
+        // refund the user any workers that were in excess.
+        draft.player.resources.workers.free = draft.player.resources.workers.free + (oldAssignedWorkers - newAssignedWorkers)
+        tile.activeProject.assignedWorkers = newAssignedWorkers
       }
     }
   })

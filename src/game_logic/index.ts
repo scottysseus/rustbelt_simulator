@@ -1,7 +1,7 @@
 import { enableMapSet } from 'immer'
 
-import { Contract, GameState, Tile, TileType } from './interfaces'
-import { advanceTurnCounter, applyRevenue, applyWorkers, resetWorkers, resolveContracts } from './turn'
+import { GameState, Tile, TileType, Contract } from './interfaces'
+import { advanceTurnCounter, applyRevenue, applyWorkers, adjustWorkers, resolveContracts } from './turn'
 import { map as mapDefinition } from '../data/map'
 import { contractQueue } from '../data/contract-catalog'
 import { NUM_OPEN_CONTRACTS } from './constants'
@@ -68,7 +68,7 @@ export function advanceTurn (initialState: GameState): GameState {
   let state = initialState
   state = applyRevenue(state)
   state = applyWorkers(state)
-  state = resetWorkers(state)
+  state = adjustWorkers(state)
   state = resolveContracts(state)
   state = advanceTurnCounter(state)
   // checkWinLoss(state)
