@@ -21,8 +21,6 @@ export function MapLocation (props: {row: number, column: number, gridInterval: 
   //   console.log(props.tile.type)
   // }
 
-  // TODO shop-market is all ... askew
-  // TODO check all models
   // TODO update @react-three/fiber
 
   const ModelComponent = tileDefinition.modelComponent
