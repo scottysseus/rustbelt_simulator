@@ -61,7 +61,7 @@ export default function Model({ ...props }: JSX.IntrinsicElements['group']) {
   const { nodes, materials } = useGLTF('/models/shop-market.glb') as GLTFResult
   return (
     <group ref={group} {...props} dispose={null}>
-      <group position={[1, 0, 0]} rotation={[0, -Math.PI / 4, 0]} scale={[0.05, 0.04, -0.01]}>
+      <group position={[1, 0, 0]} rotation={[0, -Math.PI / 4, 0]} scale={[0.04954137, 0.03751972, -0.00511462]}>
         <mesh castShadow receiveShadow geometry={nodes.Cube024.geometry} material={materials['Farm Stand Wood']} />
         <mesh castShadow receiveShadow geometry={nodes.Cube024_1.geometry} material={materials.Grass} />
         <mesh castShadow receiveShadow geometry={nodes.Cube024_2.geometry} material={materials.Dirt} />

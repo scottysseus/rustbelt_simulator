@@ -31,7 +31,7 @@ export default function Model({ ...props }: JSX.IntrinsicElements['group']) {
   const { nodes, materials } = useGLTF('/models/shop-super.glb') as GLTFResult
   return (
     <group ref={group} {...props} dispose={null}>
-      <group position={[0.5, 0.05, -0.5]}>
+      <group position={[0.50000006, 0.05, -0.50000018]}>
         <mesh castShadow receiveShadow geometry={nodes.Plane101.geometry} material={materials.Dirt} />
         <mesh castShadow receiveShadow geometry={nodes.Plane101_1.geometry} material={materials['FoodMart::Walls']} />
         <mesh castShadow receiveShadow geometry={nodes.Plane101_2.geometry} material={materials['FoodMart::Door']} />

@@ -28,7 +28,7 @@ export default function Model({ ...props }: JSX.IntrinsicElements['group']) {
         geometry={nodes.Cube.geometry}
         material={materials.Material}
         position={[0.5, 0.25, -0.5]}
-        scale={[0.4, 0.25, 0.4]}
+        scale={[0.40000001, 0.25, 0.40000001]}
       />
       <mesh
         castShadow

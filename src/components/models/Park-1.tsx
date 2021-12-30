@@ -27,7 +27,7 @@ export default function Model({ ...props }: JSX.IntrinsicElements['group']) {
   const { nodes, materials } = useGLTF('/models/park-1.glb') as GLTFResult
   return (
     <group ref={group} {...props} dispose={null}>
-      <group position={[0, 0, -0.3]} scale={[7.43, 0.25, 0.25]}>
+      <group position={[0, 0, -0.30000001]} scale={[7.42671585, 0.25, 0.25]}>
         <mesh castShadow receiveShadow geometry={nodes.Cube056.geometry} material={materials.Grass} />
         <mesh castShadow receiveShadow geometry={nodes.Cube056_1.geometry} material={materials.Gray} />
         <mesh castShadow receiveShadow geometry={nodes.Cube056_2.geometry} material={materials.Rust} />
