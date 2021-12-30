@@ -43,6 +43,7 @@ export interface TileDefinition {
   readonly happiness: number
   readonly happinessGrowth: number
   readonly modelPath: string
+  readonly modelComponent?: ({ ...props }: JSX.IntrinsicElements['group']) => JSX.Element
 }
 
 export type TileType = string
