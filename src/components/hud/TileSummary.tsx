@@ -1,4 +1,4 @@
-import { Card, CardContent, CardHeader, IconButton, Typography } from '@mui/material'
+import { Card, CardContent, CardHeader, IconButton } from '@mui/material'
 import { ProjectsDisplay } from './ProjectsDisplay'
 import { Tile, WorkerState } from '../../game_logic'
 import { dispatcher } from '../reducers'
@@ -40,9 +40,11 @@ export function TileSummary (props: {
         titleTypographyProps={{ variant: 'h6' }}
         subheaderTypographyProps={{ variant: 'body2' }}
       />
-      <CardContent>
-        <ProjectsDisplay tile={props.tile} tileIndex={props.tileIndex} workers={props.workers} dispatch={props.dispatch} />
-      </CardContent>
+      {tileDefinition.projects && tileDefinition.projects.length > 1 &&
+        <CardContent>
+
+          <ProjectsDisplay tile={props.tile} tileIndex={props.tileIndex} workers={props.workers} dispatch={props.dispatch} />
+        </CardContent>}
     </Card>
   )
 }
