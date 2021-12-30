@@ -1,6 +1,5 @@
 
 import { ReactNode, useCallback, useState } from 'react'
-import * as THREE from 'three'
 import { tileCatalog } from '../../data/tile-catalog'
 import { Tile } from '../../game_logic'
 import { SelectAura } from './SelectAura'
@@ -16,20 +15,13 @@ export function MapLocation (props: {row: number, column: number, gridInterval: 
 
   const tileDefinition = tileCatalog[props.tile.type]
 
-  // TODO: ensure with exhaustive key type
-  // if (!tileDefinition || !tileDefinition.modelPath) {
-  //   console.log(props.tile.type)
-  // }
-
-  // TODO update @react-three/fiber
-
   const ModelComponent = tileDefinition.modelComponent
 
   const [hover, setHover] = useState(false)
   const onPointerOver = useCallback(() => setHover(true), [])
   const onPointerOut = useCallback(() => setHover(false), [])
 
-  const onClick = useCallback((event: THREE.Event) => {
+  const onClick = useCallback(() => {
     console.log('Clicked on Map Location', tileDefinition.name, props.column, props.row)
     props.onSelected()
   }, [props, tileDefinition.name])
