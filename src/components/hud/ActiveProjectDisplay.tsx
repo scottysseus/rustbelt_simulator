@@ -42,10 +42,12 @@ function activeProjectContent (props: {
 
 export function ActiveProjectDisplay (props: {activeProject: ActiveProject, tileIndex: number, workers: WorkerState, dispatch: dispatcher}) {
   const projectDefinition = projectCatalog[props.activeProject.type]
-  const onWorkersChange = (event: any) => {
-    const workerCount = parseInt(event.target.value)
-    if (!isNaN(workerCount)) {
-      props.dispatch({ type: 'assignWorkers', tileIndex: props.tileIndex, workerCount })
+  const onWorkersChange = (event: MouseEvent) => {
+    if (event.target && event.target instanceof HTMLInputElement) {
+      const workerCount = parseInt(event.target.value)
+      if (!isNaN(workerCount)) {
+        props.dispatch({ type: 'assignWorkers', tileIndex: props.tileIndex, workerCount })
+      }
     }
   }
 
