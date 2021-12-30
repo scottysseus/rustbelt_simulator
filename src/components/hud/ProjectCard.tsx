@@ -25,7 +25,7 @@ export function ProjectCard (props: {
               </div>
             </div>
           </>
-            }
+        }
         titleTypographyProps={{ variant: 'button' }}
         subheaderTypographyProps={{ variant: 'body2' }}
         action={props.action}

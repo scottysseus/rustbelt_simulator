@@ -7,7 +7,7 @@ import { ActiveProject, ProjectDefinition, WorkerState } from '../../game_logic'
 import { dispatcher } from '../reducers'
 import { ProjectCard } from './ProjectCard'
 
-function activeProjectContent (props: {
+function ActiveProjectContent (props: {
   activeProject: ActiveProject,
   projectDefinition: ProjectDefinition,
   onWorkersChange: (event: any) => void,
@@ -65,7 +65,7 @@ export function ActiveProjectDisplay (props: {activeProject: ActiveProject, tile
         <Button onClick={onCancelProject}>Cancel</Button>
     }
       content={
-        activeProjectContent({ activeProject: props.activeProject, projectDefinition: projectDefinition, onWorkersChange: onWorkersChange, workers: props.workers })
+        <ActiveProjectContent activeProject={props.activeProject} projectDefinition={projectDefinition} onWorkersChange={onWorkersChange} workers={props.workers} />
     }
     />
   )
