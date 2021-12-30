@@ -27,7 +27,7 @@ export interface State {
 }
 
 export const reducer: Reducer<State, Action> = (draft, action) => {
-  console.log('old state', draft)
+  console.debug('old state', draft)
   switch (action.type) {
     case 'advanceTurn':
       // TypeScript sometimes complains about writing to readonly properties on the draft.

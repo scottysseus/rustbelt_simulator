@@ -9,7 +9,7 @@ import { join } from 'path'
 const placeholderModelPath = './public/models/placeholder.glb'
 async function doit () {
   for (const tileType in tileCatalog) {
-    console.log(tileType)
+    console.debug(tileType)
     const filePath = join('./public', tileCatalog[tileType].modelPath)
     try {
       await access(filePath, constants.F_OK)
@@ -20,4 +20,4 @@ async function doit () {
   }
 }
 
-doit().catch(console.log)
+doit().catch(console.debug)

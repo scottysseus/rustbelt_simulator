@@ -15,7 +15,7 @@ const STARTING_WORKERS = 10
 
 export function createGameState (): GameState {
   const openContracts: Contract[] = []
-  console.log(`contract queue initialized as: ${contractQueue}`)
+  console.debug(`contract queue initialized as: ${contractQueue}`)
   do {
     const toOpen = contractQueue.pop()
     if (toOpen !== undefined) {
@@ -23,7 +23,7 @@ export function createGameState (): GameState {
     }
   } while (openContracts.length < NUM_OPEN_CONTRACTS)
 
-  console.log(`contract queue has been reduced to: ${contractQueue}`)
+  console.debug(`contract queue has been reduced to: ${contractQueue}`)
 
   return {
     game: {

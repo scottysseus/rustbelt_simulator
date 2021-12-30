@@ -48,8 +48,6 @@ async function convertProjectCatalog () {
     entry.effort = parseInt(entry.effort)
     finalCat[entry.id] = entry
   }
-  console.log(projectCat)
-  console.log(finalCat)
 
   const projectCatalogFile = `
 import { ProjectCatalog } from '../game_logic'
