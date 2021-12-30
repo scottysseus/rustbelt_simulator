@@ -31,7 +31,7 @@ function GameView (props: GameViewProps) {
 
   return (
     <>
-      <MapControls target={[10, 0, 10]} />
+      <MapControls maxPolarAngle={1 / 2 * Math.PI - Math.PI / 16} target={[10, 0, 10]} />
       <PlainPlane />
       <Skybox />
       <ambientLight intensity={0.3} />
