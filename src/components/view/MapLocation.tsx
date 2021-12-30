@@ -21,7 +21,6 @@ export function MapLocation (props: {row: number, column: number, gridInterval: 
   //   console.log(props.tile.type)
   // }
 
-  // TODO lint all GLTFJSX
   // TODO shop-market is all ... askew
   // TODO check all models
   // TODO update @react-three/fiber
