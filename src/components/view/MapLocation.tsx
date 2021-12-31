@@ -4,6 +4,7 @@ import { tileCatalog } from '../../data/tile-catalog'
 import { Tile } from '../../game_logic'
 import { SelectAura } from './SelectAura'
 
+const LEFT_MOUSE_BUTTON = 0
 /**
  * Represents an occupied tile on the map.
  * @param props
@@ -18,12 +19,27 @@ export function MapLocation (props: {row: number, column: number, gridInterval: 
   const ModelComponent = tileDefinition.modelComponent
 
   const [hover, setHover] = useState(false)
+  const [mouseX, setMouseX] = useState(0)
+  const [mouseY, setMouseY] = useState(0)
   const onPointerOver = useCallback(() => setHover(true), [])
   const onPointerOut = useCallback(() => setHover(false), [])
-
-  const onClick = useCallback(() => {
-    props.onSelected()
-  }, [props])
+  const onPointerDown = useCallback((event) => {
+    if (!(event.button === LEFT_MOUSE_BUTTON)) {
+      return
+    }
+    setMouseX(event.clientX)
+    setMouseY(event.clientY)
+  }, [])
+  const onPointerUp = useCallback((event) => {
+    if (!(event.button === LEFT_MOUSE_BUTTON)) {
+      return
+    }
+    console.log('Mouse Button', event.button)
+    // Have a little fudge factor for mouse movement
+    if (Math.abs(event.clientX - mouseX + event.clientY - mouseY) < 50) {
+      props.onSelected()
+    }
+  }, [props, mouseX, mouseY])
 
   return (
     <group
@@ -32,7 +48,8 @@ export function MapLocation (props: {row: number, column: number, gridInterval: 
       <RotateY angle={props.tile.rotation}>
         <ModelComponent
           position={[0, 0, 1]}
-          onClick={onClick}
+          onPointerDown={onPointerDown}
+          onPointerUp={onPointerUp}
           onPointerOver={onPointerOver}
           onPointerOut={onPointerOut}
         />
