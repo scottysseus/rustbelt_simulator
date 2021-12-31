@@ -1,7 +1,7 @@
 import { enableMapSet } from 'immer'
 
 import { GameState, Tile, TileType, Contract } from './interfaces'
-import { advanceTurnCounter, applyRevenue, applyWorkers, adjustWorkers, resolveContracts } from './turn'
+import { advanceTurnCounter, applyRevenue, applyWorkers, adjustWorkers, resolveContracts, calculateRevenue, calculateHappiness } from './turn'
 import { map as mapDefinition } from '../data/map'
 import { contractQueue } from '../data/contract-catalog'
 import { NUM_OPEN_CONTRACTS } from './constants'
@@ -22,7 +22,7 @@ export function createGameState (): GameState {
     }
   } while (openContracts.length < NUM_OPEN_CONTRACTS)
 
-  return {
+  let state:GameState = {
     game: {
       turnCounter: 0
     },
@@ -30,7 +30,7 @@ export function createGameState (): GameState {
       resources: {
         money: {
           balance: STARTING_MONEY,
-          revenue: -10
+          revenue: -10000
         },
         workers: {
           max: STARTING_WORKERS,
@@ -54,6 +54,10 @@ export function createGameState (): GameState {
       size: mapDefinition.size
     }
   }
+
+  state = calculateRevenue(state)
+  state = calculateHappiness(state)
+  return state
 }
 
 function initializeTiles (): Array<Tile> {
@@ -64,13 +68,14 @@ function initializeTiles (): Array<Tile> {
   }))
 }
 
-export function advanceTurn (initialState: GameState): GameState {
-  let state = initialState
+export function advanceTurn (state: GameState): GameState {
   state = applyRevenue(state)
   state = applyWorkers(state)
   state = adjustWorkers(state)
   state = resolveContracts(state)
   state = advanceTurnCounter(state)
+  state = calculateRevenue(state)
+  state = calculateHappiness(state)
   // checkWinLoss(state)
   return state
 }

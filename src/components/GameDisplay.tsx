@@ -31,7 +31,7 @@ export const GameDisplay = forwardRef<HTMLDivElement, GameDisplayProps>((props, 
     <div style={props.style} ref={ref} className='container'>
       <GameViewPort state={state} dispatch={dispatch} />
       <Hud state={state} dispatch={dispatch} />
-      <Modal open={transitioningTurn}><div className='turn-transition-modal'>{'Turn ' + state.game.game.turnCounter}</div></Modal>
+      <Modal open={transitioningTurn}><div className='turn-transition-modal'>{'Turn ' + (state.game.game.turnCounter + 1)}</div></Modal>
     </div>
   )
 })

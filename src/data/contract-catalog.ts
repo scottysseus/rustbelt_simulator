@@ -20,12 +20,12 @@ export const catalog: ContractCatalog = {
     name: 'I\'m not Lovin\' It anymore',
     description: 'Upgrade at least one drive thru restaurant.',
     reward: '$100/turn, 🙂3',
-    isSatisfied: (gameState: GameState) => satisfiesCompletedProjectCount(gameState, { 'upgrade-restaurant-family': 1 }),
+    isSatisfied: (gameState: GameState) => satisfiesCompletedProjectCount(gameState, { 'upgrade-restaurant-family': 3 }),
     applyReward: produce((draft) => {
       draft.player.resources.money.revenue += 100
       draft.player.victory.happiness += 3
     }),
-    calculateProgress: (gameState: GameState) => progressCompletedProjectCount(gameState, { 'upgrade-restaurant-family': 1 })
+    calculateProgress: (gameState: GameState) => progressCompletedProjectCount(gameState, { 'upgrade-restaurant-family': 3 })
   },
   [contractIDs.greenTourism]: {
     name: 'Green Tourism',
@@ -66,14 +66,14 @@ export const catalog: ContractCatalog = {
     isSatisfied: (gameState: GameState) => satisfiesTileTypeCount(gameState, { 'park-dog': 2 }),
     applyReward: produce((draft) => {
       draft.player.victory.happiness += 5
-      draft.player.resources.workers.max += 2
+      draft.player.resources.money.balance += 100
     }),
     calculateProgress: (gameState: GameState) => progressTileTypeCount(gameState, { 'park-dog': 2 })
   },
   [contractIDs.civicLeader]: {
     name: 'Civic Leader',
     description: 'Repair 2 #civic buildings.',
-    reward: '🙂10',
+    reward: '🙂10, 👤2',
     isSatisfied: (gameState: GameState) => satisfiesCompletedProjectsAnyCount(gameState, ['repair-library', 'repair-firestation'], 2),
     applyReward: produce((draft) => {
       draft.player.victory.happiness += 10
@@ -84,22 +84,21 @@ export const catalog: ContractCatalog = {
   [contractIDs.conservationist]: {
     name: 'Conservationist',
     description: 'Restore 3 #nature properties.',
-    reward: '🙂5',
-    isSatisfied: (gameState: GameState) => satisfiesCompletedProjectsAnyCount(gameState, ['restore-forest'], 2),
+    reward: '🙂8',
+    isSatisfied: (gameState: GameState) => satisfiesCompletedProjectsAnyCount(gameState, ['restore-forest'], 3),
     applyReward: produce((draft) => {
       draft.player.victory.happiness += 5
-      draft.player.resources.workers.max += 2
     }),
-    calculateProgress: (gameState: GameState) => progressCompletedProjectsAnyCount(gameState, ['restore-forest'], 2)
+    calculateProgress: (gameState: GameState) => progressCompletedProjectsAnyCount(gameState, ['restore-forest'], 3)
   },
   [contractIDs.theCoalIndustryIsBack]: {
     name: 'The Coal Industry is Back',
     description: 'Convert 2 coal power plants to wind farms.',
-    reward: '🙂5',
+    reward: '🙂5, 👤3',
     isSatisfied: (gameState: GameState) => satisfiesCompletedProjectCount(gameState, { 'convert-wind': 2 }),
     applyReward: produce((draft) => {
       draft.player.victory.happiness += 5
-      draft.player.resources.workers.max += 2
+      draft.player.resources.workers.max += 3
     }),
     calculateProgress: (gameState: GameState) => progressCompletedProjectCount(gameState, { 'convert-wind': 2 })
   },
@@ -107,12 +106,11 @@ export const catalog: ContractCatalog = {
     name: 'This Old House',
     description: 'Repair 4 abandoned houses.',
     reward: '🙂5',
-    isSatisfied: (gameState: GameState) => satisfiesCompletedProjectCount(gameState, { 'repair-house': 2 }),
+    isSatisfied: (gameState: GameState) => satisfiesCompletedProjectCount(gameState, { 'repair-house': 4 }),
     applyReward: produce((draft) => {
       draft.player.victory.happiness += 5
-      draft.player.resources.workers.max += 2
     }),
-    calculateProgress: (gameState: GameState) => progressCompletedProjectCount(gameState, { 'repair-house': 2 })
+    calculateProgress: (gameState: GameState) => progressCompletedProjectCount(gameState, { 'repair-house': 4 })
   },
   [contractIDs.whiteCollar]: {
     name: 'White Collar',
@@ -121,7 +119,6 @@ export const catalog: ContractCatalog = {
     isSatisfied: (gameState: GameState) => satisfiesCompletedProjectCount(gameState, { 'build-office-tower': 3 }),
     applyReward: produce((draft) => {
       draft.player.victory.happiness += 5
-      draft.player.resources.workers.max += 2
     }),
     calculateProgress: (gameState: GameState) => progressCompletedProjectCount(gameState, { 'build-office-tower': 3 })
   }
