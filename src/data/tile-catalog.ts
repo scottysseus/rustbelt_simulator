@@ -15,13 +15,14 @@ export const tileCatalog: TileCatalog = {
     ],
     happiness: 0,
     happinessGrowth: 0,
-    revenue: 0,
+    revenue: -8000,
     projects: [
       'build-park',
       'upgrade-office',
       'build-shop-market',
       'build-fire',
-      'build-library'
+      'build-library',
+      'build-house'
     ]
   },
   meadow: {
@@ -83,7 +84,7 @@ export const tileCatalog: TileCatalog = {
     ],
     happiness: -5,
     happinessGrowth: 0,
-    revenue: 2,
+    revenue: 15000,
     projects: [
       'demolish',
       'repair-gas'
@@ -99,7 +100,7 @@ export const tileCatalog: TileCatalog = {
     ],
     happiness: 2,
     happinessGrowth: 0,
-    revenue: 10,
+    revenue: 40000,
     projects: [
       'demolish'
     ]
@@ -115,7 +116,7 @@ export const tileCatalog: TileCatalog = {
     ],
     happiness: -5,
     happinessGrowth: 0,
-    revenue: -5,
+    revenue: -5000,
     projects: [
       'demolish',
       'repair-park'
@@ -131,7 +132,7 @@ export const tileCatalog: TileCatalog = {
     ],
     happiness: 5,
     happinessGrowth: 0,
-    revenue: -3,
+    revenue: -10000,
     projects: [
       'demolish',
       'upgrade-park-dog',
@@ -150,7 +151,7 @@ export const tileCatalog: TileCatalog = {
     ],
     happiness: 6,
     happinessGrowth: 0,
-    revenue: -5,
+    revenue: -8000,
     projects: [
       'demolish',
       'upgrade-park-sports',
@@ -168,7 +169,7 @@ export const tileCatalog: TileCatalog = {
     ],
     happiness: 10,
     happinessGrowth: 1,
-    revenue: -5,
+    revenue: -16000,
     projects: [
       'demolish',
       'upgrade-park-sports',
@@ -187,7 +188,7 @@ export const tileCatalog: TileCatalog = {
     ],
     happiness: 20,
     happinessGrowth: 2,
-    revenue: -10,
+    revenue: -25000,
     projects: [
       'demolish',
       'upgrade-park-mem',
@@ -206,7 +207,7 @@ export const tileCatalog: TileCatalog = {
     ],
     happiness: -10,
     happinessGrowth: 0,
-    revenue: 0,
+    revenue: -1200,
     projects: [
       'demolish',
       'repair-house'
@@ -222,7 +223,7 @@ export const tileCatalog: TileCatalog = {
     ],
     happiness: 1,
     happinessGrowth: 0,
-    revenue: 0,
+    revenue: 5000,
     projects: [
       'demolish',
       'upgrade-house-luxury'
@@ -238,7 +239,7 @@ export const tileCatalog: TileCatalog = {
     ],
     happiness: 2,
     happinessGrowth: 0,
-    revenue: 2,
+    revenue: 15000,
     projects: [
       'demolish'
     ]
@@ -254,7 +255,7 @@ export const tileCatalog: TileCatalog = {
     ],
     happiness: -10,
     happinessGrowth: 0,
-    revenue: 0,
+    revenue: -15000,
     projects: [
       'demolish',
       'repair-shop'
@@ -270,7 +271,7 @@ export const tileCatalog: TileCatalog = {
     ],
     happiness: 10,
     happinessGrowth: 0,
-    revenue: 5,
+    revenue: 32000,
     projects: [
       'demolish',
       'upgrade-shop-supermarket'
@@ -286,7 +287,7 @@ export const tileCatalog: TileCatalog = {
     ],
     happiness: 10,
     happinessGrowth: 0,
-    revenue: 8,
+    revenue: 25000,
     projects: [
       'demolish',
       'upgrade-shop-small',
@@ -303,7 +304,7 @@ export const tileCatalog: TileCatalog = {
     ],
     happiness: 12,
     happinessGrowth: 1,
-    revenue: 21,
+    revenue: 90000,
     projects: [
       'demolish'
     ]
@@ -320,7 +321,7 @@ export const tileCatalog: TileCatalog = {
     ],
     happiness: -10,
     happinessGrowth: 0,
-    revenue: -5,
+    revenue: -20000,
     projects: [
       'demolish',
       'repair-library'
@@ -337,7 +338,7 @@ export const tileCatalog: TileCatalog = {
     ],
     happiness: 5,
     happinessGrowth: 1,
-    revenue: -10,
+    revenue: -35000,
     projects: [
       'demolish',
       'upgrade-library'
@@ -353,7 +354,7 @@ export const tileCatalog: TileCatalog = {
     ],
     happiness: 15,
     happinessGrowth: 2,
-    revenue: -15,
+    revenue: -50000,
     projects: [
       'demolish'
     ]
@@ -369,7 +370,7 @@ export const tileCatalog: TileCatalog = {
     ],
     happiness: -15,
     happinessGrowth: 0,
-    revenue: -20,
+    revenue: -42000,
     projects: [
       'demolish',
       'repair-firestation'
@@ -385,7 +386,7 @@ export const tileCatalog: TileCatalog = {
     ],
     happiness: 15,
     happinessGrowth: 0,
-    revenue: -10,
+    revenue: -60000,
     projects: [
       'demolish'
     ]
@@ -401,7 +402,7 @@ export const tileCatalog: TileCatalog = {
     ],
     happiness: -10,
     happinessGrowth: 0,
-    revenue: 0,
+    revenue: 23000,
     projects: [
       'demolish',
       'upgrade-rest-diner'
@@ -417,7 +418,7 @@ export const tileCatalog: TileCatalog = {
     ],
     happiness: 3,
     happinessGrowth: 0,
-    revenue: 4,
+    revenue: 32000,
     projects: [
       'demolish',
       'upgrade-rest-fine-dining'
@@ -433,7 +434,7 @@ export const tileCatalog: TileCatalog = {
     ],
     happiness: 7,
     happinessGrowth: 0,
-    revenue: 10,
+    revenue: 64000,
     projects: [
       'demolish'
     ]
@@ -488,7 +489,7 @@ export const tileCatalog: TileCatalog = {
     ],
     happiness: 5,
     happinessGrowth: 0,
-    revenue: 5,
+    revenue: 120000,
     projects: [
       'demolish',
       'upgrade-office-2'
@@ -505,7 +506,7 @@ export const tileCatalog: TileCatalog = {
     ],
     happiness: 5,
     happinessGrowth: 0,
-    revenue: 10,
+    revenue: 150000,
     projects: [
       'demolish',
       'upgrade-office-3'
@@ -522,7 +523,7 @@ export const tileCatalog: TileCatalog = {
     ],
     happiness: 5,
     happinessGrowth: 0,
-    revenue: 15,
+    revenue: 180000,
     projects: [
       'demolish',
       'upgrade-office-4'
@@ -539,7 +540,7 @@ export const tileCatalog: TileCatalog = {
     ],
     happiness: 5,
     happinessGrowth: 0,
-    revenue: 20,
+    revenue: 200000,
     projects: [
       'demolish'
     ]
@@ -555,7 +556,7 @@ export const tileCatalog: TileCatalog = {
     ],
     happiness: 4,
     happinessGrowth: 1,
-    revenue: -15,
+    revenue: 45000,
     projects: [
       'demolish',
       'upgrade-energy-coal'
@@ -572,7 +573,7 @@ export const tileCatalog: TileCatalog = {
     ],
     happiness: 2,
     happinessGrowth: -1,
-    revenue: -20,
+    revenue: -20000,
     projects: [
       'demolish',
       'upgrade-energy-wind'

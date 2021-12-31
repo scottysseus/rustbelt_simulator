@@ -15,7 +15,7 @@ export const GameIntro = forwardRef<HTMLDivElement, IntroProps>((props, ref) => 
         </p>
         <p>Fire? Yup.</p>
         <p>Crime? Yup.</p>
-        <p>Corruption? Yup.</p>
+        <p>Corruption? You betcha.</p>
         <p>Tornado? Two.</p>
         <p>It's gotten bad enough that the State has appointed you the new Mayor of Rustfield.</p>
         <p>You've got $1 Million (and quesionably broad authority) to turn this place around.</p>
