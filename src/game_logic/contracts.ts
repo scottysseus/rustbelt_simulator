@@ -29,14 +29,14 @@ function countProjectsCompletedByType (projectsComplete: readonly ProjectType[])
 }
 
 function countTilesByType (tiles: readonly Tile[]): Map<TileType, number> {
-  const result = new Map()
+  const result = new Map<TileType, number>()
   for (const tile of tiles) {
     mapIncr(result, tile.type)
   }
   return result
 }
 
-function getCountsProgress<K extends string> (desiredCounts: Record<K, number>, actualCounts: Map<K, number>, comparator: Comparator) {
+function getCountsProgress (desiredCounts: DesiredCounts, actualCounts: ActualCounts, comparator: Comparator) {
   let current = 0
   let required = 0
   for (const key in desiredCounts) {
@@ -57,6 +57,7 @@ function getCountsProgress<K extends string> (desiredCounts: Record<K, number>, 
   }
 }
 
+type ActualCounts = Map<string, number>
 type DesiredCounts = Record<string, number>
 
 /**
@@ -96,7 +97,7 @@ export function progressCompletedProjectCount (gameState: GameState, desiredProj
  * @param comparator, optional argument to change how desired and actual are compared
  * @returns true if for all properties of {desiredProjects}, at least the specified number of tiles has that tag
  */
-export function satisifiesCompletedProjectCount (gameState: GameState, desiredProjects: DesiredCounts, comparator: Comparator = COMP_GTE): boolean {
+export function satisfiesCompletedProjectCount (gameState: GameState, desiredProjects: DesiredCounts, comparator: Comparator = COMP_GTE): boolean {
   const result = progressCompletedProjectCount(gameState, desiredProjects, comparator)
   return comparator(result.current, result.required)
 }

@@ -1,6 +1,6 @@
 import produce from 'immer'
 import { Contract, ContractCatalog, GameState } from '../game_logic'
-import { COMP_EQ, satisfiesTagCount, satisfiesTileTypeCount, satisifiesCompletedProjectCount, satisfiesCompletedProjectsAnyCount, progressTagCount, progressCompletedProjectCount, progressCompletedProjectsAnyCount, progressTileTypeCount } from '../game_logic/contracts'
+import { COMP_EQ, satisfiesTagCount, satisfiesTileTypeCount, satisfiesCompletedProjectCount, satisfiesCompletedProjectsAnyCount, progressTagCount, progressCompletedProjectCount, progressCompletedProjectsAnyCount, progressTileTypeCount } from '../game_logic/contracts'
 
 export const contractIDs = {
   imLovinIt: 'i\'m lovin\' it',
@@ -20,7 +20,7 @@ export const catalog: ContractCatalog = {
     name: 'I\'m not Lovin\' It anymore',
     description: 'Upgrade at least one drive thru restaurant.',
     reward: '$100/turn, 🙂3',
-    isSatisfied: (gameState: GameState) => satisifiesCompletedProjectCount(gameState, { 'upgrade-restaurant-family': 1 }),
+    isSatisfied: (gameState: GameState) => satisfiesCompletedProjectCount(gameState, { 'upgrade-restaurant-family': 1 }),
     applyReward: produce((draft) => {
       draft.player.resources.money.revenue += 100
       draft.player.victory.happiness += 3
@@ -52,7 +52,7 @@ export const catalog: ContractCatalog = {
     name: 'Educated Workforce',
     description: 'Build 1 new library to educate the Rustfield citizenry.',
     reward: '🙂5, 👤2',
-    isSatisfied: (gameState: GameState) => satisifiesCompletedProjectCount(gameState, { 'build-library': 1 }),
+    isSatisfied: (gameState: GameState) => satisfiesCompletedProjectCount(gameState, { 'build-library': 1 }),
     applyReward: produce((draft) => {
       draft.player.victory.happiness += 5
       draft.player.resources.workers.max += 2
@@ -96,7 +96,7 @@ export const catalog: ContractCatalog = {
     name: 'The Coal Industry is Back',
     description: 'Convert 2 coal power plants to wind farms.',
     reward: '🙂5',
-    isSatisfied: (gameState: GameState) => satisifiesCompletedProjectCount(gameState, { 'convert-wind': 2 }),
+    isSatisfied: (gameState: GameState) => satisfiesCompletedProjectCount(gameState, { 'convert-wind': 2 }),
     applyReward: produce((draft) => {
       draft.player.victory.happiness += 5
       draft.player.resources.workers.max += 2
@@ -107,7 +107,7 @@ export const catalog: ContractCatalog = {
     name: 'This Old House',
     description: 'Repair 4 abandoned houses.',
     reward: '🙂5',
-    isSatisfied: (gameState: GameState) => satisifiesCompletedProjectCount(gameState, { 'repair-house': 2 }),
+    isSatisfied: (gameState: GameState) => satisfiesCompletedProjectCount(gameState, { 'repair-house': 2 }),
     applyReward: produce((draft) => {
       draft.player.victory.happiness += 5
       draft.player.resources.workers.max += 2
@@ -118,7 +118,7 @@ export const catalog: ContractCatalog = {
     name: 'White Collar',
     description: 'Build 3 new offices.',
     reward: '🙂5',
-    isSatisfied: (gameState: GameState) => satisifiesCompletedProjectCount(gameState, { 'build-office-tower': 3 }),
+    isSatisfied: (gameState: GameState) => satisfiesCompletedProjectCount(gameState, { 'build-office-tower': 3 }),
     applyReward: produce((draft) => {
       draft.player.victory.happiness += 5
       draft.player.resources.workers.max += 2

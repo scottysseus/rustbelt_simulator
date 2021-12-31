@@ -118,10 +118,7 @@ export function resolveContracts (initialState: GameState): GameState {
  * been satisfied or, if none was found, -1.
  */
 function findIndexOfSatisfiedOpenContract (state: GameState): number {
-  return state.player.contracts.open.findIndex(contract => {
-    const satisfied = contract.isSatisfied(state)
-    return satisfied
-  })
+  return state.player.contracts.open.findIndex(contract => contract.isSatisfied(state))
 }
 
 /**

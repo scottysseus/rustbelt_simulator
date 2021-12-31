@@ -23,7 +23,7 @@ export function MapLocation (props: {row: number, column: number, gridInterval: 
 
   const onClick = useCallback(() => {
     props.onSelected()
-  }, [props, tileDefinition.name])
+  }, [props])
 
   return (
     <group
