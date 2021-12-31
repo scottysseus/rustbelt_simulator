@@ -151,6 +151,11 @@ html, body {
      padding-top: 0;
  }
 
+.project-list {
+    max-height: 240px;
+    overflow-y: auto;
+}
+
 .project-card {
     width: 100%;
     text-align: left;
