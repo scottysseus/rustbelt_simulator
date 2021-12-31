@@ -3,5 +3,8 @@
         "@babel/preset-env",
         ["@babel/preset-react", { "runtime": "automatic" }],
         ["@babel/typescript", { "allExtensions": true, "isTSX": true }]
+    ],
+    "plugins": [
+        "@babel/plugin-transform-runtime"
     ]
 }
