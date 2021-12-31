@@ -1,6 +1,6 @@
 import { Button, Stack } from '@mui/material'
 import { CSSProperties, forwardRef } from 'react'
-import Background from '../../docs/images/menu-background.png'
+import Background from '../assets/images/menu-background.png'
 
 type MenuProps = {
   style?: CSSProperties // applied by transition
