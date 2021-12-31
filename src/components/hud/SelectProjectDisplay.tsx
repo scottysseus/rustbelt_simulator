@@ -31,7 +31,7 @@ export function SelectProjectDisplay (props: {tile: Tile, tileIndex: number, dis
   return (
     <>
       <Typography><b>Projects</b></Typography>
-      <List>{projectList}</List>
+      <List className='project-list'>{projectList}</List>
     </>
   )
 }

@@ -1,28 +1,82 @@
+
 import { TileCatalog } from '../game_logic'
-import { Empty, EnergyCoal, EnergyWind, Fire0, Fire1, Gas0, Gas1, House0, House1, House2, Library0, Library1, Library2, Meadow, Office1, Park0, Park1, ParkDog, ParkMem, ParkSports, Restaurant0, Restaurant1, Restaurant2, RoadIntersection, RoadStraight, RoadTurn, Shop0, ShopMarket, ShopSmall, ShopSuper, Superstore, Trees0, Trees1 } from '../components/models'
+import { Empty, EnergyCoal, EnergyWind, Fire0, Fire1, Gas0, Gas1, House0, House1, House2, Library0, Library1, Library2, Meadow, Office1, Park0, Park1, ParkDog, ParkMem, ParkSports, Restaurant0, Restaurant1, Restaurant2, RoadIntersection, RoadStraight, RoadTurn, Shop0, ShopMarket, ShopSmall, ShopSuper, Trees0, Trees1 } from '../components/models'
 
 // This file implements a "database" of tiles, each with unique appearance, choices, etc
 export const tileCatalog: TileCatalog = {
   empty: {
     id: 'empty',
+    modelComponent: Empty,
     name: 'Empty Lot',
-    description: 'lorem ipsum',
+    description: "What? It's an empty lot.",
     tags: [
+      'abandoned',
       'empty'
     ],
     happiness: 0,
     happinessGrowth: 0,
     revenue: 0,
-    modelComponent: Empty,
     projects: [
       'build-park',
-      'build-office-tower'
+      'upgrade-office',
+      'build-shop-market',
+      'build-fire',
+      'build-library'
+    ]
+  },
+  meadow: {
+    id: 'meadow',
+    modelComponent: Meadow,
+    name: 'Meadow',
+    description: 'Grassy meadow.',
+    tags: [
+      'nature',
+      'empty'
+    ],
+    happiness: 1,
+    happinessGrowth: 0,
+    revenue: 0,
+    projects: [
+      'deforest'
+    ]
+  },
+  'trees-0': {
+    id: 'trees-0',
+    modelComponent: Trees0,
+    name: 'Trees',
+    description: 'Trees! Trees! Trees!',
+    tags: [
+      'nature'
+    ],
+    happiness: 1,
+    happinessGrowth: 0,
+    revenue: 0,
+    projects: [
+      'deforest'
+    ]
+  },
+  'trees-1': {
+    id: 'trees-1',
+    modelComponent: Trees1,
+    name: 'Apple Trees',
+    description: 'Apples? Mmmm. Tasty.',
+    tags: [
+      'nature'
+    ],
+    happiness: 1,
+    happinessGrowth: 0,
+    revenue: 0,
+    projects: [
+      'deforest',
+      'convert-trees-1',
+      'convert-meadow'
     ]
   },
   'gas-0': {
     id: 'gas-0',
+    modelComponent: Gas0,
     name: 'Rundown Gas Station',
-    description: 'lorem ipsum',
+    description: 'Not for late night snack runs. ',
     tags: [
       'retail',
       'damaged'
@@ -30,7 +84,6 @@ export const tileCatalog: TileCatalog = {
     happiness: -5,
     happinessGrowth: 0,
     revenue: 2,
-    modelComponent: Gas0,
     projects: [
       'demolish',
       'repair-gas'
@@ -38,23 +91,24 @@ export const tileCatalog: TileCatalog = {
   },
   'gas-1': {
     id: 'gas-1',
+    modelComponent: Gas1,
     name: 'Gas Station',
-    description: 'lorem ipsum',
+    description: 'Come inside, grab a coffee!',
     tags: [
       'retail'
     ],
     happiness: 2,
     happinessGrowth: 0,
     revenue: 10,
-    modelComponent: Gas1,
     projects: [
       'demolish'
     ]
   },
   'park-0': {
     id: 'park-0',
+    modelComponent: Park0,
     name: 'Schitty Park',
-    description: 'lorem ipsum',
+    description: 'Find another field to play in. ',
     tags: [
       'park',
       'damaged'
@@ -62,7 +116,6 @@ export const tileCatalog: TileCatalog = {
     happiness: -5,
     happinessGrowth: 0,
     revenue: -5,
-    modelComponent: Park0,
     projects: [
       'demolish',
       'repair-park'
@@ -70,75 +123,83 @@ export const tileCatalog: TileCatalog = {
   },
   'park-1': {
     id: 'park-1',
+    modelComponent: Park1,
     name: 'Park',
-    description: 'lorem ipsum',
+    description: 'Have a picnic! ',
     tags: [
       'park'
     ],
     happiness: 5,
     happinessGrowth: 0,
     revenue: -3,
-    modelComponent: Park1,
     projects: [
       'demolish',
       'upgrade-park-dog',
-      'upgrade-park-memorial'
+      'upgrade-park-mem',
+      'upgrade-park-sports',
+      'restore-forest'
     ]
   },
   'park-dog': {
     id: 'park-dog',
+    modelComponent: ParkDog,
     name: 'Dog Park',
-    description: 'lorem ipsum',
+    description: 'No cats allowed! ',
     tags: [
       'park'
     ],
     happiness: 6,
     happinessGrowth: 0,
     revenue: -5,
-    modelComponent: ParkDog,
     projects: [
       'demolish',
       'upgrade-park-sports',
-      'upgrade-park-memorial'
+      'upgrade-park-mem',
+      'restore-forest'
     ]
   },
   'park-mem': {
     id: 'park-mem',
+    modelComponent: ParkMem,
     name: 'Memorial Park',
-    description: 'lorem ipsum',
+    description: 'For memorials and memorial related activities.',
     tags: [
       'park'
     ],
     happiness: 10,
     happinessGrowth: 1,
     revenue: -5,
-    modelComponent: ParkMem,
     projects: [
       'demolish',
       'upgrade-park-sports',
-      'upgrade-park-dog'
+      'upgrade-park-dog',
+      'restore-forest'
     ]
   },
   'park-sports': {
     id: 'park-sports',
-    name: 'Sports Complex',
-    description: 'lorem ipsum',
+    modelComponent: ParkSports,
+    name: 'Rustfield Field ',
+    description: 'For sports and sport related activities.',
     tags: [
       'park',
-      ' entertainment'
+      'entertainment'
     ],
     happiness: 20,
     happinessGrowth: 2,
     revenue: -10,
-    modelComponent: ParkSports,
     projects: [
-      'demolish'
+      'demolish',
+      'upgrade-park-mem',
+      'upgrade-park-dog',
+      'restore-forest'
     ]
   },
   'house-0': {
     id: 'house-0',
+    modelComponent: House0,
     name: 'Abandoned House',
-    description: 'lorem ipsum',
+    description: 'Might be haunted. ',
     tags: [
       'residential',
       'damaged'
@@ -146,7 +207,6 @@ export const tileCatalog: TileCatalog = {
     happiness: -10,
     happinessGrowth: 0,
     revenue: 0,
-    modelComponent: House0,
     projects: [
       'demolish',
       'repair-house'
@@ -154,39 +214,40 @@ export const tileCatalog: TileCatalog = {
   },
   'house-1': {
     id: 'house-1',
+    modelComponent: House1,
     name: 'Shack',
-    description: 'lorem ipsum',
+    description: 'Probably not haunted. ',
     tags: [
       'residential'
     ],
     happiness: 1,
     happinessGrowth: 0,
     revenue: 0,
-    modelComponent: House1,
     projects: [
-      'demolish'
+      'demolish',
+      'upgrade-house-luxury'
     ]
   },
   'house-2': {
     id: 'house-2',
+    modelComponent: House2,
     name: 'House',
-    description: 'lorem ipsum',
+    description: 'Home is where the heart is! ',
     tags: [
       'residential'
     ],
     happiness: 2,
     happinessGrowth: 0,
     revenue: 2,
-    modelComponent: House2,
     projects: [
-      'demolish',
-      'upgrade-house-family'
+      'demolish'
     ]
   },
   'shop-0': {
     id: 'shop-0',
-    name: 'Boarded up shop',
-    description: 'lorem ipsum',
+    modelComponent: Shop0,
+    name: 'Boarded-Up Shop',
+    description: 'Best to avoid. ',
     tags: [
       'retail',
       'damaged'
@@ -194,7 +255,6 @@ export const tileCatalog: TileCatalog = {
     happiness: -10,
     happinessGrowth: 0,
     revenue: 0,
-    modelComponent: Shop0,
     projects: [
       'demolish',
       'repair-shop'
@@ -202,63 +262,65 @@ export const tileCatalog: TileCatalog = {
   },
   'shop-small': {
     id: 'shop-small',
-    name: 'quaint small business',
-    description: 'lorem ipsum',
+    modelComponent: ShopSmall,
+    name: 'Stuff',
+    description: 'For stuff. ',
     tags: [
       'retail'
     ],
     happiness: 10,
     happinessGrowth: 0,
     revenue: 5,
-    modelComponent: ShopSmall,
     projects: [
       'demolish',
-      'upgrade-shop-market'
+      'upgrade-shop-supermarket'
     ]
   },
   'shop-market': {
     id: 'shop-market',
-    name: 'market',
-    description: 'lorem ipsum',
+    modelComponent: ShopMarket,
+    name: 'Food & Stuff',
+    description: 'For food and stuff. ',
     tags: [
       'retail'
     ],
     happiness: 10,
     happinessGrowth: 0,
     revenue: 8,
-    modelComponent: ShopMarket,
     projects: [
       'demolish',
-      'upgrade-shop-supermarket'
+      'upgrade-shop-small',
+      'upgrade-rest-diner'
     ]
   },
   'shop-super': {
     id: 'shop-super',
-    name: 'supermarket',
-    description: 'lorem ipsum',
+    modelComponent: ShopSuper,
+    name: 'Super-Mart ',
+    description: 'Average ordinary everyday supermarket.',
     tags: [
       'retail'
     ],
     happiness: 12,
     happinessGrowth: 1,
     revenue: 21,
-    modelComponent: ShopSuper,
     projects: [
       'demolish'
     ]
   },
   'library-0': {
     id: 'library-0',
-    name: 'neglected library',
-    description: 'lorem ipsum',
+    modelComponent: Library0,
+    name: 'Rusty Books',
+    description: "Don't waste your time reading. ",
     tags: [
       'civic',
-      'damaged'
+      'damaged',
+      'entertainment'
     ],
     happiness: -10,
     happinessGrowth: 0,
     revenue: -5,
-    modelComponent: Library0,
     projects: [
       'demolish',
       'repair-library'
@@ -266,16 +328,16 @@ export const tileCatalog: TileCatalog = {
   },
   'library-1': {
     id: 'library-1',
-    name: 'library',
-    description: 'lorem ipsum',
+    modelComponent: Library1,
+    name: 'Rustfield Library ',
+    description: 'To read, or not to read? ',
     tags: [
       'civic',
-      ' entertainment'
+      'entertainment'
     ],
     happiness: 5,
     happinessGrowth: 1,
     revenue: -10,
-    modelComponent: Library1,
     projects: [
       'demolish',
       'upgrade-library'
@@ -283,23 +345,24 @@ export const tileCatalog: TileCatalog = {
   },
   'library-2': {
     id: 'library-2',
-    name: 'modern library',
-    description: 'lorem ipsum',
+    modelComponent: Library2,
+    name: 'Library of Rustfield',
+    description: "It's not Alexandria, but it's still nice. ",
     tags: [
       'civic'
     ],
     happiness: 15,
     happinessGrowth: 2,
     revenue: -15,
-    modelComponent: Library2,
     projects: [
       'demolish'
     ]
   },
   'fire-0': {
     id: 'fire-0',
-    name: 'crumbling fire station',
-    description: 'lorem ipsum',
+    modelComponent: Fire0,
+    name: 'Fire Station 0',
+    description: 'Half the force was fired...',
     tags: [
       'civic',
       'damaged'
@@ -307,7 +370,6 @@ export const tileCatalog: TileCatalog = {
     happiness: -15,
     happinessGrowth: 0,
     revenue: -20,
-    modelComponent: Fire0,
     projects: [
       'demolish',
       'repair-firestation'
@@ -315,23 +377,24 @@ export const tileCatalog: TileCatalog = {
   },
   'fire-1': {
     id: 'fire-1',
-    name: 'fire station',
-    description: 'lorem ipsum',
+    modelComponent: Fire1,
+    name: 'Fire Station 1 ',
+    description: 'Smokeshows fighting smokeshows! ',
     tags: [
       'civic'
     ],
     happiness: 15,
     happinessGrowth: 0,
     revenue: -10,
-    modelComponent: Fire1,
     projects: [
       'demolish'
     ]
   },
   'restaurant-0': {
     id: 'restaurant-0',
-    name: 'drive thru',
-    description: 'lorem ipsum',
+    modelComponent: Restaurant0,
+    name: 'Rust Burger ',
+    description: 'Would you like to super-size that order? ',
     tags: [
       'food',
       'damaged'
@@ -339,100 +402,93 @@ export const tileCatalog: TileCatalog = {
     happiness: -10,
     happinessGrowth: 0,
     revenue: 0,
-    modelComponent: Restaurant0,
     projects: [
       'demolish',
-      'upgrade-restaurant-family'
+      'upgrade-rest-diner'
     ]
   },
   'restaurant-1': {
     id: 'restaurant-1',
-    name: 'diner',
-    description: 'lorem ipsum',
+    modelComponent: Restaurant1,
+    name: "Dalilah's Diner",
+    description: 'Half price apps and drinks! ',
     tags: [
       'food'
     ],
     happiness: 3,
     happinessGrowth: 0,
     revenue: 4,
-    modelComponent: Restaurant1,
     projects: [
       'demolish',
-      'upgrade-restaurant-fine'
+      'upgrade-rest-fine-dining'
     ]
   },
   'restaurant-2': {
     id: 'restaurant-2',
-    name: 'fine dining',
-    description: 'lorem ipsum',
+    modelComponent: Restaurant2,
+    name: "Bianca's Bistro",
+    description: 'Look at you big spender. ',
     tags: [
       'food'
     ],
     happiness: 7,
     happinessGrowth: 0,
     revenue: 10,
-    modelComponent: Restaurant2,
     projects: [
       'demolish'
     ]
   },
   'road-straight': {
     id: 'road-straight',
+    modelComponent: RoadStraight,
     name: 'Straight Road',
-    description: 'lorem ipsum',
+    description: 'Curves are overratted. ',
     tags: [
       'road'
     ],
     happiness: 0,
     happinessGrowth: 0,
     revenue: 0,
-    modelComponent: RoadStraight,
-    projects: [
-      'demolish'
-    ]
+    projects: []
   },
   'road-turn': {
     id: 'road-turn',
+    modelComponent: RoadTurn,
     name: 'Turn Road',
-    description: 'lorem ipsum',
+    description: 'Curves are awesome! ',
     tags: [
       'road'
     ],
     happiness: 0,
     happinessGrowth: 0,
     revenue: 0,
-    modelComponent: RoadTurn,
-    projects: [
-      'demolish'
-    ]
+    projects: []
   },
   'road-intersection': {
     id: 'road-intersection',
+    modelComponent: RoadIntersection,
     name: 'Intersection Road',
-    description: 'lorem ipsum',
+    description: 'Two roads diverged... ',
     tags: [
       'road'
     ],
     happiness: 0,
     happinessGrowth: 0,
     revenue: 0,
-    modelComponent: RoadIntersection,
-    projects: [
-      'demolish'
-    ]
+    projects: []
   },
   'office-1': {
     id: 'office-1',
-    name: 'Offices',
-    description: 'lorem ipsum',
+    modelComponent: Office1,
+    name: 'Office One',
+    description: "Somebody's got a case of the Mondays!",
     tags: [
       'commercial',
-      ' corporate'
+      'corporate'
     ],
     happiness: 5,
     happinessGrowth: 0,
     revenue: 5,
-    modelComponent: Office1,
     projects: [
       'demolish',
       'upgrade-office-2'
@@ -440,16 +496,16 @@ export const tileCatalog: TileCatalog = {
   },
   'office-2': {
     id: 'office-2',
-    name: 'Offices',
-    description: 'lorem ipsum',
+    modelComponent: Office1,
+    name: 'Office Two',
+    description: 'Need those TPS reports ASAP.',
     tags: [
       'commercial',
-      ' corporate'
+      'corporate'
     ],
     happiness: 5,
     happinessGrowth: 0,
     revenue: 10,
-    modelComponent: Office1,
     projects: [
       'demolish',
       'upgrade-office-3'
@@ -457,16 +513,16 @@ export const tileCatalog: TileCatalog = {
   },
   'office-3': {
     id: 'office-3',
-    name: 'Offices',
-    description: 'lorem ipsum',
+    modelComponent: Office1,
+    name: 'Office Three',
+    description: 'Next Friday is Hawaiian shirt day! ',
     tags: [
       'commercial',
-      ' corporate'
+      'corporate'
     ],
     happiness: 5,
     happinessGrowth: 0,
     revenue: 15,
-    modelComponent: Office1,
     projects: [
       'demolish',
       'upgrade-office-4'
@@ -474,90 +530,52 @@ export const tileCatalog: TileCatalog = {
   },
   'office-4': {
     id: 'office-4',
-    name: 'Offices',
-    description: 'lorem ipsum',
+    modelComponent: Office1,
+    name: 'Office Four',
+    description: 'I believe you have my stapler. ',
     tags: [
       'commercial',
-      ' corporate'
+      'corporate'
     ],
     happiness: 5,
     happinessGrowth: 0,
     revenue: 20,
-    modelComponent: Office1,
     projects: [
       'demolish'
     ]
   },
   'energy-wind': {
     id: 'energy-wind',
+    modelComponent: EnergyWind,
     name: 'Wind Farm',
-    description: 'lorem ipsum',
+    description: "Renewable energy? I'm a huge fan! ",
     tags: [
       'civic',
       'power'
     ],
     happiness: 4,
     happinessGrowth: 1,
-    revenue: 10,
-    modelComponent: EnergyWind,
+    revenue: -15,
     projects: [
-      'demolish'
+      'demolish',
+      'upgrade-energy-coal'
     ]
   },
   'energy-coal': {
     id: 'energy-coal',
+    modelComponent: EnergyCoal,
     name: 'Coal Plant',
-    description: 'lorem ipsum',
+    description: "Tell the kids it's a cloud factory. ",
     tags: [
       'civic',
       'power'
     ],
     happiness: 2,
     happinessGrowth: -1,
-    revenue: 30,
-    modelComponent: EnergyCoal,
+    revenue: -20,
     projects: [
       'demolish',
-      'convert-wind'
+      'upgrade-energy-wind'
     ]
-  },
-  'trees-0': {
-    id: 'trees-0',
-    name: 'Pristine Forest',
-    description: 'lorem ipsum',
-    tags: [],
-    happiness: 5,
-    happinessGrowth: 1,
-    revenue: 3,
-    modelComponent: Trees0,
-    projects: []
-  },
-  'trees-1': {
-    id: 'trees-1',
-    name: 'Pristine Forest',
-    description: 'lorem ipsum',
-    tags: [],
-    happiness: 5,
-    happinessGrowth: 1,
-    revenue: 3,
-    modelComponent: Trees1,
-    projects: []
-  },
-  meadow: {
-    id: 'meadow',
-    name: 'Pristine Meadow',
-    description: 'lorem ipsum',
-    tags: [],
-    happiness: 5,
-    happinessGrowth: 1,
-    revenue: 3,
-    modelComponent: Meadow,
-    projects: []
   }
 }
-
-// 36 tiles for...
-// - (+1) Placeholder isn't listed here
-// - (-3) office-1 thru office-4 use Office1 model
-// - (+1) Tile model is unused
-// ...35 models.
