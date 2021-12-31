@@ -1,9 +1,19 @@
-import { Fade } from '@mui/material'
-import { useState } from 'react'
+import { Fade, Typography } from '@mui/material'
+import { Suspense, useState } from 'react'
 import { GameDisplay } from './components/GameDisplay'
 import { Menu } from './components/Menu'
 import { GameIntro } from './components/GameIntro'
 import Background from './assets/images/menu-background.png'
+import { useProgress } from '@react-three/drei'
+
+function Loader () {
+  const { loaded, total, progress } = useProgress()
+  return (
+    <Typography className='loader'>
+      Loading... {progress}% - {total - loaded} items remain
+    </Typography>
+  )
+}
 
 function App () {
   const [menuState, setMenuState] = useState('menu')
@@ -32,7 +42,9 @@ function App () {
       </Fade>
       <Fade in={menuState === 'game'}>
         <div className='container'>
-          <GameDisplay started={menuState === 'game'} />
+          <Suspense fallback={<Loader />}>
+            <GameDisplay started={menuState === 'game'} />
+          </Suspense>
         </div>
       </Fade>
     </>

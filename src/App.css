@@ -213,3 +213,21 @@ html, body {
  .project-card-content.project-card-content.project-card-content.project-card-content {
     padding: 0;
  }
+
+.loader {
+    background-size: cover;
+    background-color: #130701;
+    background-repeat: no-repeat;
+    background-position: center;
+    min-width: 100%;
+    min-height: 100%;
+    position: fixed;
+    font-size: 25px;
+    color: #b65e38;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+    text-align: center;
+    padding-top: 5%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
