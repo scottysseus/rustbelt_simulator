@@ -38,12 +38,18 @@ async function convertTileCatalog () {
 
   const replaceMeRegex = /"REPLACE_ME(.+)"/g
 
+  // replace the double quotes around the entry.modelComponent values, e.g. "Empty" -> Empty
+  const jsonString = JSON.stringify(finalCatalog, undefined, 2).replaceAll(replaceMeRegex, (_match, p1) => p1)
+
   const catalogFile = `
 import { TileCatalog } from '../game_logic'
 import { Empty, EnergyCoal, EnergyWind, Fire0, Fire1, Gas0, Gas1, House0, House1, House2, Library0, Library1, Library2, Meadow, Office1, Park0, Park1, ParkDog, ParkMem, ParkSports, Restaurant0, Restaurant1, Restaurant2, RoadIntersection, RoadStraight, RoadTurn, Shop0, ShopMarket, ShopSmall, ShopSuper, Trees0, Trees1 } from '../components/models'
 
+
+
+
 // This file implements a "database" of tiles, each with unique appearance, choices, etc
-export const tileCatalog: TileCatalog = ${JSON.stringify(finalCatalog, undefined, 2).replaceAll(replaceMeRegex, (_match, p1) => p1)}`
+export const tileCatalog: TileCatalog = ${jsonString}`
   await writeFile('src/data/tile-catalog.ts', catalogFile)
 }
 
