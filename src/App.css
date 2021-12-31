@@ -60,6 +60,19 @@ html, body {
     align-items: center;
 }
 
+.turn-transition-modal {
+    font-family: 'Rock Salt', cursive;
+    color: #b65e38;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20%;
+    width: 300px;
+    font-size: 48px;
+    transform: 'translate(-50%, -50%)';
+    text-align: center;
+}
+
 .stats {
     left: unset !important;
     right: 0;
