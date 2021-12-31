@@ -521,22 +521,6 @@ export const tileCatalog: TileCatalog = {
       'convert-wind'
     ]
   },
-  superstore: {
-    id: 'superstore',
-    name: 'walmart',
-    description: 'lorem ipsum',
-    tags: [
-      'retail',
-      ' commercial'
-    ],
-    happiness: 12,
-    happinessGrowth: -1,
-    revenue: 9,
-    modelComponent: Superstore,
-    projects: [
-      'demolish'
-    ]
-  },
   'trees-0': {
     id: 'trees-0',
     name: 'Pristine Forest',
