@@ -16,7 +16,7 @@ function App () {
         <Menu onStart={onStart} />
       </Fade>
       <Fade in={inGame}>
-        <GameDisplay />
+        <GameDisplay started={inGame} />
       </Fade>
     </>
   )
