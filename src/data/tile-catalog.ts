@@ -19,7 +19,9 @@ export const tileCatalog: TileCatalog = {
     projects: [
       'build-park',
       'upgrade-office',
-      'build-shop-market'
+      'build-shop-market',
+      'build-fire',
+      'build-library'
     ]
   },
   meadow: {
@@ -77,7 +79,7 @@ export const tileCatalog: TileCatalog = {
     description: 'Not for late night snack runs. ',
     tags: [
       'retail',
-      'damaged'
+      ' damaged'
     ],
     happiness: -5,
     happinessGrowth: 0,
@@ -109,7 +111,7 @@ export const tileCatalog: TileCatalog = {
     description: 'Find another field to play in. ',
     tags: [
       'park',
-      'damaged'
+      ' damaged'
     ],
     happiness: -5,
     happinessGrowth: 0,
@@ -133,7 +135,9 @@ export const tileCatalog: TileCatalog = {
     projects: [
       'demolish',
       'upgrade-park-dog',
-      'upgrade-park-mem'
+      'upgrade-park-mem',
+      'upgrade-park-sports',
+      'restore-forest'
     ]
   },
   'park-dog': {
@@ -150,7 +154,8 @@ export const tileCatalog: TileCatalog = {
     projects: [
       'demolish',
       'upgrade-park-sports',
-      'upgrade-park-mem'
+      'upgrade-park-mem',
+      'restore-forest'
     ]
   },
   'park-mem': {
@@ -167,7 +172,8 @@ export const tileCatalog: TileCatalog = {
     projects: [
       'demolish',
       'upgrade-park-sports',
-      'upgrade-park-dog'
+      'upgrade-park-dog',
+      'restore-forest'
     ]
   },
   'park-sports': {
@@ -185,7 +191,8 @@ export const tileCatalog: TileCatalog = {
     projects: [
       'demolish',
       'upgrade-park-mem',
-      'upgrade-park-dog'
+      'upgrade-park-dog',
+      'restore-forest'
     ]
   },
   'house-0': {
@@ -195,7 +202,7 @@ export const tileCatalog: TileCatalog = {
     description: 'Might be haunted. ',
     tags: [
       'residential',
-      'damaged'
+      ' damaged'
     ],
     happiness: -10,
     happinessGrowth: 0,
@@ -243,7 +250,7 @@ export const tileCatalog: TileCatalog = {
     description: 'Best to avoid. ',
     tags: [
       'retail',
-      'damaged'
+      ' damaged'
     ],
     happiness: -10,
     happinessGrowth: 0,
@@ -357,7 +364,7 @@ export const tileCatalog: TileCatalog = {
     description: 'Half the force was fired...',
     tags: [
       'civic',
-      'damaged'
+      ' damaged'
     ],
     happiness: -15,
     happinessGrowth: 0,
@@ -389,7 +396,7 @@ export const tileCatalog: TileCatalog = {
     description: 'Would you like to super-size that order? ',
     tags: [
       'food',
-      'damaged'
+      ' damaged'
     ],
     happiness: -10,
     happinessGrowth: 0,
@@ -543,7 +550,7 @@ export const tileCatalog: TileCatalog = {
     description: "Renewable energy? I'm a huge fan! ",
     tags: [
       'civic',
-      'power'
+      ' power'
     ],
     happiness: 4,
     happinessGrowth: 1,
@@ -560,7 +567,7 @@ export const tileCatalog: TileCatalog = {
     description: "Tell the kids it's a cloud factory. ",
     tags: [
       'civic',
-      'power'
+      ' power'
     ],
     happiness: 2,
     happinessGrowth: -1,

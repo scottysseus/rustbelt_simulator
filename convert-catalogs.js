@@ -16,6 +16,13 @@ async function convertTileCatalog () {
     if (entry.project3) {
       entry.projects.push(entry.project3)
     }
+    if (entry.project4) {
+      entry.projects.push(entry.project4)
+    }
+    if (entry.project5) {
+      entry.projects.push(entry.project5)
+    }
+
     entry.tags = entry.tags.split(',')
     entry.happiness = parseInt(entry.happiness)
     entry.revenue = parseInt(entry.revenue)

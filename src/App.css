@@ -147,6 +147,10 @@ html, body {
      cursor: pointer;
  }
 
+ .tile-card-content.tile-card-content.tile-card-content {
+     padding-top: 0;
+ }
+
 .project-card {
     width: 100%;
     text-align: left;
