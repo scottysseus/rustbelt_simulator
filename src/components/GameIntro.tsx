@@ -1,14 +1,12 @@
 import { Button, Stack, Typography } from '@mui/material'
-import { CSSProperties, forwardRef } from 'react'
 
 type IntroProps = {
-  style?: CSSProperties // applied by transition
   onContinue: () => void
 }
 
-export const GameIntro = forwardRef<HTMLDivElement, IntroProps>((props, ref) => {
+export function GameIntro (props: IntroProps) {
   return (
-    <div style={{ ...props.style }} ref={ref} className='menu-intro'>
+    <>
       <Typography variant='body1'>
         <p>
           The town of Rustfield has fallen on hard times. Just 'bout everything that could go wrong, did.
@@ -24,6 +22,6 @@ export const GameIntro = forwardRef<HTMLDivElement, IntroProps>((props, ref) => 
       <Stack spacing={2} className='menu-main-buttons'>
         <Button variant='contained' onClick={props.onContinue}> Continue </Button>
       </Stack>
-    </div>
+    </>
   )
-})
+}
