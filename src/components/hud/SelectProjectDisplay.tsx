@@ -7,7 +7,6 @@ import { dispatcher } from '../reducers'
 export function SelectProjectDisplay (props: {tile: Tile, tileIndex: number, dispatch: dispatcher}) {
   const tileDefinition = tileCatalog[props.tile.type]
   const projects = tileDefinition.projects.map((id) => projectCatalog[id])
-  console.debug('projects', projects, props.tile)
   const projectList = projects.map((project, index) => {
     const onClick = () => {
       // TODO: Get the tile index here to pass up with the dispatch or otherwise figure out how to fix the fact

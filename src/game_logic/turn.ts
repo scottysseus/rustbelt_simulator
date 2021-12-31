@@ -128,7 +128,6 @@ function findIndexOfSatisfiedOpenContract (state: GameState): number {
  * Collects the rewards of the contract at contractIndex of the `open` list and moves it to the `completed` list,
  */
 function completeContract (state: GameState, contractIndex: number): GameState {
-  console.debug('Completeing Contract', state.player.contracts.open[contractIndex])
   const newState = state.player.contracts.open[contractIndex].applyReward(state)
   return produce(newState, draft => {
     const completed = draft.player.contracts.open[contractIndex]
