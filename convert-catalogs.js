@@ -21,10 +21,7 @@ async function convertTileCatalog () {
     entry.revenue = parseInt(entry.revenue)
     entry.happinessGrowth = parseInt(entry.happinessGrowth)
 
-    const modelPathRegex = /models\/(.+)\.glb/
-    // eslint-disable-next-line no-eval
-    entry.modelComponent = 'REPLACE_ME' + entry.modelPath.match(modelPathRegex)[1].replace(/(\w)(\w*)/g,
-      function (g0, g1, g2) { return g1.toUpperCase() + g2.toLowerCase() }).replace('-', '')
+    entry.modelComponent = 'REPLACE_ME' + entry.modelComponent
     delete entry.project1
     delete entry.project2
     delete entry.project3
@@ -43,7 +40,7 @@ async function convertTileCatalog () {
 
   const catalogFile = `
 import { TileCatalog } from '../game_logic'
-import { Empty, EnergyCoal, EnergyWind, Fire0, Fire1, Gas0, Gas1, House0, House1, House2, Library0, Library1, Library2, Meadow, Office1, Park0, Park1, ParkDog, ParkMem, ParkSports, Restaurant0, Restaurant1, Restaurant2, RoadIntersection, RoadStraight, RoadTurn, Shop0, ShopMarket, ShopSmall, ShopSuper, Superstore, Trees0, Trees1 } from '../components/models'
+import { Empty, EnergyCoal, EnergyWind, Fire0, Fire1, Gas0, Gas1, House0, House1, House2, Library0, Library1, Library2, Meadow, Office1, Park0, Park1, ParkDog, ParkMem, ParkSports, Restaurant0, Restaurant1, Restaurant2, RoadIntersection, RoadStraight, RoadTurn, Shop0, ShopMarket, ShopSmall, ShopSuper, Trees0, Trees1 } from '../components/models'
 
 // This file implements a "database" of tiles, each with unique appearance, choices, etc
 export const tileCatalog: TileCatalog = ${JSON.stringify(finalCatalog, undefined, 2).replaceAll(replaceMeRegex, (_match, p1) => p1)}`

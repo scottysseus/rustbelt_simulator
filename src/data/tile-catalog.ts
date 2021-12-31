@@ -1,12 +1,12 @@
+
 import { TileCatalog } from '../game_logic'
-import { Empty, EnergyCoal, EnergyWind, Fire0, Fire1, Gas0, Gas1, House0, House1, House2, Library0, Library1, Library2, Meadow, Office1, Park0, Park1, ParkDog, ParkMem, ParkSports, Restaurant0, Restaurant1, Restaurant2, RoadIntersection, RoadStraight, RoadTurn, Shop0, ShopMarket, ShopSmall, ShopSuper, Superstore, Trees0, Trees1 } from '../components/models'
+import { Empty, EnergyCoal, EnergyWind, Fire0, Fire1, Gas0, Gas1, House0, House1, House2, Library0, Library1, Library2, Meadow, Office1, Park0, Park1, ParkDog, ParkMem, ParkSports, Restaurant0, Restaurant1, Restaurant2, RoadIntersection, RoadStraight, RoadTurn, Shop0, ShopMarket, ShopSmall, ShopSuper, Trees0, Trees1 } from '../components/models'
 
 // This file implements a "database" of tiles, each with unique appearance, choices, etc
 export const tileCatalog: TileCatalog = {
   empty: {
     id: 'empty',
-    modelComponent: '',
-    modelPath: 'models/empty.glb',
+    modelComponent: Empty,
     name: 'Empty Lot',
     description: "What? It's an empty lot.",
     tags: [
@@ -16,8 +16,6 @@ export const tileCatalog: TileCatalog = {
     happiness: 0,
     happinessGrowth: 0,
     revenue: 0,
-    project4: 'build-fire',
-    project5: 'build-library',
     projects: [
       'build-park',
       'upgrade-office',
@@ -26,8 +24,7 @@ export const tileCatalog: TileCatalog = {
   },
   meadow: {
     id: 'meadow',
-    modelComponent: '',
-    modelPath: 'models/meadow.glb',
+    modelComponent: Meadow,
     name: 'Meadow',
     description: 'Grassy meadow.',
     tags: [
@@ -37,16 +34,13 @@ export const tileCatalog: TileCatalog = {
     happiness: 1,
     happinessGrowth: 0,
     revenue: 0,
-    project4: '',
-    project5: '',
     projects: [
       'deforest'
     ]
   },
   'trees-0': {
     id: 'trees-0',
-    modelComponent: '',
-    modelPath: 'models/trees-0.glb',
+    modelComponent: Trees0,
     name: 'Trees',
     description: 'Trees! Trees! Trees!',
     tags: [
@@ -55,16 +49,13 @@ export const tileCatalog: TileCatalog = {
     happiness: 1,
     happinessGrowth: 0,
     revenue: 0,
-    project4: '',
-    project5: '',
     projects: [
       'deforest'
     ]
   },
   'trees-1': {
     id: 'trees-1',
-    modelComponent: '',
-    modelPath: 'models/trees-1.glb',
+    modelComponent: Trees1,
     name: 'Apple Trees',
     description: 'Apples? Mmmm. Tasty.',
     tags: [
@@ -73,8 +64,6 @@ export const tileCatalog: TileCatalog = {
     happiness: 1,
     happinessGrowth: 0,
     revenue: 0,
-    project4: '',
-    project5: '',
     projects: [
       'deforest',
       'convert-trees-1',
@@ -83,8 +72,7 @@ export const tileCatalog: TileCatalog = {
   },
   'gas-0': {
     id: 'gas-0',
-    modelComponent: '',
-    modelPath: 'models/gas-0.glb',
+    modelComponent: Gas0,
     name: 'Rundown Gas Station',
     description: 'Not for late night snack runs. ',
     tags: [
@@ -94,8 +82,6 @@ export const tileCatalog: TileCatalog = {
     happiness: -5,
     happinessGrowth: 0,
     revenue: 2,
-    project4: '',
-    project5: '',
     projects: [
       'demolish',
       'repair-gas'
@@ -103,8 +89,7 @@ export const tileCatalog: TileCatalog = {
   },
   'gas-1': {
     id: 'gas-1',
-    modelComponent: '',
-    modelPath: 'models/gas-1.glb',
+    modelComponent: Gas1,
     name: 'Gas Station',
     description: 'Come inside, grab a coffee!',
     tags: [
@@ -113,16 +98,13 @@ export const tileCatalog: TileCatalog = {
     happiness: 2,
     happinessGrowth: 0,
     revenue: 10,
-    project4: '',
-    project5: '',
     projects: [
       'demolish'
     ]
   },
   'park-0': {
     id: 'park-0',
-    modelComponent: '',
-    modelPath: 'models/park-0.glb',
+    modelComponent: Park0,
     name: 'Schitty Park',
     description: 'Find another field to play in. ',
     tags: [
@@ -132,8 +114,6 @@ export const tileCatalog: TileCatalog = {
     happiness: -5,
     happinessGrowth: 0,
     revenue: -5,
-    project4: '',
-    project5: '',
     projects: [
       'demolish',
       'repair-park'
@@ -141,8 +121,7 @@ export const tileCatalog: TileCatalog = {
   },
   'park-1': {
     id: 'park-1',
-    modelComponent: '',
-    modelPath: 'models/park-1.glb',
+    modelComponent: Park1,
     name: 'Park',
     description: 'Have a picnic! ',
     tags: [
@@ -151,8 +130,6 @@ export const tileCatalog: TileCatalog = {
     happiness: 5,
     happinessGrowth: 0,
     revenue: -3,
-    project4: 'upgrade-park-sports',
-    project5: 'restore-forest',
     projects: [
       'demolish',
       'upgrade-park-dog',
@@ -161,8 +138,7 @@ export const tileCatalog: TileCatalog = {
   },
   'park-dog': {
     id: 'park-dog',
-    modelComponent: '',
-    modelPath: 'models/park-dog.glb',
+    modelComponent: ParkDog,
     name: 'Dog Park',
     description: 'No cats allowed! ',
     tags: [
@@ -171,8 +147,6 @@ export const tileCatalog: TileCatalog = {
     happiness: 6,
     happinessGrowth: 0,
     revenue: -5,
-    project4: 'restore-forest',
-    project5: '',
     projects: [
       'demolish',
       'upgrade-park-sports',
@@ -181,8 +155,7 @@ export const tileCatalog: TileCatalog = {
   },
   'park-mem': {
     id: 'park-mem',
-    modelComponent: '',
-    modelPath: 'models/park-mem.glb',
+    modelComponent: ParkMem,
     name: 'Memorial Park',
     description: 'For memorials and memorial related activities.',
     tags: [
@@ -191,8 +164,6 @@ export const tileCatalog: TileCatalog = {
     happiness: 10,
     happinessGrowth: 1,
     revenue: -5,
-    project4: 'restore-forest',
-    project5: '',
     projects: [
       'demolish',
       'upgrade-park-sports',
@@ -201,8 +172,7 @@ export const tileCatalog: TileCatalog = {
   },
   'park-sports': {
     id: 'park-sports',
-    modelComponent: '',
-    modelPath: 'models/park-sports.glb',
+    modelComponent: ParkSports,
     name: 'Rustfield Field ',
     description: 'For sports and sport related activities.',
     tags: [
@@ -212,8 +182,6 @@ export const tileCatalog: TileCatalog = {
     happiness: 20,
     happinessGrowth: 2,
     revenue: -10,
-    project4: 'restore-forest',
-    project5: '',
     projects: [
       'demolish',
       'upgrade-park-mem',
@@ -222,8 +190,7 @@ export const tileCatalog: TileCatalog = {
   },
   'house-0': {
     id: 'house-0',
-    modelComponent: '',
-    modelPath: 'models/house-0.glb',
+    modelComponent: House0,
     name: 'Abandoned House',
     description: 'Might be haunted. ',
     tags: [
@@ -233,8 +200,6 @@ export const tileCatalog: TileCatalog = {
     happiness: -10,
     happinessGrowth: 0,
     revenue: 0,
-    project4: '',
-    project5: '',
     projects: [
       'demolish',
       'repair-house'
@@ -242,8 +207,7 @@ export const tileCatalog: TileCatalog = {
   },
   'house-1': {
     id: 'house-1',
-    modelComponent: '',
-    modelPath: 'models/house-1.glb',
+    modelComponent: House1,
     name: 'Shack',
     description: 'Probably not haunted. ',
     tags: [
@@ -252,8 +216,6 @@ export const tileCatalog: TileCatalog = {
     happiness: 1,
     happinessGrowth: 0,
     revenue: 0,
-    project4: '',
-    project5: '',
     projects: [
       'demolish',
       'upgrade-house-luxury'
@@ -261,8 +223,7 @@ export const tileCatalog: TileCatalog = {
   },
   'house-2': {
     id: 'house-2',
-    modelComponent: '',
-    modelPath: 'models/house-2.glb',
+    modelComponent: House2,
     name: 'House',
     description: 'Home is where the heart is! ',
     tags: [
@@ -271,16 +232,13 @@ export const tileCatalog: TileCatalog = {
     happiness: 2,
     happinessGrowth: 0,
     revenue: 2,
-    project4: '',
-    project5: '',
     projects: [
       'demolish'
     ]
   },
   'shop-0': {
     id: 'shop-0',
-    modelComponent: '',
-    modelPath: 'models/shop-0.glb',
+    modelComponent: Shop0,
     name: 'Boarded-Up Shop',
     description: 'Best to avoid. ',
     tags: [
@@ -290,8 +248,6 @@ export const tileCatalog: TileCatalog = {
     happiness: -10,
     happinessGrowth: 0,
     revenue: 0,
-    project4: '',
-    project5: '',
     projects: [
       'demolish',
       'repair-shop'
@@ -299,8 +255,7 @@ export const tileCatalog: TileCatalog = {
   },
   'shop-small': {
     id: 'shop-small',
-    modelComponent: '',
-    modelPath: 'models/shop-small.glb',
+    modelComponent: ShopSmall,
     name: 'Stuff',
     description: 'For stuff. ',
     tags: [
@@ -309,8 +264,6 @@ export const tileCatalog: TileCatalog = {
     happiness: 10,
     happinessGrowth: 0,
     revenue: 5,
-    project4: '',
-    project5: '',
     projects: [
       'demolish',
       'upgrade-shop-supermarket'
@@ -318,8 +271,7 @@ export const tileCatalog: TileCatalog = {
   },
   'shop-market': {
     id: 'shop-market',
-    modelComponent: '',
-    modelPath: 'models/shop-market.glb',
+    modelComponent: ShopMarket,
     name: 'Food & Stuff',
     description: 'For food and stuff. ',
     tags: [
@@ -328,8 +280,6 @@ export const tileCatalog: TileCatalog = {
     happiness: 10,
     happinessGrowth: 0,
     revenue: 8,
-    project4: '',
-    project5: '',
     projects: [
       'demolish',
       'upgrade-shop-small',
@@ -338,8 +288,7 @@ export const tileCatalog: TileCatalog = {
   },
   'shop-super': {
     id: 'shop-super',
-    modelComponent: '',
-    modelPath: 'models/shop-super.glb',
+    modelComponent: ShopSuper,
     name: 'Super-Mart ',
     description: 'Average ordinary everyday supermarket.',
     tags: [
@@ -348,16 +297,13 @@ export const tileCatalog: TileCatalog = {
     happiness: 12,
     happinessGrowth: 1,
     revenue: 21,
-    project4: '',
-    project5: '',
     projects: [
       'demolish'
     ]
   },
   'library-0': {
     id: 'library-0',
-    modelComponent: '',
-    modelPath: 'models/library-0.glb',
+    modelComponent: Library0,
     name: 'Rusty Books',
     description: "Don't waste your time reading. ",
     tags: [
@@ -368,8 +314,6 @@ export const tileCatalog: TileCatalog = {
     happiness: -10,
     happinessGrowth: 0,
     revenue: -5,
-    project4: '',
-    project5: '',
     projects: [
       'demolish',
       'repair-library'
@@ -377,8 +321,7 @@ export const tileCatalog: TileCatalog = {
   },
   'library-1': {
     id: 'library-1',
-    modelComponent: '',
-    modelPath: 'models/library-1.glb',
+    modelComponent: Library1,
     name: 'Rustfield Library ',
     description: 'To read, or not to read? ',
     tags: [
@@ -388,8 +331,6 @@ export const tileCatalog: TileCatalog = {
     happiness: 5,
     happinessGrowth: 1,
     revenue: -10,
-    project4: '',
-    project5: '',
     projects: [
       'demolish',
       'upgrade-library'
@@ -397,8 +338,7 @@ export const tileCatalog: TileCatalog = {
   },
   'library-2': {
     id: 'library-2',
-    modelComponent: '',
-    modelPath: 'models/library-2.glb',
+    modelComponent: Library2,
     name: 'Library of Rustfield',
     description: "It's not Alexandria, but it's still nice. ",
     tags: [
@@ -407,16 +347,13 @@ export const tileCatalog: TileCatalog = {
     happiness: 15,
     happinessGrowth: 2,
     revenue: -15,
-    project4: '',
-    project5: '',
     projects: [
       'demolish'
     ]
   },
   'fire-0': {
     id: 'fire-0',
-    modelComponent: '',
-    modelPath: 'models/fire-0.glb',
+    modelComponent: Fire0,
     name: 'Fire Station 0',
     description: 'Half the force was fired...',
     tags: [
@@ -426,8 +363,6 @@ export const tileCatalog: TileCatalog = {
     happiness: -15,
     happinessGrowth: 0,
     revenue: -20,
-    project4: '',
-    project5: '',
     projects: [
       'demolish',
       'repair-firestation'
@@ -435,8 +370,7 @@ export const tileCatalog: TileCatalog = {
   },
   'fire-1': {
     id: 'fire-1',
-    modelComponent: '',
-    modelPath: 'models/fire-1.glb',
+    modelComponent: Fire1,
     name: 'Fire Station 1 ',
     description: 'Smokeshows fighting smokeshows! ',
     tags: [
@@ -445,16 +379,13 @@ export const tileCatalog: TileCatalog = {
     happiness: 15,
     happinessGrowth: 0,
     revenue: -10,
-    project4: '',
-    project5: '',
     projects: [
       'demolish'
     ]
   },
   'restaurant-0': {
     id: 'restaurant-0',
-    modelComponent: '',
-    modelPath: 'models/restaurant-0.glb',
+    modelComponent: Restaurant0,
     name: 'Rust Burger ',
     description: 'Would you like to super-size that order? ',
     tags: [
@@ -464,8 +395,6 @@ export const tileCatalog: TileCatalog = {
     happiness: -10,
     happinessGrowth: 0,
     revenue: 0,
-    project4: '',
-    project5: '',
     projects: [
       'demolish',
       'upgrade-rest-diner'
@@ -473,8 +402,7 @@ export const tileCatalog: TileCatalog = {
   },
   'restaurant-1': {
     id: 'restaurant-1',
-    modelComponent: '',
-    modelPath: 'models/restaurant-1.glb',
+    modelComponent: Restaurant1,
     name: "Dalilah's Diner",
     description: 'Half price apps and drinks! ',
     tags: [
@@ -483,8 +411,6 @@ export const tileCatalog: TileCatalog = {
     happiness: 3,
     happinessGrowth: 0,
     revenue: 4,
-    project4: '',
-    project5: '',
     projects: [
       'demolish',
       'upgrade-rest-fine-dining'
@@ -492,8 +418,7 @@ export const tileCatalog: TileCatalog = {
   },
   'restaurant-2': {
     id: 'restaurant-2',
-    modelComponent: '',
-    modelPath: 'models/restaurant-2.glb',
+    modelComponent: Restaurant2,
     name: "Bianca's Bistro",
     description: 'Look at you big spender. ',
     tags: [
@@ -502,16 +427,13 @@ export const tileCatalog: TileCatalog = {
     happiness: 7,
     happinessGrowth: 0,
     revenue: 10,
-    project4: '',
-    project5: '',
     projects: [
       'demolish'
     ]
   },
   'road-straight': {
     id: 'road-straight',
-    modelComponent: '',
-    modelPath: 'models/road-straight.glb',
+    modelComponent: RoadStraight,
     name: 'Straight Road',
     description: 'Curves are overratted. ',
     tags: [
@@ -520,14 +442,11 @@ export const tileCatalog: TileCatalog = {
     happiness: 0,
     happinessGrowth: 0,
     revenue: 0,
-    project4: '',
-    project5: '',
     projects: []
   },
   'road-turn': {
     id: 'road-turn',
-    modelComponent: '',
-    modelPath: 'models/road-turn.glb',
+    modelComponent: RoadTurn,
     name: 'Turn Road',
     description: 'Curves are awesome! ',
     tags: [
@@ -536,14 +455,11 @@ export const tileCatalog: TileCatalog = {
     happiness: 0,
     happinessGrowth: 0,
     revenue: 0,
-    project4: '',
-    project5: '',
     projects: []
   },
   'road-intersection': {
     id: 'road-intersection',
-    modelComponent: '',
-    modelPath: 'models/road-intersection.glb',
+    modelComponent: RoadIntersection,
     name: 'Intersection Road',
     description: 'Two roads diverged... ',
     tags: [
@@ -552,14 +468,11 @@ export const tileCatalog: TileCatalog = {
     happiness: 0,
     happinessGrowth: 0,
     revenue: 0,
-    project4: '',
-    project5: '',
     projects: []
   },
   'office-1': {
     id: 'office-1',
-    modelComponent: '',
-    modelPath: 'models/office-1.glb',
+    modelComponent: Office1,
     name: 'Office One',
     description: "Somebody's got a case of the Mondays!",
     tags: [
@@ -569,8 +482,6 @@ export const tileCatalog: TileCatalog = {
     happiness: 5,
     happinessGrowth: 0,
     revenue: 5,
-    project4: '',
-    project5: '',
     projects: [
       'demolish',
       'upgrade-office-2'
@@ -578,8 +489,7 @@ export const tileCatalog: TileCatalog = {
   },
   'office-2': {
     id: 'office-2',
-    modelComponent: '',
-    modelPath: 'models/office-2.glb',
+    modelComponent: Office1,
     name: 'Office Two',
     description: 'Need those TPS reports ASAP.',
     tags: [
@@ -589,8 +499,6 @@ export const tileCatalog: TileCatalog = {
     happiness: 5,
     happinessGrowth: 0,
     revenue: 10,
-    project4: '',
-    project5: '',
     projects: [
       'demolish',
       'upgrade-office-3'
@@ -598,8 +506,7 @@ export const tileCatalog: TileCatalog = {
   },
   'office-3': {
     id: 'office-3',
-    modelComponent: '',
-    modelPath: 'models/office-3.glb',
+    modelComponent: Office1,
     name: 'Office Three',
     description: 'Next Friday is Hawaiian shirt day! ',
     tags: [
@@ -609,8 +516,6 @@ export const tileCatalog: TileCatalog = {
     happiness: 5,
     happinessGrowth: 0,
     revenue: 15,
-    project4: '',
-    project5: '',
     projects: [
       'demolish',
       'upgrade-office-4'
@@ -618,8 +523,7 @@ export const tileCatalog: TileCatalog = {
   },
   'office-4': {
     id: 'office-4',
-    modelComponent: '',
-    modelPath: 'models/office-4.glb',
+    modelComponent: Office1,
     name: 'Office Four',
     description: 'I believe you have my stapler. ',
     tags: [
@@ -629,16 +533,13 @@ export const tileCatalog: TileCatalog = {
     happiness: 5,
     happinessGrowth: 0,
     revenue: 20,
-    project4: '',
-    project5: '',
     projects: [
       'demolish'
     ]
   },
   'energy-wind': {
     id: 'energy-wind',
-    modelComponent: '',
-    modelPath: 'models/energy-wind.glb',
+    modelComponent: EnergyWind,
     name: 'Wind Farm',
     description: "Renewable energy? I'm a huge fan! ",
     tags: [
@@ -648,8 +549,6 @@ export const tileCatalog: TileCatalog = {
     happiness: 4,
     happinessGrowth: 1,
     revenue: -15,
-    project4: '',
-    project5: '',
     projects: [
       'demolish',
       'upgrade-energy-coal'
@@ -657,8 +556,7 @@ export const tileCatalog: TileCatalog = {
   },
   'energy-coal': {
     id: 'energy-coal',
-    modelComponent: '',
-    modelPath: 'models/energy-coal.glb',
+    modelComponent: EnergyCoal,
     name: 'Coal Plant',
     description: "Tell the kids it's a cloud factory. ",
     tags: [
@@ -668,8 +566,6 @@ export const tileCatalog: TileCatalog = {
     happiness: 2,
     happinessGrowth: -1,
     revenue: -20,
-    project4: '',
-    project5: '',
     projects: [
       'demolish',
       'upgrade-energy-wind'
