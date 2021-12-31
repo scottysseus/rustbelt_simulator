@@ -42,11 +42,10 @@ function GameView (props: GameViewProps) {
         shadow-mapSize-width={4096}
         shadow-mapSize-height={4096}
         shadow-camera-near={0.5}
-        shadow-camera-far={30}
+        shadow-camera-far={120}
         shadow-bias={-0.0003}
       />
       <Map gridInterval={1} mapState={props.state.game.map} uiState={props.state.ui} dispatch={props.dispatch} />
-      <Stats className='stats' showPanel={1} />
       {/* <gridHelper position={[0, 0.002, 0]} args={[100, 100, 'white', 'gray']} />
       <axesHelper position={[0, 0.004, 0]} args={[10]} /> */}
     </>

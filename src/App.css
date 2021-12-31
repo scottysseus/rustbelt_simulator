@@ -21,6 +21,24 @@ html, body {
 
 }
 
+.menu-intro {
+    background-size: cover;
+    background-color: #130701;
+    background-repeat: no-repeat;
+    background-position: center;
+    min-width: 100%;
+    min-height: 100%;
+    position: fixed;
+    /* font-size: 18px; */
+    color: #b65e38;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+    text-align: center;
+    padding-top: 5%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
 .menu-main {
     background-size: cover;
     background-color: #130701;
@@ -91,7 +109,7 @@ html, body {
     gap: 10px;
     padding: 12px;
     align-items: center;
-    background-color: transparent;
+    background-color: rgb(182,94,56, 0.5);
     color: #130701;
     box-shadow: none;
     padding-left: 24px;
