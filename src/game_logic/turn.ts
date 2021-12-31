@@ -64,10 +64,12 @@ function checkIfTileCompleted (state: GameState, tileIndex: number): GameState {
   const projectDefinition = projectCatalog[tile.activeProject.type]
   const tileDefinition = tileCatalog[tile.type]
 
+  // Exit early if project isn't done
   if (tile.activeProject.progress < projectDefinition.effort) {
     return state
   }
 
+  // Add this project to the list of completed projects
   const newTile: Tile = {
     // morph the tile into the target type
     type: projectDefinition.targetTileType,
@@ -76,6 +78,8 @@ function checkIfTileCompleted (state: GameState, tileIndex: number): GameState {
   }
 
   return produce(state, draft => {
+    draft.player.projects.completed.push(tile.activeProject.type)
+    draft.player.resources.workers.free += tile.activeProject.assignedWorkers
     draft.map.tiles[tileIndex] = newTile
     draft.player.victory.happiness += tileDefinition.happiness
     draft.player.resources.money.revenue += tileDefinition.revenue
@@ -114,13 +118,17 @@ export function resolveContracts (initialState: GameState): GameState {
  * been satisfied or, if none was found, -1.
  */
 function findIndexOfSatisfiedOpenContract (state: GameState): number {
-  return state.player.contracts.open.findIndex(contract => contract.isSatisfied(state))
+  return state.player.contracts.open.findIndex(contract => {
+    const satisfied = contract.isSatisfied(state)
+    return satisfied
+  })
 }
 
 /**
  * Collects the rewards of the contract at contractIndex of the `open` list and moves it to the `completed` list,
  */
 function completeContract (state: GameState, contractIndex: number): GameState {
+  console.debug('Completeing Contract', state.player.contracts.open[contractIndex])
   const newState = state.player.contracts.open[contractIndex].applyReward(state)
   return produce(newState, draft => {
     const completed = draft.player.contracts.open[contractIndex]

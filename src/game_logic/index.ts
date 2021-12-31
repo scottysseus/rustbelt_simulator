@@ -47,6 +47,9 @@ export function createGameState (): GameState {
       contracts: {
         open: openContracts,
         completed: []
+      },
+      projects: {
+        completed: []
       }
     },
     map: {

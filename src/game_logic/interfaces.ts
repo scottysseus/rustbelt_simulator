@@ -142,6 +142,9 @@ export interface PlayerState {
   readonly contracts: {
     readonly completed: ReadonlyArray<Contract>,
     readonly open: ReadonlyArray<Contract>
+  },
+  readonly projects: {
+    readonly completed: ProjectType[]
   }
 }
 
