@@ -10,7 +10,6 @@ export function Menu (props: MenuProps) {
       Rustfield Revival
       <Stack spacing={2} className='menu-main-buttons'>
         <Button variant='contained' onClick={props.onStart}>Start</Button>
-        <Button variant='contained'>Credits</Button>
       </Stack>
     </>
   )

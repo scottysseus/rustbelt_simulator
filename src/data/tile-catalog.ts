@@ -21,7 +21,8 @@ export const tileCatalog: TileCatalog = {
       'upgrade-office',
       'build-shop-market',
       'build-fire',
-      'build-library'
+      'build-library',
+      'build-house'
     ]
   },
   meadow: {
