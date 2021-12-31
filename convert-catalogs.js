@@ -70,8 +70,6 @@ async function convertProjectCatalog () {
     delete entry.tier
     finalCat[entry.id] = entry
   }
-  console.log(projectCat)
-  console.log(finalCat)
 
   const projectCatalogFile = `
 import { ProjectCatalog } from '../game_logic'

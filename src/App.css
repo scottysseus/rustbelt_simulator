@@ -22,13 +22,17 @@ html, body {
 }
 
 .menu-main {
+    background-size: cover;
     background-color: #130701;
+    background-repeat: no-repeat;
+    background-position: center;
     min-width: 100%;
     min-height: 100%;
     position: fixed;
     font-family: 'Rock Salt', cursive;
     font-size: 56px;
-    color: #b7410e;
+    color: #b65e38;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
     text-align: center;
     padding-top: 10%;
     display: flex;
@@ -37,7 +41,8 @@ html, body {
 }
 
 .menu-main-buttons > button {
-    background-color: #b7410e;
+    background-color: #b65e38;
+    border: 1px solid black;
     min-width: max-content;
     width: 256px;
 }

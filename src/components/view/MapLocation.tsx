@@ -22,9 +22,8 @@ export function MapLocation (props: {row: number, column: number, gridInterval: 
   const onPointerOut = useCallback(() => setHover(false), [])
 
   const onClick = useCallback(() => {
-    console.log('Clicked on Map Location', tileDefinition.name, props.column, props.row)
     props.onSelected()
-  }, [props, tileDefinition.name])
+  }, [props])
 
   return (
     <group
