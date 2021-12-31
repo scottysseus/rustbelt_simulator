@@ -1,6 +1,6 @@
 import produce from 'immer'
 import { Contract, ContractCatalog, GameState } from '../game_logic'
-import { COMP_EQ, satisfiesTagCount, satisfiesTileTypeCount, satisifiesCompletedProjectCount, satisfiesCompletedProjectsAnyCount } from '../game_logic/contracts'
+import { COMP_EQ, satisfiesTagCount, satisfiesTileTypeCount, satisifiesCompletedProjectCount, satisfiesCompletedProjectsAnyCount, progressTagCount, progressCompletedProjectCount, progressCompletedProjectsAnyCount, progressTileTypeCount } from '../game_logic/contracts'
 
 export const contractIDs = {
   imLovinIt: 'i\'m lovin\' it',
@@ -25,7 +25,7 @@ export const catalog: ContractCatalog = {
       draft.player.resources.money.revenue += 100
       draft.player.victory.happiness += 3
     }),
-    calculateProgress: () => ({ current: 0, required: 2 })
+    calculateProgress: (gameState: GameState) => progressCompletedProjectCount(gameState, { 'upgrade-restaurant-family': 1 })
   },
   [contractIDs.greenTourism]: {
     name: 'Green Tourism',
@@ -36,7 +36,7 @@ export const catalog: ContractCatalog = {
       draft.player.resources.money.balance += 85
       draft.player.victory.happiness += 5
     }),
-    calculateProgress: () => ({ current: 0, required: 2 })
+    calculateProgress: (gameState: GameState) => progressTagCount(gameState, { park: 1 })
   },
   [contractIDs.brokenWindowsTheory]: {
     name: 'Broken Windows Theory',
@@ -46,7 +46,7 @@ export const catalog: ContractCatalog = {
     applyReward: produce((draft) => {
       draft.player.victory.happiness += 22
     }),
-    calculateProgress: () => ({ current: 0, required: 2 })
+    calculateProgress: (gameState: GameState) => progressTagCount(gameState, { damaged: 0 }, COMP_EQ)
   },
   [contractIDs.educatedWorkforce]: {
     name: 'Educated Workforce',
@@ -57,7 +57,7 @@ export const catalog: ContractCatalog = {
       draft.player.victory.happiness += 5
       draft.player.resources.workers.max += 2
     }),
-    calculateProgress: () => ({ current: 0, required: 2 })
+    calculateProgress: (gameState: GameState) => progressCompletedProjectCount(gameState, { 'build-library': 1 })
   },
   [contractIDs.mansBestFriend]: {
     name: 'Man\'s Best Friend',
@@ -68,7 +68,7 @@ export const catalog: ContractCatalog = {
       draft.player.victory.happiness += 5
       draft.player.resources.workers.max += 2
     }),
-    calculateProgress: () => ({ current: 0, required: 2 })
+    calculateProgress: (gameState: GameState) => progressTileTypeCount(gameState, { 'park-dog': 2 })
   },
   [contractIDs.civicLeader]: {
     name: 'Civic Leader',
@@ -79,7 +79,7 @@ export const catalog: ContractCatalog = {
       draft.player.victory.happiness += 10
       draft.player.resources.workers.max += 2
     }),
-    calculateProgress: () => ({ current: 0, required: 2 })
+    calculateProgress: (gameState: GameState) => progressCompletedProjectsAnyCount(gameState, ['repair-library', 'repair-firestation'], 2)
   },
   [contractIDs.conservationist]: {
     name: 'Conservationist',
@@ -90,7 +90,7 @@ export const catalog: ContractCatalog = {
       draft.player.victory.happiness += 5
       draft.player.resources.workers.max += 2
     }),
-    calculateProgress: () => ({ current: 0, required: 2 })
+    calculateProgress: (gameState: GameState) => progressCompletedProjectsAnyCount(gameState, ['restore-forest'], 2)
   },
   [contractIDs.theCoalIndustryIsBack]: {
     name: 'The Coal Industry is Back',
@@ -101,7 +101,7 @@ export const catalog: ContractCatalog = {
       draft.player.victory.happiness += 5
       draft.player.resources.workers.max += 2
     }),
-    calculateProgress: () => ({ current: 0, required: 2 })
+    calculateProgress: (gameState: GameState) => progressCompletedProjectCount(gameState, { 'convert-wind': 2 })
   },
   [contractIDs.thisOldHouse]: {
     name: 'This Old House',
@@ -112,7 +112,7 @@ export const catalog: ContractCatalog = {
       draft.player.victory.happiness += 5
       draft.player.resources.workers.max += 2
     }),
-    calculateProgress: () => ({ current: 0, required: 2 })
+    calculateProgress: (gameState: GameState) => progressCompletedProjectCount(gameState, { 'repair-house': 2 })
   },
   [contractIDs.whiteCollar]: {
     name: 'White Collar',
@@ -123,7 +123,7 @@ export const catalog: ContractCatalog = {
       draft.player.victory.happiness += 5
       draft.player.resources.workers.max += 2
     }),
-    calculateProgress: () => ({ current: 0, required: 2 })
+    calculateProgress: (gameState: GameState) => progressCompletedProjectCount(gameState, { 'build-office-tower': 3 })
   }
 }
 

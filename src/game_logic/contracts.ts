@@ -2,9 +2,9 @@
  * This module defines common functions for contracts
  */
 
-import { GameState, ProjectType, Tile, TileType } from '.'
+import { ContractProgress, GameState, ProjectType, Tile, TileType } from '.'
 import { tileCatalog } from '../data/tile-catalog'
-import { mapIncr } from './shared'
+import { clamp, mapIncr } from './shared'
 
 type Comparator = (actual: number, desired: number) => boolean
 export const COMP_GTE: Comparator = (x, y) => x >= y
@@ -36,22 +36,41 @@ function countTilesByType (tiles: readonly Tile[]): Map<TileType, number> {
   return result
 }
 
-function compareCounts<K extends string> (desiredCounts: Record<K, number>, actualCounts: Map<K, number>, comparator: Comparator): boolean {
-  let satisfied = true
+function getCountsProgress<K extends string> (desiredCounts: Record<K, number>, actualCounts: Map<K, number>, comparator: Comparator) {
+  let current = 0
+  let required = 0
   for (const key in desiredCounts) {
     const desired = desiredCounts[key]
+    required += desired
     const actual = actualCounts.get(key)
     if (actual) {
-      satisfied = satisfied && comparator(actual, desired)
-    } else {
-      satisfied = false
-      break
+      if (desired > 0) {
+        current += clamp(actual, 0, desired)
+      } else {
+        current += actual
+      }
     }
   }
-  return satisfied
+  return {
+    current,
+    required
+  }
 }
 
 type DesiredCounts = Record<string, number>
+
+/**
+ * Determine the progress
+ * @param gameState
+ * @param desiredTags
+ * @param comparator
+ * @returns
+ */
+export function progressTagCount (gameState: GameState, desiredTags: DesiredCounts, comparator: Comparator = COMP_GTE): ContractProgress {
+  const actualCounts = countTilesByTags(gameState.map.tiles)
+  const result = getCountsProgress(desiredTags, actualCounts, comparator)
+  return result
+}
 
 /**
  * Determine if the given gameState satisfies an object of desired tag occurence counts.
@@ -60,8 +79,13 @@ type DesiredCounts = Record<string, number>
  * @returns true if for all properties of {desiredTags}, at least the specified number of tiles has that tag
  */
 export function satisfiesTagCount (gameState: GameState, desiredTags: DesiredCounts, comparator: Comparator = COMP_GTE): boolean {
-  const actualCounts = countTilesByTags(gameState.map.tiles)
-  const result = compareCounts(desiredTags, actualCounts, comparator)
+  const result = progressTagCount(gameState, desiredTags, comparator)
+  return comparator(result.current, result.required)
+}
+
+export function progressCompletedProjectCount (gameState: GameState, desiredProjects: DesiredCounts, comparator: Comparator = COMP_GTE): ContractProgress {
+  const actualCounts = countProjectsCompletedByType(gameState.player.projects.completed)
+  const result = getCountsProgress(desiredProjects, actualCounts, comparator)
   return result
 }
 
@@ -73,29 +97,35 @@ export function satisfiesTagCount (gameState: GameState, desiredTags: DesiredCou
  * @returns true if for all properties of {desiredProjects}, at least the specified number of tiles has that tag
  */
 export function satisifiesCompletedProjectCount (gameState: GameState, desiredProjects: DesiredCounts, comparator: Comparator = COMP_GTE): boolean {
-  const actualCounts = countProjectsCompletedByType(gameState.player.projects.completed)
-  const result = compareCounts(desiredProjects, actualCounts, comparator)
-  return result
+  const result = progressCompletedProjectCount(gameState, desiredProjects, comparator)
+  return comparator(result.current, result.required)
 }
 
-/**
- *
- * @param gameState
- * @param desiredProjects
- * @param desiredTotal
- * @param comparator
- * @returns
- */
-export function satisfiesCompletedProjectsAnyCount (gameState: GameState, desiredProjects: ProjectType[], desiredTotal: number, comparator: Comparator = COMP_GTE) {
+export function progressCompletedProjectsAnyCount (gameState: GameState, desiredProjects: ProjectType[], desiredTotal: number, comparator: Comparator = COMP_GTE): ContractProgress {
   const actualCounts = countProjectsCompletedByType(gameState.player.projects.completed)
-  let actualTotal = 0
+  let current = 0
+  const required = desiredTotal
   for (const type of desiredProjects) {
     const actual = actualCounts.get(type)
     if (actual) {
-      actualTotal = actualTotal + actual
+      current = current + actual
     }
   }
-  return comparator(actualTotal, desiredTotal)
+  return {
+    current,
+    required
+  }
+}
+
+export function satisfiesCompletedProjectsAnyCount (gameState: GameState, desiredProjects: ProjectType[], desiredTotal: number, comparator: Comparator = COMP_GTE) {
+  const result = progressCompletedProjectsAnyCount(gameState, desiredProjects, desiredTotal, comparator)
+  return comparator(result.current, result.required)
+}
+
+export function progressTileTypeCount (gameState: GameState, desiredTiles: DesiredCounts, comparator: Comparator = COMP_GTE): ContractProgress {
+  const actualCounts = countTilesByType(gameState.map.tiles)
+  const result = getCountsProgress(desiredTiles, actualCounts, comparator)
+  return result
 }
 
 /**
@@ -106,7 +136,6 @@ export function satisfiesCompletedProjectsAnyCount (gameState: GameState, desire
   * @returns true if for all properties of {desiredTiles}, at least the specified number of tiles has that type
  */
 export function satisfiesTileTypeCount (gameState: GameState, desiredTiles: DesiredCounts, comparator: Comparator = COMP_GTE): boolean {
-  const actualCounts = countTilesByType(gameState.map.tiles)
-  const result = compareCounts(desiredTiles, actualCounts, comparator)
-  return result
+  const result = progressTileTypeCount(gameState, desiredTiles, comparator)
+  return comparator(result.current, result.required)
 }

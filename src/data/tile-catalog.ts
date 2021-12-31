@@ -25,7 +25,7 @@ export const tileCatalog: TileCatalog = {
     description: 'lorem ipsum',
     tags: [
       'retail',
-      ' damaged'
+      'damaged'
     ],
     happiness: -5,
     happinessGrowth: 0,
@@ -57,7 +57,7 @@ export const tileCatalog: TileCatalog = {
     description: 'lorem ipsum',
     tags: [
       'park',
-      ' damaged'
+      'damaged'
     ],
     happiness: -5,
     happinessGrowth: 0,
@@ -141,7 +141,7 @@ export const tileCatalog: TileCatalog = {
     description: 'lorem ipsum',
     tags: [
       'residential',
-      ' damaged'
+      'damaged'
     ],
     happiness: -10,
     happinessGrowth: 0,
@@ -189,7 +189,7 @@ export const tileCatalog: TileCatalog = {
     description: 'lorem ipsum',
     tags: [
       'retail',
-      ' damaged'
+      'damaged'
     ],
     happiness: -10,
     happinessGrowth: 0,
@@ -253,7 +253,7 @@ export const tileCatalog: TileCatalog = {
     description: 'lorem ipsum',
     tags: [
       'civic',
-      ' damaged'
+      'damaged'
     ],
     happiness: -10,
     happinessGrowth: 0,
@@ -302,7 +302,7 @@ export const tileCatalog: TileCatalog = {
     description: 'lorem ipsum',
     tags: [
       'civic',
-      ' damaged'
+      'damaged'
     ],
     happiness: -15,
     happinessGrowth: 0,
@@ -334,7 +334,7 @@ export const tileCatalog: TileCatalog = {
     description: 'lorem ipsum',
     tags: [
       'food',
-      ' damaged'
+      'damaged'
     ],
     happiness: -10,
     happinessGrowth: 0,
