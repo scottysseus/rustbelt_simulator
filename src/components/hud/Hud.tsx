@@ -36,7 +36,7 @@ export function Hud (props: {
         </Accordion>
       </div>
       <div className='bottom-hud'>
-        <TileSummary tile={selectedTile} tileIndex={props.state.ui.selectedTile} workers={props.state.game.player.resources.workers} dispatch={props.dispatch} />
+        <TileSummary money={props.state.game.player.resources.money} tile={selectedTile} tileIndex={props.state.ui.selectedTile} workers={props.state.game.player.resources.workers} dispatch={props.dispatch} />
       </div>
       <div className='bottom-hud-right'>
         <Fab variant='extended' size='large' color='secondary' aria-label='add' onClick={nextTurn}>

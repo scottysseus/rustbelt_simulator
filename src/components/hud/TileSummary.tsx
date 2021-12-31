@@ -10,7 +10,8 @@ export function TileSummary (props: {
   tile: Tile | null,
   tileIndex: number | null,
   workers: WorkerState,
-  dispatch: dispatcher
+  dispatch: dispatcher,
+  money: {revenue: number, balance: number}
 }) {
   if (props.tile === null || props.tileIndex === null) {
     return null
@@ -42,7 +43,7 @@ export function TileSummary (props: {
       />
       <CardContent className='tile-card-content'>
         <Typography style={{ paddingBottom: '12px' }} variant='body2'>{tileDefinition.description}</Typography>
-        {tileDefinition.projects && tileDefinition.projects.length > 0 && <ProjectsDisplay tile={props.tile} tileIndex={props.tileIndex} workers={props.workers} dispatch={props.dispatch} />}
+        {tileDefinition.projects && tileDefinition.projects.length > 0 && <ProjectsDisplay balance={props.money.balance} tile={props.tile} tileIndex={props.tileIndex} workers={props.workers} dispatch={props.dispatch} />}
       </CardContent>
     </Card>
   )

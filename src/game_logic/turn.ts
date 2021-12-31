@@ -14,6 +14,29 @@ import { tileCatalog } from '../data/tile-catalog'
 import { GameState, TileUnderConstruction, isTileUnderConstruction, Tile } from './interfaces'
 import { clamp } from './shared'
 
+export function calculateRevenue (state: GameState): GameState {
+  return produce(state, draft => {
+    let revenue = 0
+    state.map.tiles.forEach(tile => {
+      const catalogEntry = tileCatalog[tile.type]
+      revenue += catalogEntry.revenue
+    })
+
+    draft.player.resources.money.revenue = revenue
+  })
+}
+
+export function calculateHappiness (state: GameState): GameState {
+  return produce(state, draft => {
+    let happiness = 0
+    state.map.tiles.forEach(tile => {
+      const catalogEntry = tileCatalog[tile.type]
+      happiness += catalogEntry.happiness
+    })
+    draft.player.victory.happiness = happiness
+  })
+}
+
 export function applyRevenue (state: GameState): GameState {
   return produce(state, draft => {
     draft.player.resources.money.balance += draft.player.resources.money.revenue
