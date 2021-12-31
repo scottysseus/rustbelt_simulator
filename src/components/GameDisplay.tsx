@@ -1,5 +1,5 @@
 import { Modal } from '@mui/material'
-import { CSSProperties, forwardRef, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useImmerReducer } from 'use-immer'
 import { createGameState } from '../game_logic'
 import { Hud } from './hud/Hud'
@@ -12,11 +12,10 @@ const startingState: State = {
 }
 
 type GameDisplayProps = {
-  style?: CSSProperties // applied by transition
   started: boolean
 }
 
-export const GameDisplay = forwardRef<HTMLDivElement, GameDisplayProps>((props, ref) => {
+export function GameDisplay (props: GameDisplayProps) {
   const [state, dispatch] = useImmerReducer<State, Action>(reducer, startingState)
   const [transitioningTurn, setTransitioningTurn] = useState(false)
   useEffect(() => {
@@ -28,10 +27,10 @@ export const GameDisplay = forwardRef<HTMLDivElement, GameDisplayProps>((props, 
   }, [props.started, state.game.game.turnCounter])
 
   return (
-    <div style={props.style} ref={ref} className='container'>
+    <>
       <GameViewPort state={state} dispatch={dispatch} />
       <Hud state={state} dispatch={dispatch} />
       <Modal open={transitioningTurn}><div className='turn-transition-modal'>{'Turn ' + (state.game.game.turnCounter + 1)}</div></Modal>
-    </div>
+    </>
   )
-})
+}

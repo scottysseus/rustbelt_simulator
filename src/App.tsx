@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { GameDisplay } from './components/GameDisplay'
 import { Menu } from './components/Menu'
 import { GameIntro } from './components/GameIntro'
+import Background from './assets/images/menu-background.png'
 
 function App () {
   const [menuState, setMenuState] = useState('menu')
@@ -20,13 +21,19 @@ function App () {
   return (
     <>
       <Fade unmountOnExit appear={false} in={menuState === 'menu'}>
-        <Menu onStart={onStart} />
+        <div style={{ backgroundImage: `url(${Background})` }} className='menu-main'>
+          <Menu onStart={onStart} />
+        </div>
       </Fade>
       <Fade in={menuState === 'intro'}>
-        <GameIntro onContinue={onContinue} />
+        <div className='menu-intro'>
+          <GameIntro onContinue={onContinue} />
+        </div>
       </Fade>
       <Fade in={menuState === 'game'}>
-        <GameDisplay started={menuState === 'game'} />
+        <div className='container'>
+          <GameDisplay started={menuState === 'game'} />
+        </div>
       </Fade>
     </>
   )
