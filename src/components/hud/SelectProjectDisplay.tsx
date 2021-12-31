@@ -8,7 +8,6 @@ import { ProjectCard } from './ProjectCard'
 export function SelectProjectDisplay (props: {tile: Tile, tileIndex: number, dispatch: dispatcher}) {
   const tileDefinition = tileCatalog[props.tile.type]
   const projects = tileDefinition.projects.map((id) => projectCatalog[id])
-  console.log('projects', projects, props.tile)
   const projectList = projects.map((project, index) => {
     const onClick = () => {
       props.dispatch({ type: 'selectProject', projectIndex: index, tileIndex: props.tileIndex })

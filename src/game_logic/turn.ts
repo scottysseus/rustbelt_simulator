@@ -64,10 +64,12 @@ function checkIfTileCompleted (state: GameState, tileIndex: number): GameState {
   const projectDefinition = projectCatalog[tile.activeProject.type]
   const tileDefinition = tileCatalog[tile.type]
 
+  // Exit early if project isn't done
   if (tile.activeProject.progress < projectDefinition.effort) {
     return state
   }
 
+  // Add this project to the list of completed projects
   const newTile: Tile = {
     // morph the tile into the target type
     type: projectDefinition.targetTileType,
@@ -76,6 +78,8 @@ function checkIfTileCompleted (state: GameState, tileIndex: number): GameState {
   }
 
   return produce(state, draft => {
+    draft.player.projects.completed.push(tile.activeProject.type)
+    draft.player.resources.workers.free += tile.activeProject.assignedWorkers
     draft.map.tiles[tileIndex] = newTile
     draft.player.victory.happiness += tileDefinition.happiness
     draft.player.resources.money.revenue += tileDefinition.revenue
