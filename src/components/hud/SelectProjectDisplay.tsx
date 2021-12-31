@@ -1,8 +1,9 @@
-import { Button, Table, TableBody, TableCell, TableHead, TableRow, Typography } from '@mui/material'
+import { Button, List, ListItem, Typography } from '@mui/material'
 import { projectCatalog } from '../../data/project-catalog'
 import { tileCatalog } from '../../data/tile-catalog'
 import { Tile } from '../../game_logic'
 import { dispatcher } from '../reducers'
+import { ProjectCard } from './ProjectCard'
 
 export function SelectProjectDisplay (props: {tile: Tile, tileIndex: number, dispatch: dispatcher}) {
   const tileDefinition = tileCatalog[props.tile.type]
@@ -10,35 +11,28 @@ export function SelectProjectDisplay (props: {tile: Tile, tileIndex: number, dis
   console.log('projects', projects, props.tile)
   const projectList = projects.map((project, index) => {
     const onClick = () => {
-      // TODO: Get the tile index here to pass up with the dispatch or otherwise figure out how to fix the fact
-      // that I don't know what the tile index is
       props.dispatch({ type: 'selectProject', projectIndex: index, tileIndex: props.tileIndex })
     }
-    const targetTileDefinition = tileCatalog[project.targetTileType]
+
     return (
-      <TableRow key={project.name}>
-        <TableCell><Typography>{project.name}</Typography></TableCell>
-        <TableCell><Typography>{project.cost}</Typography></TableCell>
-        <TableCell><Typography>{project.effort}</Typography></TableCell>
-        <TableCell><Typography>{targetTileDefinition.name}</Typography></TableCell>
-        <TableCell><Button onClick={onClick}>Start</Button></TableCell>
-      </TableRow>
+      <ListItem className='project-list-item' key={project.id}>
+        <ProjectCard
+          project={project}
+          content={
+            <Typography variant='body2'>{project.description}</Typography>
+        }
+          action={
+            <Button onClick={onClick}>Start</Button>
+        }
+        />
+      </ListItem>
     )
   })
 
   return (
     <>
-      <Typography variant='h6'>Projects</Typography>
-      <Table>
-        <TableHead>
-          <TableRow>
-            {['Name', 'Cost', 'Effort', 'Goal', ''].map((s) => (<TableCell key={s}>{s}</TableCell>))}
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {projectList}
-        </TableBody>
-      </Table>
+      <Typography><b>Projects</b></Typography>
+      <List>{projectList}</List>
     </>
   )
 }
