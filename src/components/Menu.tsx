@@ -13,7 +13,6 @@ export const Menu = forwardRef<HTMLDivElement, MenuProps>((props, ref) => {
       Rustfield Revival
       <Stack spacing={2} className='menu-main-buttons'>
         <Button variant='contained' onClick={props.onStart}>Start</Button>
-        <Button variant='contained'>Credits</Button>
       </Stack>
     </div>
   )
