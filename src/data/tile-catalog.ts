@@ -11,7 +11,7 @@ export const tileCatalog: TileCatalog = {
     description: "What? It's an empty lot.",
     tags: [
       'abandoned',
-      ' empty'
+      'empty'
     ],
     happiness: 0,
     happinessGrowth: 0,
@@ -31,7 +31,7 @@ export const tileCatalog: TileCatalog = {
     description: 'Grassy meadow.',
     tags: [
       'nature',
-      ' empty'
+      'empty'
     ],
     happiness: 1,
     happinessGrowth: 0,
@@ -79,7 +79,7 @@ export const tileCatalog: TileCatalog = {
     description: 'Not for late night snack runs. ',
     tags: [
       'retail',
-      ' damaged'
+      'damaged'
     ],
     happiness: -5,
     happinessGrowth: 0,
@@ -111,7 +111,7 @@ export const tileCatalog: TileCatalog = {
     description: 'Find another field to play in. ',
     tags: [
       'park',
-      ' damaged'
+      'damaged'
     ],
     happiness: -5,
     happinessGrowth: 0,
@@ -183,7 +183,7 @@ export const tileCatalog: TileCatalog = {
     description: 'For sports and sport related activities.',
     tags: [
       'park',
-      ' entertainment'
+      'entertainment'
     ],
     happiness: 20,
     happinessGrowth: 2,
@@ -202,7 +202,7 @@ export const tileCatalog: TileCatalog = {
     description: 'Might be haunted. ',
     tags: [
       'residential',
-      ' damaged'
+      'damaged'
     ],
     happiness: -10,
     happinessGrowth: 0,
@@ -250,7 +250,7 @@ export const tileCatalog: TileCatalog = {
     description: 'Best to avoid. ',
     tags: [
       'retail',
-      ' damaged'
+      'damaged'
     ],
     happiness: -10,
     happinessGrowth: 0,
@@ -315,7 +315,8 @@ export const tileCatalog: TileCatalog = {
     description: "Don't waste your time reading. ",
     tags: [
       'civic',
-      'damaged'
+      'damaged',
+      'entertainment'
     ],
     happiness: -10,
     happinessGrowth: 0,
@@ -332,7 +333,7 @@ export const tileCatalog: TileCatalog = {
     description: 'To read, or not to read? ',
     tags: [
       'civic',
-      ' entertainment'
+      'entertainment'
     ],
     happiness: 5,
     happinessGrowth: 1,
@@ -364,7 +365,7 @@ export const tileCatalog: TileCatalog = {
     description: 'Half the force was fired...',
     tags: [
       'civic',
-      ' damaged'
+      'damaged'
     ],
     happiness: -15,
     happinessGrowth: 0,
@@ -396,7 +397,7 @@ export const tileCatalog: TileCatalog = {
     description: 'Would you like to super-size that order? ',
     tags: [
       'food',
-      ' damaged'
+      'damaged'
     ],
     happiness: -10,
     happinessGrowth: 0,
@@ -483,7 +484,7 @@ export const tileCatalog: TileCatalog = {
     description: "Somebody's got a case of the Mondays!",
     tags: [
       'commercial',
-      ' corporate'
+      'corporate'
     ],
     happiness: 5,
     happinessGrowth: 0,
@@ -500,7 +501,7 @@ export const tileCatalog: TileCatalog = {
     description: 'Need those TPS reports ASAP.',
     tags: [
       'commercial',
-      ' corporate'
+      'corporate'
     ],
     happiness: 5,
     happinessGrowth: 0,
@@ -517,7 +518,7 @@ export const tileCatalog: TileCatalog = {
     description: 'Next Friday is Hawaiian shirt day! ',
     tags: [
       'commercial',
-      ' corporate'
+      'corporate'
     ],
     happiness: 5,
     happinessGrowth: 0,
@@ -534,7 +535,7 @@ export const tileCatalog: TileCatalog = {
     description: 'I believe you have my stapler. ',
     tags: [
       'commercial',
-      ' corporate'
+      'corporate'
     ],
     happiness: 5,
     happinessGrowth: 0,
@@ -550,7 +551,7 @@ export const tileCatalog: TileCatalog = {
     description: "Renewable energy? I'm a huge fan! ",
     tags: [
       'civic',
-      ' power'
+      'power'
     ],
     happiness: 4,
     happinessGrowth: 1,
@@ -567,7 +568,7 @@ export const tileCatalog: TileCatalog = {
     description: "Tell the kids it's a cloud factory. ",
     tags: [
       'civic',
-      ' power'
+      'power'
     ],
     happiness: 2,
     happinessGrowth: -1,

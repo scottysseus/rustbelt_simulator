@@ -23,7 +23,7 @@ async function convertTileCatalog () {
       entry.projects.push(entry.project5)
     }
 
-    entry.tags = entry.tags.split(',')
+    entry.tags = entry.tags.split(',').map(tag => tag.trim())
     entry.happiness = parseInt(entry.happiness)
     entry.revenue = parseInt(entry.revenue)
     entry.happinessGrowth = parseInt(entry.happinessGrowth)
