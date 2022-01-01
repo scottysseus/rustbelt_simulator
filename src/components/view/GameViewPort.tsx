@@ -11,6 +11,7 @@ function PlainPlane () {
     <mesh
       position={[0, -0.002, 0]}
       rotation={new THREE.Euler(-Math.PI / 2)}
+      name='plainPlane'
       receiveShadow
     >
       <planeGeometry args={[1000, 1000, 20, 20]} />
@@ -37,7 +38,7 @@ function GameView (props: GameViewProps) {
       <MapControls maxPolarAngle={1 / 2 * Math.PI - Math.PI / 16} target={[10, 0, 10]} />
       <PlainPlane />
       <Skybox />
-      <ambientLight intensity={0.3} />
+      <ambientLight intensity={0.6} />
       <Map gridInterval={1} mapState={props.state.game.map} uiState={props.state.ui} dispatch={props.dispatch} />
       {/* <gridHelper position={[0, 0.002, 0]} args={[100, 100, 'white', 'gray']} />
       <axesHelper position={[0, 0.004, 0]} args={[10]} /> */}

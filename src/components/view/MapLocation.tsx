@@ -44,6 +44,7 @@ export function MapLocation (props: {row: number, column: number, gridInterval: 
   return (
     <group
       position={[x, 0, z]}
+      name='mapLocation'
     >
       <RotateY angle={props.tile.rotation}>
         <ModelComponent

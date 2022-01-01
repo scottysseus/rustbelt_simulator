@@ -20,8 +20,8 @@ export default function useCsm () {
       shadowMapSize: 4096,
       camera: camera,
       lightDirection: lightDirection,
-      lightIntensity: 0.4,
-      lightNear: 0.1,
+      lightIntensity: 1.0,
+      lightNear: 1,
       lightFar: 40,
       lightMargin: 6,
       shadowBias: -0.0005
@@ -34,6 +34,26 @@ export default function useCsm () {
       }
     }
   }, [camera, scene])
+
+  useEffect(() => {
+    if (!csmRef.current) { return }
+    const csm = csmRef.current
+
+    scene.traverse((obj) => {
+      if (obj.name === 'mapLocation') {
+        obj.traverse((innerObj) => {
+          if (innerObj instanceof THREE.Mesh) {
+            csm.setupMaterial(innerObj.material)
+          }
+        })
+      }
+
+      if (obj.name === 'plainPlane') {
+        const material = (obj as THREE.Mesh).material as THREE.Material
+        csm.setupMaterial(material)
+      }
+    })
+  }, [scene])
 
   useFrame(() => {
     if (csmRef.current) {
