@@ -71,17 +71,15 @@ function AuraSide (props: AuraSideProps) {
       >
         <planeGeometry args={[1, AURA_SIDE_HEIGHT]} />
         <shaderMaterial
-          args={[{
-            uniforms: {
-              color: {
-                value: props.color
-              }
-            },
-            vertexShader,
-            fragmentShader,
-            transparent: true,
-            depthWrite: false
-          }]}
+          uniforms={{
+            color: {
+              value: props.color
+            }
+          }}
+          vertexShader={vertexShader}
+          fragmentShader={fragmentShader}
+          transparent
+          depthWrite={false}
           side={THREE.FrontSide}
         />
       </mesh>
