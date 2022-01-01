@@ -20,23 +20,24 @@ const fragmentShader = `
   }
 `
 
+const COLOR_HI = new THREE.Color('#10c4fb')
+const COLOR_LO = new THREE.Color('#d4e7f4')
+
 export function Skybox () {
   return (
     <mesh>
       <sphereGeometry args={[800]} />
       <shaderMaterial
-        args={[{
-          uniforms: {
-            colorHi: {
-              value: new THREE.Color('#10c4fb')
-            },
-            colorLo: {
-              value: new THREE.Color('#d4e7f4')
-            }
+        uniforms={{
+          colorHi: {
+            value: COLOR_HI
           },
-          vertexShader,
-          fragmentShader
-        }]}
+          colorLo: {
+            value: COLOR_LO
+          }
+        }}
+        vertexShader={vertexShader}
+        fragmentShader={fragmentShader}
         side={THREE.DoubleSide}
       />
     </mesh>
