@@ -70,17 +70,12 @@ export default function useCsm () {
 
 function setupMaterials (scene: THREE.Scene, csm: CSM) {
   scene.traverse((obj) => {
-    if (obj.name === 'mapLocation') {
-      obj.traverse((innerObj) => {
-        if (innerObj instanceof THREE.Mesh) {
-          csm.setupMaterial(innerObj.material)
-        }
-      })
-    }
-
-    if (obj.name === 'plainPlane') {
-      const material = (obj as THREE.Mesh).material as THREE.Material
-      csm.setupMaterial(material)
+    if (obj.receiveShadow) {
+      if (!(obj instanceof THREE.Mesh)) {
+        console.warn('Object wanted to receive shadows, but wasn\'t a Mesh:', obj)
+        return
+      }
+      csm.setupMaterial(obj.material)
     }
   })
 }

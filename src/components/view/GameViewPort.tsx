@@ -11,7 +11,6 @@ function PlainPlane () {
     <mesh
       position={[0, -0.002, 0]}
       rotation={new THREE.Euler(-Math.PI / 2)}
-      name='plainPlane'
       receiveShadow
     >
       <planeGeometry args={[1000, 1000, 20, 20]} />
