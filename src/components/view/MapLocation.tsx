@@ -1,10 +1,9 @@
-import { ThreeEvent } from '@react-three/fiber'
-import { ReactNode, useState } from 'react'
+import { ReactNode, useMemo, useState } from 'react'
 import { tileCatalog } from '../../data/tile-catalog'
 import { Tile } from '../../game_logic'
 import { SelectAura } from './SelectAura'
+import withFudgyClick from './WithFudgyClick'
 
-const LEFT_MOUSE_BUTTON = 0
 /**
  * Represents an occupied tile on the map.
  * @param props
@@ -16,29 +15,9 @@ export function MapLocation (props: {row: number, column: number, gridInterval: 
 
   const tileDefinition = tileCatalog[props.tile.type]
 
-  const ModelComponent = tileDefinition.modelComponent
+  const ModelComponent = useMemo(() => withFudgyClick(tileDefinition.modelComponent), [tileDefinition.modelComponent])
 
   const [hover, setHover] = useState(false)
-  const [mouseX, setMouseX] = useState(0)
-  const [mouseY, setMouseY] = useState(0)
-  const onPointerOver = () => setHover(true)
-  const onPointerOut = () => setHover(false)
-  const onPointerDown = (event: ThreeEvent<PointerEvent>) => {
-    if (!(event.nativeEvent.button === LEFT_MOUSE_BUTTON)) {
-      return
-    }
-    setMouseX(event.nativeEvent.clientX)
-    setMouseY(event.nativeEvent.clientY)
-  }
-  const onPointerUp = (event: ThreeEvent<PointerEvent>) => {
-    if (!(event.nativeEvent.button === LEFT_MOUSE_BUTTON)) {
-      return
-    }
-    // Have a little fudge factor for mouse movement
-    if (Math.abs(event.nativeEvent.clientX - mouseX + event.nativeEvent.clientY - mouseY) < 50) {
-      props.onSelected()
-    }
-  }
 
   return (
     <group
@@ -48,10 +27,9 @@ export function MapLocation (props: {row: number, column: number, gridInterval: 
       <RotateY angle={props.tile.rotation}>
         <ModelComponent
           position={[0, 0, 1]}
-          onPointerDown={onPointerDown}
-          onPointerUp={onPointerUp}
-          onPointerOver={onPointerOver}
-          onPointerOut={onPointerOut}
+          onPointerOver={() => setHover(true)}
+          onPointerOut={() => setHover(false)}
+          onFudgyClick={() => props.onSelected()}
         />
       </RotateY>
       <SelectAura hover={hover} selected={props.selected} />
