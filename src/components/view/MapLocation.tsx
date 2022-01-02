@@ -1,5 +1,5 @@
-
-import { ReactNode, useCallback, useState } from 'react'
+import { ThreeEvent } from '@react-three/fiber'
+import { ReactNode, useState } from 'react'
 import { tileCatalog } from '../../data/tile-catalog'
 import { Tile } from '../../game_logic'
 import { SelectAura } from './SelectAura'
@@ -21,25 +21,24 @@ export function MapLocation (props: {row: number, column: number, gridInterval: 
   const [hover, setHover] = useState(false)
   const [mouseX, setMouseX] = useState(0)
   const [mouseY, setMouseY] = useState(0)
-  const onPointerOver = useCallback(() => setHover(true), [])
-  const onPointerOut = useCallback(() => setHover(false), [])
-  const onPointerDown = useCallback((event) => {
-    if (!(event.button === LEFT_MOUSE_BUTTON)) {
+  const onPointerOver = () => setHover(true)
+  const onPointerOut = () => setHover(false)
+  const onPointerDown = (event: ThreeEvent<PointerEvent>) => {
+    if (!(event.nativeEvent.button === LEFT_MOUSE_BUTTON)) {
       return
     }
-    setMouseX(event.clientX)
-    setMouseY(event.clientY)
-  }, [])
-  const onPointerUp = useCallback((event) => {
-    if (!(event.button === LEFT_MOUSE_BUTTON)) {
+    setMouseX(event.nativeEvent.clientX)
+    setMouseY(event.nativeEvent.clientY)
+  }
+  const onPointerUp = (event: ThreeEvent<PointerEvent>) => {
+    if (!(event.nativeEvent.button === LEFT_MOUSE_BUTTON)) {
       return
     }
-    console.log('Mouse Button', event.button)
     // Have a little fudge factor for mouse movement
-    if (Math.abs(event.clientX - mouseX + event.clientY - mouseY) < 50) {
+    if (Math.abs(event.nativeEvent.clientX - mouseX + event.nativeEvent.clientY - mouseY) < 50) {
       props.onSelected()
     }
-  }, [props, mouseX, mouseY])
+  }
 
   return (
     <group

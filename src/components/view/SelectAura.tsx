@@ -33,11 +33,17 @@ type SelectAuraProps = {
   selected: boolean
 }
 
+const AURA_SIDE_COLOR_SELECTED = new THREE.Color('#ff6d6d')
+const AURA_SIDE_COLOR_HOVER = new THREE.Color('#ffffff')
+const AURA_BOTTOM_COLOR_SELECTED = new THREE.Color('#ff0000')
+const AURA_BOTTOM_COLOR_HOVER = new THREE.Color('#ffffff')
+
 export function SelectAura (props: SelectAuraProps) {
   const selected = props.selected
   const hover = props.selected ? false : props.hover
-  const color = props.selected ? new THREE.Color('#FF6D6D') : new THREE.Color('#ffffff')
-  const colorBottom = props.selected ? new THREE.Color('#FF0000') : new THREE.Color('#ffffff')
+
+  const color = selected ? AURA_SIDE_COLOR_SELECTED : AURA_SIDE_COLOR_HOVER
+  const colorBottom = selected ? AURA_BOTTOM_COLOR_SELECTED : AURA_BOTTOM_COLOR_HOVER
 
   return (
     <group
@@ -60,12 +66,18 @@ type AuraSideProps = {
 }
 
 const AURA_SIDE_HEIGHT = 2
+const AURA_SIDE_ROTATIONS = [
+  new THREE.Euler(0, Math.PI / 2 * 0),
+  new THREE.Euler(0, Math.PI / 2 * 1),
+  new THREE.Euler(0, Math.PI / 2 * 2),
+  new THREE.Euler(0, Math.PI / 2 * 3)
+]
 
 function AuraSide (props: AuraSideProps) {
+  const rotation = AURA_SIDE_ROTATIONS[props.rotation]
+
   return (
-    <group
-      rotation={new THREE.Euler(0, Math.PI / 2 * props.rotation)}
-    >
+    <group rotation={rotation}>
       <mesh
         position={[0, AURA_SIDE_HEIGHT / 2, 0.5]}
       >

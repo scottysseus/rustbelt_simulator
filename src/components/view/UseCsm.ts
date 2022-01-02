@@ -3,14 +3,14 @@ import { useFrame, useThree } from '@react-three/fiber'
 import { useEffect, useRef } from 'react'
 import { CSM } from 'three/examples/jsm/csm/CSM'
 
+const LIGHT_DIRECTION = new THREE.Vector3(3, -7, -2).normalize()
+
 export default function useCsm () {
   const csmRef = useRef<CSM>()
   const scene = useThree(state => state.scene)
   const camera = useThree(state => state.camera)
 
   useEffect(() => {
-    // map is 15x15
-    const lightDirection = new THREE.Vector3(3, -7, -2).normalize()
     csmRef.current = new CSM({
       maxFar: 15,
       cascades: 4,
@@ -19,7 +19,7 @@ export default function useCsm () {
       parent: scene,
       shadowMapSize: 4096,
       camera: camera,
-      lightDirection: lightDirection,
+      lightDirection: LIGHT_DIRECTION,
       lightIntensity: 1.0,
       lightNear: 1,
       lightFar: 40,
